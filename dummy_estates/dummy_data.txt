@@ -28,6 +28,7 @@ VALUES
 ('lacinia.Sed.congue@inhendreritconsectetuer.edu', 'HMJ04LOX3TS', 'Elísabet Englandsdrottning', 1671011630, 4111000, 'Buckinghamhöll 1', 220, '');
 
 INSERT INTO "public"."user_role_userrole" ("role", "user_id")
+VALUES
 ('user', 25),
 ('user', 26),
 ('user', 27),
@@ -49,3 +50,48 @@ INSERT INTO "public"."user_role_userrole" ("role", "user_id")
 ('seller', 36),
 ('buyer', 33),
 ('admin', 34);
+
+INSERT INTO "public"."offer_offer" ("amount", "status", "offer_made", "payed", "expires", "estate_id", "offer_maker_id")
+VALUES
+(37000000, 'incoming', '2019/05/06', False, '2019/05/08', 23, 33);
+
+
+INSERT INTO "public"."message_message" ("message_sent", "message_seen", "subject", "message_body", "recipient_id", "sender_id")
+VALUES
+('2019/04/06', TRUE, 'Björgvinsbraut 1: Fyrirspurn um hjól', 'Hæ, ég sá að hjól fylgdi eigninni. Málið er að ég er ekki í fasteignahugleiðingum en mig bráðvantar hjól. Ertu til í að selja hjólið sér? Kveðja, Arnar', 26, 29),
+('2019/04/07', TRUE, 'Björgvinsbraut 1: Fyrirspurn um hjól', 'Ég er nú yfirleitt svona all or nothing maður en ég er kannski til í að skoða þetta fyrir rétt verð. Ég fékk löggiltan hjólasala til að meta fyrir mig hjólið og hann metur það á 60 millur. Take it or leave it. Kv. Bjöggi', 29, 26),
+('2019/04/08', TRUE, 'Björgvinsbraut 1: Fyrirspurn um hjól', 'Æ, ég held ég taki bara strætó. Takk samt.', 26, 29),
+('2019/05/01', TRUE, 'Kastalakofi 57: Regarding shipment', 'To whom it may concern. My name is Elizabeth and I happen to be the queen of the British Commonwealth. As a queen, castles are very dear to my heart and I noticed you had one for sale. I was wondering if you offer free shipping to England. Sincerely yours, Queen Elizabeth II', 25, 36),
+('2019/05/01', TRUE, 'Kastalakofi 57: Regarding shipment', 'Dear Queen Elizabeth, of course we offer free shipping but unfortunately we are out of shipping containers at the moment. If you wish, we can take the castle apart and send you the building units but that service is not free. Let me know if you are still interested. Cheers! Sunna', 36, 25),
+('2019/05/02', TRUE, 'Næstumútiálandi 2', 'Halló. Hversu mikið úti á landi er Næstumútiálandi? Eru einhver nútímaþægindi þarna? Er t.d. komið rafmagn? Kim Kardashian', 31, 30),
+('2019/05/05', FALSE, 'Næstumútiálandi 2', 'Vá hvað þú talar góða íslensku! En svo ég svari spurningunni, já það er komið rafmagn en hins vegar erum við ekki með rennandi vatn hérna annað en beint úr náttúrunni. Skiptir það nokkuð máli? Júlía', 30 , 31),
+('2019/05/06', FALSE, 'Næstumútiálandi 2', 'Heyrðu, ég talaði við Orkuveituna og þeir eru til í að leggja vatnslagnir fyrir þig! Frábærar fréttir, ekki satt? Júlía', 30, 31);
+
+
+INSERT INTO "public"."estate_estateimage" ("image", "estate_id")
+VALUES
+('https://unsplash.com/photos/psrloDbaZc8', 13),
+('https://unsplash.com/photos/0yfWDwHOB0g', 13),
+('https://unsplash.com/photos/561igiTyvSk', 14),
+('https://unsplash.com/photos/6x387K_MWtI', 15),
+('https://unsplash.com/photos/AwOG1tC5buE', 15),
+('https://unsplash.com/photos/2d4lAQAlbDA', 16),
+('https://unsplash.com/photos/QZGQO3NvsLo', 16),
+('https://unsplash.com/photos/ALpEkP29Eys', 17),
+('https://unsplash.com/photos/7XKkJVw1d8c', 17),
+('https://unsplash.com/photos/d82BazKbKFw', 17),
+('https://unsplash.com/photos/UV81E0oXXWQ', 17),
+('https://unsplash.com/photos/OgcJIKRnRC8', 18),
+('https://unsplash.com/photos/AQl-J19ocWE', 18),
+('https://unsplash.com/photos/1ddol8rgUH8', 19),
+('https://unsplash.com/photos/3wylDrjxH-E', 19),
+('https://unsplash.com/photos/yFV39g6AZ5o', 20),
+('https://unsplash.com/photos/Dl6H4_nzBpE', 20),
+('https://unsplash.com/photos/4ojhpgKpS68', 21),
+('https://unsplash.com/photos/gREquCUXQLI', 21),
+('https://unsplash.com/photos/ob-hsLNxYPc', 22),
+('https://unsplash.com/photos/jn7uVeCdf6U', 22),
+('https://unsplash.com/photos/eWqOgJ-lfiI', 23),
+('https://unsplash.com/photos/JDBVXignFdA', 23);
+
+
