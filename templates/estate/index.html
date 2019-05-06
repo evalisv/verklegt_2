@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="red">Response úr html file í estate</h1>
+    {% for estate in estates %}
+        <div>{{ estate.name }}</div>
+        <div>{{ estate.price }}</div>
+    {% endfor %}
+{% endblock %}
