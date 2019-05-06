@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'estate.apps.EstateConfig',
+    'message.apps.MessageConfig',
+    'offer.apps.OfferConfig',
+    'payment.apps.PaymentConfig',
+    'user_role.apps.UserRoleConfig',
     'user.apps.UserConfig'
 ]
 
