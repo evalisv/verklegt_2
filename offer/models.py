@@ -11,6 +11,6 @@ class Offer(models.Model):
     offer_made = models.DateTimeField()
     offer_maker = models.ForeignKey(User, on_delete=models.CASCADE)
     payed = models.BooleanField()
-    counter_offer_to = models.OneToOneField("self", blank=True, on_delete=models.PROTECT)
+    counter_offer_to = models.OneToOneField("self", blank=True, null=True, on_delete=models.PROTECT)
     expires = models.DateTimeField()
-    payment = models.ForeignKey(Payment, blank=True, on_delete=models.PROTECT)
+    payment = models.ForeignKey(Payment, blank=True, null=True, on_delete=models.PROTECT)

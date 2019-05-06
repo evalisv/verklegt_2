@@ -9,7 +9,7 @@ class User(models.Model):
     phone_number = models.IntegerField()
     address = models.CharField(max_length=255)
     postal_code = models.IntegerField()
-    watchlist = models.TextField(blank=True)
+    watchlist = models.TextField(blank=True, null=True)
 
 
 class UserImage(models.Model):
