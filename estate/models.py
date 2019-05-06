@@ -16,7 +16,7 @@ class Estate(models.Model):
     entry = models.BooleanField()
     garage = models.BooleanField()
     description = models.CharField(max_length=999)
-    open_house = models.DateTimeField()
+    open_house = models.DateTimeField(null=True, blank=True)
     estate_seller = models.ForeignKey(User, on_delete=models.CASCADE)
     views = models.IntegerField()
     elevator = models.BooleanField()
