@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+
+class Payment(models.Model):
+    amount = models.IntegerField()
+    received = models.DateTimeField()
+    payment_method = models.CharField(max_length=999)

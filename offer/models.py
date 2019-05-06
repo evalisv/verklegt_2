@@ -1,3 +1,16 @@
 from django.db import models
+from estate.models import Estate
+from payment.models import Payment
+from user.models import User
 
-# Create your models here.
+
+class Offer(models.Model):
+    amount = models.IntegerField()
+    estate = models.ForeignKey(Estate, on_delete=models.CASCADE)
+    status = models.CharField(max_length=32)
+    offer_made = models.DateTimeField()
+    offer_maker = models.ForeignKey(User, on_delete=models.CASCADE)
+    payed = models.BooleanField()
+    counter_offer_to = models.OneToOneField("self", blank=True, on_delete=models.PROTECT)
+    expires = models.DateTimeField()
+    payment = models.ForeignKey(Payment, blank=True, on_delete=models.PROTECT)
