@@ -1,9 +1,9 @@
 {%  extends "base.html" %}
 {% block content %}
-    <h1>Innskráning</h1>
+    <h1>Notandi</h1>
     <form class="form form-horizontal" method="POST">
         {%  csrf_token %}
         {{ form }}
-        <input type="submit" class="btn btn-primary" value="Login">
+        <input type="submit" class="btn btn-primary" value="Update">
     </form>
 {% endblock %}
