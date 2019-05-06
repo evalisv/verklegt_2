@@ -1,56 +1,56 @@
---select * from Estates
+--select * from Estate
 
-INSERT INTO Estates (address, postal_code, type, size, bedrooms, bathrooms, fasteignamat, brunabotamat, price,
-					 year_built, elevator, garage, entry, description, cover_image, estate_seller, date_listed, views)
+INSERT INTO Estate (address, postal_code, type, size, bedrooms, bathrooms, fasteignamat, brunabotamat, price,
+					 year_built, elevator, garage, entry, description, estate_seller, date_listed, views)
 					VALUES ('Björgvinsbraut 1', 200, 'Einbýlishús', 140, 2, 1, 61500000, 52000000, 68000000,
-						   1990, TRUE, TRUE, TRUE, 'Einstaklega falleg eign við einstaklega fallega götu. Gengið er beint inn í stofuna og svo fylgir hjól með eigninni.','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdsVUGSScRWmWqmv9f31A5pxAt7IQpr6DSTw0_E91WDlxGefOs',1,'2019/02/01',39);
+						   1990, TRUE, TRUE, TRUE, 'Einstaklega falleg eign við einstaklega fallega götu. Gengið er beint inn í stofuna og svo fylgir hjól með eigninni.',1,'2019/02/01',39);
 
-INSERT INTO Estates (address, postal_code, type, size, bedrooms, bathrooms, fasteignamat, brunabotamat, price,
-					 year_built, elevator, garage, entry, description, cover_image, estate_seller, date_listed, views)
+INSERT INTO Estate (address, postal_code, type, size, bedrooms, bathrooms, fasteignamat, brunabotamat, price,
+					 year_built, elevator, garage, entry, description, estate_seller, date_listed, views)
 					VALUES ('Arnarsvegur 3', 101, 'Raðhús', 99, 2, 1, 51000000, 40000000, 60000000,
-						   1990, TRUE, TRUE, TRUE, 'Mjög fallegt raðhús með stórum svölum sem snúa út á Laugarveginn.','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdsVUGSScRWmWqmv9f31A5pxAt7IQpr6DSTw0_E91WDlxGefOs',2,'2019/03/10',27);
+						   1990, TRUE, TRUE, TRUE, 'Mjög fallegt raðhús með stórum svölum sem snúa út á Laugarveginn.',2,'2019/03/10',27);
 
-INSERT INTO Estates (address, postal_code, type, size, bedrooms, bathrooms, fasteignamat, brunabotamat, price,
-					 year_built, elevator, garage, entry, description, cover_image, estate_seller, date_listed, views)
+INSERT INTO Estate (address, postal_code, type, size, bedrooms, bathrooms, fasteignamat, brunabotamat, price,
+					 year_built, elevator, garage, entry, description, estate_seller, date_listed, views)
 					VALUES ('Egilstaðabrekka 43', 105, 'Fjölbýlishús', 80, 1, 1, 36500000, 26000000, 41000000,
-						   1975, TRUE, TRUE, FALSE, 'Skemmtileg íbúð á fjórðu hæð með suðursvölum. Góð eign fyrir hundafólk.','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdsVUGSScRWmWqmv9f31A5pxAt7IQpr6DSTw0_E91WDlxGefOs',3,'2018/12/19',97);
+						   1975, TRUE, TRUE, FALSE, 'Skemmtileg íbúð á fjórðu hæð með suðursvölum. Góð eign fyrir hundafólk.',3,'2018/12/19',97);
 
-INSERT INTO Estates (address, postal_code, type, size, bedrooms, bathrooms, fasteignamat, brunabotamat, price,
-					 year_built, elevator, garage, entry, description, cover_image, estate_seller, date_listed, views)
+INSERT INTO Estate (address, postal_code, type, size, bedrooms, bathrooms, fasteignamat, brunabotamat, price,
+					 year_built, elevator, garage, entry, description, estate_seller, date_listed, views)
 					VALUES ('Hildarhólar 31', 220, 'Einbýlishús', 139, 3, 1, 75500000, 67000000, 87000000,
-						   1984, FALSE, TRUE, TRUE, 'Gengið er inn eldhús og þaðan inn í svefnherbergi.','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdsVUGSScRWmWqmv9f31A5pxAt7IQpr6DSTw0_E91WDlxGefOs',4,'2019/04/27',14);
+						   1984, FALSE, TRUE, TRUE, 'Gengið er inn eldhús og þaðan inn í svefnherbergi.',4,'2019/04/27',14);
 
-INSERT INTO Estates (address, postal_code, type, size, bedrooms, bathrooms, fasteignamat, brunabotamat, price,
-					 year_built, elevator, garage, entry, description, cover_image, estate_seller, date_listed, views)
+INSERT INTO Estate (address, postal_code, type, size, bedrooms, bathrooms, fasteignamat, brunabotamat, price,
+					 year_built, elevator, garage, entry, description, estate_seller, date_listed, views)
 					VALUES ('CandyQueenstígur 55', 210, 'Einbýlishús', 150, 3, 2, 89000000, 82000000, 99000000,
-						   1979, TRUE, TRUE, TRUE, 'Mjög skemmtilegt hús í Garðabæ, með flottum garði.','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdsVUGSScRWmWqmv9f31A5pxAt7IQpr6DSTw0_E91WDlxGefOs',5,'2019/05/01',4);
+						   1979, TRUE, TRUE, TRUE, 'Mjög skemmtilegt hús í Garðabæ, með flottum garði.',5,'2019/05/01',4);
 
-INSERT INTO Estates (address, postal_code, type, size, bedrooms, bathrooms, fasteignamat, brunabotamat, price,
-					 year_built, elevator, garage, entry, description, cover_image, estate_seller, date_listed, views)
+INSERT INTO Estate (address, postal_code, type, size, bedrooms, bathrooms, fasteignamat, brunabotamat, price,
+					 year_built, elevator, garage, entry, description, estate_seller, date_listed, views)
 					VALUES ('Thundercatsvegur 149', 107, 'Fjölbýlishús', 115, 3, 1, 54500000, 49500000, 60000000,
-						   1999, FALSE, FALSE, FALSE, 'Vel staðsett íbúð. Stutt í alla þjónustu.','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdsVUGSScRWmWqmv9f31A5pxAt7IQpr6DSTw0_E91WDlxGefOs',6,'2018/11/01',142);
+						   1999, FALSE, FALSE, FALSE, 'Vel staðsett íbúð. Stutt í alla þjónustu.',6,'2018/11/01',142);
 
-INSERT INTO Estates (address, postal_code, type, size, bedrooms, bathrooms, fasteignamat, brunabotamat, price,
-					 year_built, elevator, garage, entry, description, cover_image, estate_seller, date_listed, views)
+INSERT INTO Estate (address, postal_code, type, size, bedrooms, bathrooms, fasteignamat, brunabotamat, price,
+					 year_built, elevator, garage, entry, description, estate_seller, date_listed, views)
 					VALUES ('Pythonfold 11', 112, 'Raðhús', 129, 3, 1, 71500000, 59000000, 75000000,
-						   1987, TRUE, TRUE, TRUE, 'Gengið er inn um bílskúr. Skemmtileg eign.','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdsVUGSScRWmWqmv9f31A5pxAt7IQpr6DSTw0_E91WDlxGefOs',7,'2018/12/01',47);
+						   1987, TRUE, TRUE, TRUE, 'Gengið er inn um bílskúr. Skemmtileg eign.',7,'2018/12/01',47);
 
-INSERT INTO Estates (address, postal_code, type, size, bedrooms, bathrooms, fasteignamat, brunabotamat, price,
-					 year_built, elevator, garage, entry, description, cover_image, estate_seller, date_listed, views)
+INSERT INTO Estate (address, postal_code, type, size, bedrooms, bathrooms, fasteignamat, brunabotamat, price,
+					 year_built, elevator, garage, entry, description, estate_seller, date_listed, views)
 					VALUES ('Vefhólar 9', 110, 'Fjölbýlishús', 81, 1, 1, 31000000, 24000000, 35000000,
-						   1982, FALSE, TRUE, FALSE, 'Mjög góð íbúð í breiðholti.','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdsVUGSScRWmWqmv9f31A5pxAt7IQpr6DSTw0_E91WDlxGefOs',8,'2018/11/20',84);
+						   1982, FALSE, TRUE, FALSE, 'Mjög góð íbúð í breiðholti.',8,'2018/11/20',84);
 
-INSERT INTO Estates (address, postal_code, type, size, bedrooms, bathrooms, fasteignamat, brunabotamat, price,
-					 year_built, elevator, garage, entry, description, cover_image, estate_seller, date_listed, views)
+INSERT INTO Estate (address, postal_code, type, size, bedrooms, bathrooms, fasteignamat, brunabotamat, price,
+					 year_built, elevator, garage, entry, description, estate_seller, date_listed, views)
 					VALUES ('Hálfbær 7.5', 111, 'Raðhús', 95, 3, 2, 53500000, 45000000, 59000000,
-						   1995, FALSE, TRUE, TRUE, 'Skemmtileg eign á besta stað Árbæ.','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdsVUGSScRWmWqmv9f31A5pxAt7IQpr6DSTw0_E91WDlxGefOs',9,'2019/04/05',21);
+						   1995, FALSE, TRUE, TRUE, 'Skemmtileg eign á besta stað Árbæ.',9,'2019/04/05',21);
 
-INSERT INTO Estates (address, postal_code, type, size, bedrooms, bathrooms, fasteignamat, brunabotamat, price,
-					 year_built, elevator, garage, entry, description, cover_image, estate_seller, date_listed, views)
+INSERT INTO Estate (address, postal_code, type, size, bedrooms, bathrooms, fasteignamat, brunabotamat, price,
+					 year_built, elevator, garage, entry, description, estate_seller, date_listed, views)
 					VALUES ('Næstumútiálandi 2', 113, 'Einbýlishús', 180, 4, 2, 69500000, 60000000, 88000000,
-						   2007, TRUE, TRUE, TRUE, 'Þetta hús var byggt fyrir smápeninga, en kostar það alveg böns af pening. Skemmtileg eign.','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdsVUGSScRWmWqmv9f31A5pxAt7IQpr6DSTw0_E91WDlxGefOs',10,'2019/01/01',65);
+						   2007, TRUE, TRUE, TRUE, 'Þetta hús var byggt fyrir smápeninga, en kostar það alveg böns af pening. Skemmtileg eign.',10,'2019/01/01',65);
 
-INSERT INTO Estates (address, postal_code, type, size, bedrooms, bathrooms, fasteignamat, brunabotamat, price,
-					 year_built, elevator, garage, entry, description, cover_image, estate_seller, date_listed, views)
+INSERT INTO Estate (address, postal_code, type, size, bedrooms, bathrooms, fasteignamat, brunabotamat, price,
+					 year_built, elevator, garage, entry, description, estate_seller, date_listed, views)
 					VALUES ('Kastalakofi 57', 270, 'Einbýlishús', 130, 3, 2, 49500000, 42000000, 51000000,
-						   1994, TRUE, TRUE, TRUE, 'Maður þarf að sjá þessa eign til að trúa henni. Endilega skoðið myndirnar.','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdsVUGSScRWmWqmv9f31A5pxAt7IQpr6DSTw0_E91WDlxGefOs',11,'2018/12/15',86);
+						   1994, TRUE, TRUE, TRUE, 'Maður þarf að sjá þessa eign til að trúa henni. Endilega skoðið myndirnar.',11,'2018/12/15',86);

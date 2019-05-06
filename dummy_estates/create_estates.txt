@@ -1,4 +1,4 @@
-create table Estates (
+create table Estate (
 	id SERIAL PRIMARY KEY,
 	address VARCHAR NOT NULL,
 	postal_code INTEGER NULL,
@@ -14,7 +14,6 @@ create table Estates (
 	garage BOOLEAN NULL,
 	entry BOOLEAN NULL,
 	description VARCHAR NULL,
-	cover_image VARCHAR NULL,
 	estate_seller INT NOT NULL,
 	date_listed DATE NOT NULL,
 	views int NOT NULL
@@ -22,5 +21,5 @@ create table Estates (
 
 create table municipalities (postal_code INTEGER PRIMARY KEY, municipality VARCHAR NOT NULL);
 
---select * from Estates
---drop table Estates
+--select * from Estate
+--drop table Estate
