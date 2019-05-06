@@ -1,0 +1,26 @@
+create table Estates (
+	id SERIAL PRIMARY KEY,
+	address VARCHAR NOT NULL,
+	postal_code INTEGER NULL,
+	type VARCHAR NULL,
+	size INTEGER NULL,
+	bedrooms INTEGER NULL,
+	bathrooms INTEGER NULL,
+	fasteignamat INTEGER NULL,
+	brunabotamat INTEGER NULL,
+	price INTEGER NULL,
+	year_built INTEGER NULL,
+	elevator BOOLEAN NULL,
+	garage BOOLEAN NULL,
+	entry BOOLEAN NULL,
+	description VARCHAR NULL,
+	cover_image VARCHAR NULL,
+	estate_seller INT NOT NULL,
+	date_listed DATE NOT NULL,
+	views int NOT NULL
+	);
+
+create table municipalities (postal_code INTEGER PRIMARY KEY, municipality VARCHAR NOT NULL);
+
+--select * from Estates
+--drop table Estates
