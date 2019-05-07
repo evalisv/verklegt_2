@@ -6,7 +6,7 @@
     border-radius: 10px;
 }
 .container {
-    /*background: red;*/
+    padding-bottom: 200px;
 }
 
 input[type="text"], input[type="password"] {
@@ -15,4 +15,21 @@ input[type="text"], input[type="password"] {
     padding: 5px;
     border-radius: 5px;
     border: solid 1px #ddd;
+}
+
+.header, .footer {
+    position: fixed;
+    bottom: 0;
+    background: #818181;
+    width: 100%;
+    padding: 50px 50px 20px;
+    color: white;
+    line-height: 0.5rem;
+    font-size: 0.8rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.header a, .footer a {
+    color: white;
 }
