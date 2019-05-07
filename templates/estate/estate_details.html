@@ -5,18 +5,57 @@
     {% for estate in estate.estateimage_set.all %}
         <img src="{{ estate.image }}" class="estate_img"/>
     {% endfor %}
-    <p>Gerð: {{ estate.type }}</p>
-    <p>Byggingarár: {{ estate.year_built }}</p>
-    <p>Stærð: {{ estate.size }}</p>
-    <p>Herbergi: {{ estate.bedrooms }}</p>
-    <p>Baðherbergi: {{ estate.bathrooms }}</p>
-    <p>Verð: {{ estate.price }}</p>
-    <p>Fasteignamat: {{ estate.fasteignamat }}</p>
-    <p>Brunabótamat: {{ estate.brunabotamat }}</p>
-    <p>Sérinngangur: {{ estate.entry }}</p>
-    <p>Bílskúr: {{ estate.garage }}</p>
-    <p>Lyfta: {{ estate.elevator }}</p>
-    <p>Skráð: {{ estate.date_listed }}</p>
+    <table>
+        <tr>
+            <td>Verð</td>
+            <td>{{ estate.price }} kr.</td>
+        </tr>
+        <tr>
+            <td>Fasteignamat</td>
+            <td>{{ estate.fasteignamat }} kr.</td>
+        </tr>
+        <tr>
+            <td>Brunabótamat</td>
+            <td>{{ estate.brunabotamat }} kr.</td>
+        </tr>
+        <tr>
+            <td>Gerð</td>
+            <td>{{ estate.type }}</td>
+        </tr>
+        <tr>
+            <td>Byggingarár</td>
+            <td>{{ estate.year_built }}</td>
+        </tr>
+        <tr>
+            <td>Stærð</td>
+            <td>{{ estate.size }} m2</td>
+        </tr>
+        <tr>
+            <td>Herbergi</td>
+            <td>{{ estate.bedrooms }}</td>
+        </tr>
+        <tr>
+            <td>Baðherbergi</td>
+            <td>{{ estate.bathrooms }}</td>
+        </tr>
+        <tr>
+            <td>Sérinngangur</td>
+            <td>{{ estate.entry }}</td>
+        </tr>
+        <tr>
+            <td>Bílskúr</td>
+            <td>{{ estate.garage }}</td>
+        </tr>
+        <tr>
+            <td>Lyfta</td>
+            <td>{{ estate.elevator }}</td>
+        </tr>
+        <tr>
+            <td>Skráð</td>
+            <td>{{ estate.date_listed }}</td>
+        </tr>
+    </table>
+
     <p>Lýsing: {{ estate.description }}</p>
 
 {% endblock %}
