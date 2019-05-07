@@ -1,10 +1,8 @@
-from django.contrib.auth.forms import UserCreationForm
+from user.classes.UserCreateForm import UserCreateForm
 from django.shortcuts import render, redirect
-
-
-# Create your views here.
 from user.models import Profile
 from user.forms.profile_form import ProfileForm
+
 
 def index(request):
     return render(request, 'user/index.html')
@@ -12,13 +10,14 @@ def index(request):
 
 def register(request):
     if 'POST' == request.method:
-        form = UserCreationForm(data=request.POST)
+        form = UserCreateForm(data=request.POST)
         if form.is_valid():
             form.save()
             return redirect('login')
     return render(request, 'user/register.html', {
-        'form': UserCreationForm()
+        'form': UserCreateForm()
     })
+
 
 def profile(request):
     profile = Profile.objects.filter(user=request.user).first()
