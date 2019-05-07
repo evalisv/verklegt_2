@@ -1,15 +1,14 @@
 from django.db import models
+from django.contrib.auth.models import User as auth_user
 
 
 class User(models.Model):
-    email = models.CharField(max_length=255, unique=True)
-    password = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
     kennitala = models.IntegerField()
     phone_number = models.IntegerField()
     address = models.CharField(max_length=255)
     postal_code = models.IntegerField()
     watchlist = models.TextField(blank=True, null=True)
+    auth_user_id = models.ForeignKey(auth_user, on_delete=models.CASCADE)
 
 
 class UserImage(models.Model):
