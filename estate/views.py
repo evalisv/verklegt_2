@@ -18,7 +18,6 @@ def register_estate(request):
         print(1)
     else:
         form = RegisterEstateForm()
-        # TODO: Instance new RegisterEstateForm()
     return render(request, 'estate/register_estate.html', {
         'form' : form
     })
