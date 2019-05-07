@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Castle Apartments</h1>
+    <form class="form my-2 my-lg-0">
+      <input type="search" class="form-control mr-sm-2" id="search_box" placeholder="Götuheiti, póstnúmer, bær..."/>
+      <button type="button" id='search_button' class="btn btn-outline-success float-right my-sm-2" >Leita</button>
+    </form>
+    <span data-selector="filter" class="open-filter float-right btn btn-outline-secondary m-2">Ítarleg leit</span>
+
+    {% for code in postal_codes %}
+    <p>{{ code.postal_code }}</p>
+    {% endfor %}
+    <div class="filter hidden">
+        <div class="postalcodes">
+            <ul class="level1">
+                <li>Höfuðborgarsvæðið
+                    <ul class="level2 hidden">
+                        <li>Reykjavík
+                            <ul class="level3 hidden">
+                                <li><input type="checkbox" name="postal101" value="postal101">101</li>
+                                <li><input type="checkbox" name="postal102" value="postal102">102</li>
+                                <li><input type="checkbox" name="postal103" value="postal103">103</li>
+                                <li><input type="checkbox" name="postal104" value="postal104">104</li>
+                                <li><input type="checkbox" name="postal105" value="postal105">105</li>
+                                <li><input type="checkbox" name="postal107" value="postal107">107</li>
+                                <li><input type="checkbox" name="postal108" value="postal108">108</li>
+                                <li><input type="checkbox" name="postal109" value="postal109">109</li>
+                                <li><input type="checkbox" name="postal110" value="postal110">110</li>
+                                <li><input type="checkbox" name="postal111" value="postal111">111</li>
+                                <li><input type="checkbox" name="postal112" value="postal112">112</li>
+                                <li><input type="checkbox" name="postal113" value="postal113">113</li>
+                                <li><input type="checkbox" name="postal116" value="postal116">116</li>
+                                <li><input type="checkbox" name="postal121" value="postal121">121</li>
+                                <li><input type="checkbox" name="postal123" value="postal123">123</li>
+                                <li><input type="checkbox" name="postal124" value="postal124">124</li>
+                                <li><input type="checkbox" name="postal125" value="postal125">125</li>
+                                <li><input type="checkbox" name="postal127" value="postal127">127</li>
+                                <li><input type="checkbox" name="postal128" value="postal128">128</li>
+                                <li><input type="checkbox" name="postal129" value="postal129">129</li>
+                                <li><input type="checkbox" name="postal130" value="postal130">130</li>
+                                <li><input type="checkbox" name="postal132" value="postal132">132</li>
+                                <li><input type="checkbox" name="postall50" value="postal150">150</li>
+                                <li><input type="checkbox" name="postal155" value="postal155">155</li>
+                            </ul>
+                        </li>
+                        <li>Seltjarnarnes
+                            <ul class="level3 hidden">
+                                <li><input type="checkbox" name="postal170" value="postal170">170</li>
+                                <li><input type="checkbox" name="postal172" value="postal172">172</li>
+                            </ul>
+                        </li>
+                        <li>Kópavogur
+                            <ul class="level3 hidden">
+                                <li><input type="checkbox" name="postal200" value="postal200">200</li>
+                                <li><input type="checkbox" name="postal201" value="postal201">201</li>
+                                <li><input type="checkbox" name="postal202" value="postal202">202</li>
+                                <li><input type="checkbox" name="postal203" value="postal203">203</li>
+                            </ul>
+                        </li>
+                        <li>Garðabær
+                            <ul class="level3 hidden">
+                                <li><input type="checkbox" name="postal210" value="postal210">210</li>
+                                <li><input type="checkbox" name="postal212" value="postal212">212</li>
+                            </ul>
+                        </li>
+                        <li>Hafnarfjörður
+                            <ul class="level3 hidden">
+                                <li><input type="checkbox" name="postal220" value="postal220">220</li>
+                                <li><input type="checkbox" name="postal221" value="postal221">221</li>
+                                <li><input type="checkbox" name="postal222" value="postal222">222</li>
+                            </ul>
+                        </li>
+                        <li>Mosfellsbær
+                            <ul class="level3 hidden">
+                                <li><input type="checkbox" name="postal270" value="postal270">270</li>
+                                <li><input type="checkbox" name="postal271" value="postal271">271</li>
+                                <li><input type="checkbox" name="postal276" value="postal276">276</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>Vesturland</li>
+                <li>Norðurland</li>
+                <li>Austurland</li>
+                <li>Suðurland</li>
+            </ul>
+        </div>
+
+    <input type="checkbox" name="type1" value="einbyli">Einbýli<br>
+        <input type="checkbox" name="type1" value="parhus">Parhús<br>
+        <input type="checkbox" name="type1" value="radhus">Raðhús<br>
+        <input type="checkbox" name="type1" value="fjolbyli">Fjölbýli<br>
+        <input type="checkbox" name="lyfta" value="lyfta">Lyfta<br>
+        <input type="checkbox" name="serinngangur" value="serinngangur">Sérinngangur<br>
+    </div>
+
+
+
+
+
+
+    <h3>Vinsælar fasteignir</h3>
+{% endblock %}

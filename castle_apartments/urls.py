@@ -16,8 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from castle_apartments import views
+
 urlpatterns = [
     path('estates/', include('estate.urls')),
     path('users/', include('user.urls')),
+    path('', views.homepage, name="homepage"),
     path('admin/', admin.site.urls),
+
 ]

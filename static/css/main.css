@@ -6,10 +6,12 @@
     border-radius: 10px;
 }
 .container {
-    padding-bottom: 200px;
+    margin-bottom: 200px;
+    background: pink;
+    overflow: hidden;
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="password"], input[type="search"] {
     width: 100%;
     display: block;
     padding: 5px;
@@ -32,4 +34,21 @@ input[type="text"], input[type="password"] {
 
 .header a, .footer a {
     color: white;
+}
+
+.open-filter {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.filter {
+    position: relative;
+    margin-top: 45px;
+}
+.filter li {
+    list-style: none;
+    cursor: pointer;
 }
