@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1 class="red">Response úr html file í estate</h1>
+    <h3>Allar fasteignir</h3>
     {% for estate in estates %}
         {% include 'estate/single_estate.html' with estate=estate %}
     {% endfor %}

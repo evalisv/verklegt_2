@@ -1,5 +1,8 @@
 <div>
-    <div> <h4>{{ estate.address }}</h4> </div>
-    <div> <h5>Verð: {{ estate.price }}</h5> </div>
-    <div> <p>{{ estate.description }}</p></div>
+    <a href = "#">
+        <img class="estate-img" src="{{ estate.estateimage_set.first.image }}" />
+        <div> <h4>{{ estate.address }}</h4> </div>
+        <div> <h5>Verð: {{ estate.price }}</h5> </div>
+        <div> <p>{{ estate.description }}</p></div>
+    </a>
 </div>
