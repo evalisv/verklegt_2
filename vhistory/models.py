@@ -9,4 +9,4 @@ class Vhistory(models.Model):
     view_date = models.DateTimeField()
 
     def __str__(self):
-        return estate.addess
+        return estate.address

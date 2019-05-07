@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'offer.apps.OfferConfig',
     'payment.apps.PaymentConfig',
     'user_role.apps.UserRoleConfig',
-    'user.apps.UserConfig'
+    'user.apps.UserConfig',
+    'vhistory.apps.VhistoryConfig'
 ]
 
 MIDDLEWARE = [
