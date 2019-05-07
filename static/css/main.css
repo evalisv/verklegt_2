@@ -1,3 +1,18 @@
-.red {
-    color: red;
+.login {
+    width: 60%;
+    background: #f5f5f5;
+    margin: 70px auto 0 auto;
+    padding: 25px;
+    border-radius: 10px;
+}
+.container {
+    /*background: red;*/
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    display: block;
+    padding: 5px;
+    border-radius: 5px;
+    border: solid 1px #ddd;
 }
