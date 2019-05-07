@@ -21,8 +21,11 @@ class Estate(models.Model):
     views = models.IntegerField()
     elevator = models.BooleanField()
     date_listed = models.DateTimeField()
-
+    def __str__(self):
+        return self.address
 
 class EstateImage(models.Model):
     image = models.CharField(max_length=999)
     estate = models.ForeignKey(Estate, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.image
