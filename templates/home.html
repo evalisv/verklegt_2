@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Castle Apartments</h1>
+    <form class="form-inline my-2 my-lg-0">
+      <input type="search" class="form-control mr-sm-2" id="search_box" placeholder="Götuheiti, póstnúmer, bær..."/>
+      <button type="button" id='search_button' class="btn btn-outline-success my-2 my-sm-0" >Leita</button>
+    </form>
+
+    <input type="checkbox" name="type1" value="einbyli">Einbýli<br>
+    <input type="checkbox" name="type1" value="parhus">Parhús<br>
+    <input type="checkbox" name="type1" value="radhus">Raðhús<br>
+    <input type="checkbox" name="type1" value="fjolbyli">Fjölbýli<br>
+    <input type="checkbox" name="lyfta" value="lyfta">Lyfta<br>
+    <input type="radio" name="serinngangur" value="serinngangur">Sérinngangur<br>
+
+    <div class="postalcodes">
+        <div class="reykjavik">
+            <input type="checkbox" name="postal101" value="postal101">101 Reykjavík<br>
+            <input type="checkbox" name="postal102" value="postal102">102 Reykjavík<br>
+            <input type="checkbox" name="postal103" value="postal103">103 Reykjavík<br>
+            <input type="checkbox" name="postal104" value="postal104">104 Reykjavík<br>
+            <input type="checkbox" name="postal105" value="postal105">105 Reykjavík<br>
+            <input type="checkbox" name="postal107" value="postal107">107 Reykjavík<br>
+            <input type="checkbox" name="postal108" value="postal108">108 Reykjavík<br>
+            <input type="checkbox" name="postal109" value="postal109">109 Reykjavík<br>
+            <input type="checkbox" name="postal110" value="postal110">110 Reykjavík<br>
+            <input type="checkbox" name="postal111" value="postal111">111 Reykjavík<br>
+            <input type="checkbox" name="postal112" value="postal112">112 Reykjavík<br>
+            <input type="checkbox" name="postal113" value="postal113">113 Reykjavík<br>
+            <input type="checkbox" name="postal116" value="postal116">116 Reykjavík<br>
+            <input type="checkbox" name="postal121" value="postal121">121 Reykjavík<br>
+            <input type="checkbox" name="postal123" value="postal123">123 Reykjavík<br>
+            <input type="checkbox" name="postal124" value="postal124">124 Reykjavík<br>
+            <input type="checkbox" name="postal125" value="postal125">125 Reykjavík<br>
+            <input type="checkbox" name="postal127" value="postal127">127 Reykjavík<br>
+            <input type="checkbox" name="postal128" value="postal128">128 Reykjavík<br>
+            <input type="checkbox" name="postal129" value="postal129">129 Reykjavík<br>
+            <input type="checkbox" name="postal130" value="postal130">130 Reykjavík<br>
+            <input type="checkbox" name="postal132" value="postal132">132 Reykjavík<br>
+            <input type="checkbox" name="postall50" value="postal150">150 Reykjavík<br>
+            <input type="checkbox" name="postal155" value="postal155">155 Reykjavík<br>
+        </div>
+
+        <div class="seltjarnarnes">
+            <input type="checkbox" name="postal170" value="postal170">170 Seltjarnarnes<br>
+            <input type="checkbox" name="postal172" value="postal172">172 Seltjarnarnes<br>
+        </div>
+
+        <div class="kopavogur">
+            <input type="checkbox" name="postal200" value="postal200">200 Kópavogur<br>
+            <input type="checkbox" name="postal201" value="postal201">201 Kópavogur<br>
+            <input type="checkbox" name="postal202" value="postal202">202 Kópavogur<br>
+            <input type="checkbox" name="postal203" value="postal203">203 Kópavogur<br>
+        </div>
+
+        <div class="gardabaer">
+            <input type="checkbox" name="postal210" value="postal210">210 Garðabær<br>
+            <input type="checkbox" name="postal212" value="postal212">212 Garðabær<br>
+        </div>
+
+
+        <div class="hafnarfjordur">
+            <input type="checkbox" name="postal220" value="postal220">220 Hafnarfjörður<br>
+            <input type="checkbox" name="postal221" value="postal221">221 Hafnarfjörður<br>
+            <input type="checkbox" name="postal222" value="postal222">222 Hafnarfjörður<br>
+
+
+        </div>
+
+        <div class="mosfellsbaer">
+            <input type="checkbox" name="postal270" value="postal270">270 Mosfellsbær<br>
+            <input type="checkbox" name="postal271" value="postal271">271 Mosfellsbær<br>
+            <input type="checkbox" name="postal276" value="postal276">276 Mosfellsbær<br>
+
+        </div>
+    </div>
+    <p>Fermetrar</p>
+    <select>
+        <option value="fra0fermetrar">0</option>
+        <option value="fra50fermetrar">50</option>
+        <option value="fra100fermetrar">100</option>
+        <option value="fra150fermetrar">150</option>
+        <option value="fra200fermetrar">200</option>
+        <option value="fra250fermetrar">250</option>
+        <option value="fra300fermetrar">300</option>
+        <option value="fra350fermetrar">350</option>
+        <option value="fra400fermetrar">400</option>
+        <option value="fra450fermetrar">450</option>
+        <option value="fra500fermetrar">500</option>
+    </select>
+    <p>til</p>
+    <select>
+        <option value="til50fermetrar">50</option>
+        <option value="til100fermetrar">100</option>
+        <option value="til150fermetrar">150</option>
+        <option value="til200fermetrar">200</option>
+        <option value="til250fermetrar">250</option>
+        <option value="til300fermetrar">300</option>
+        <option value="til350fermetrar">350</option>
+        <option value="til400fermetrar">400</option>
+        <option value="til450fermetrar">450</option>
+        <option value="til500fermetrar">500</option>
+    </select>
+    <br>
+
+    <p>Herbergi</p>
+    <select>
+        <option value="fra1herbergi">1</option>
+        <option value="fra2herbergi">2</option>
+        <option value="fra3herbergi">3</option>
+        <option value="fra4herbergi">4</option>
+        <option value="fra5herbergi">5</option>
+    </select>
+    <p>til</p>
+    <select>
+        <option value="til1herbergi">1</option>
+        <option value="til2herbergi">2</option>
+        <option value="til3herbergi">3</option>
+        <option value="til4herbergi">4</option>
+        <option value="til5herbergi">5</option>
+    </select>
+    <br>
+
+    <p>Verð (m.kr)</p>
+    <select>
+        <option value="fra0milljon">0</option>
+        <option value="fra10milljon">10</option>
+        <option value="fra20milljon">20</option>
+        <option value="fra30milljon">30</option>
+        <option value="fra40milljon">40</option>
+        <option value="fra50milljon">50</option>
+        <option value="fra60milljon">60</option>
+        <option value="fra70milljon">70</option>
+        <option value="fra80milljon">80</option>
+        <option value="fra90milljon">90</option>
+        <option value="fra100milljon">100</option>
+    </select>
+    <p>til</p>
+    <select>
+        <option value="til10milljon">10</option>
+        <option value="til20milljon">20</option>
+        <option value="til30milljon">30</option>
+        <option value="til40milljon">40</option>
+        <option value="til50milljon">50</option>
+        <option value="til60milljon">60</option>
+        <option value="til70milljon">70</option>
+        <option value="til80milljon">80</option>
+        <option value="til90milljon">90</option>
+        <option value="til100milljon">100</option>
+    </select>
+
+
+
+
+    <h3>Vinsælar fasteignir</h3>
+{% endblock %}
