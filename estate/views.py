@@ -1,10 +1,21 @@
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
-from estate.models import Estate
+from estate.models import Estate, EstateImage
 from estate.forms.estate_form import RegisterEstateForm
 # Create your views here.
 
 
 def index(request):
+    if 'search_filter' in request.GET:
+        search_filter = request.GET['search_filter']
+        estates = [ {
+            'address': x.address,
+            'price': x.price,
+            'description': x.description,
+            'firstImage': x.estateimage_set.first().image
+
+        } for x in Estate.objects.filter(address__icontains=search_filter) ]
+        return JsonResponse({ 'data': estates })
     context = {"estates": Estate.objects.all().order_by('address')}
     return render(request, "estate/index.html", context)
 
