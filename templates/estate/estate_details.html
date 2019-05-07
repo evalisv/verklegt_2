@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <h1>{{ estate.address }}, {{ estate.postal_code }}</h1>
+    {% for estate in estate.estateimage_set.all %}
+        <img src="{{ estate.image }}" class="estate_img"/>
+    {% endfor %}
+    <p>Gerð: {{ estate.type }}</p>
+    <p>Byggingarár: {{ estate.year_built }}</p>
+    <p>Stærð: {{ estate.size }}</p>
+    <p>Herbergi: {{ estate.bedrooms }}</p>
+    <p>Baðherbergi: {{ estate.bathrooms }}</p>
+    <p>Verð: {{ estate.price }}</p>
+    <p>Fasteignamat: {{ estate.fasteignamat }}</p>
+    <p>Brunabótamat: {{ estate.brunabotamat }}</p>
+    <p>Sérinngangur: {{ estate.entry }}</p>
+    <p>Bílskúr: {{ estate.garage }}</p>
+    <p>Lyfta: {{ estate.elevator }}</p>
+    <p>Skráð: {{ estate.date_listed }}</p>
+    <p>Lýsing: {{ estate.description }}</p>
+
+{% endblock %}
