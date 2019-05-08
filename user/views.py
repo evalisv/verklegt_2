@@ -22,19 +22,18 @@ def update_user(request, id):
         return render(request, 'user/update_user.html', {
             'form': form,
             'id': id
+
+
         })
 
 
 #setti tímabundið inn UserCreationForm
 def register(request):
-    if 'POST' == request.method:
+    if request.method == 'POST':
         form = UserCreateForm(data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('user')
-    else:
-        form = UserCreateForm(data=request.POST)
-
+            return redirect('login')
     return render(request, 'user/register.html', {
         'form': UserCreateForm()
     })
