@@ -2,20 +2,22 @@ from user.classes.UserCreateForm import UserCreateForm
 from django.shortcuts import render, redirect
 from user.models import Profile
 from user.forms.profile_form import ProfileForm
+from django.contrib.auth.forms import UserCreationForm
 
 
 def index(request):
     return render(request, 'user/index.html')
 
 
+#setti tímabundið inn UserCreationForm
 def register(request):
     if 'POST' == request.method:
-        form = UserCreateForm(data=request.POST)
+        form = UserCreationForm(data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')
+            return redirect('user')
     return render(request, 'user/register.html', {
-        'form': UserCreateForm()
+        'form': UserCreationForm()
     })
 
 
