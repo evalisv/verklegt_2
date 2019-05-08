@@ -1,9 +1,10 @@
-{% extents 'home.html' %}
-{% block content %}
-    <h1>{{ estate.address }}</h1>
-    <h2>Verð: {{ estate.price }} kr.</h2>
-    <h2>Stærð: {{ estate.size }} fm.</h2>
-    <h2>Tegund: {{ estate.type }}</h2>
-    <p>{{ estate.description }}</p>
-    <img src="{{ estate.EstateImage_set.get(id=0).image }}"
-{% endblock %}
+<div>
+    <a href="#">
+        <img class="estate-img" src="{{ estate.EstateImage_set.get(id=0).image }}" />
+        <h1>{{ estate.address }}</h1>
+        <h2>Verð: {{ estate.price }} kr.</h2>
+        <h2>Stærð: {{ estate.size }} fm.</h2>
+        <h2>Tegund: {{ estate.type }}</h2>
+        <p>{{ estate.description }}</p>
+    </a>
+</div>
