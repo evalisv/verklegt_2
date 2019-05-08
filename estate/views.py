@@ -48,7 +48,9 @@ def update_estate(request, id):
     if request.method == 'POST':
         form = UpdateEstateForm(data=request.POST, instance=instance)
         if form.is_valid():
-            form.save()
+            estate = form.save()
+            estate_image = EstateImage(image=request.POST['image'], estate=estate)
+            estate_image.save()
             return redirect('estate_details', id=id)
     else:
         form = UpdateEstateForm(instance=instance)

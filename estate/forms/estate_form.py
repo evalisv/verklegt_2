@@ -3,12 +3,12 @@ from django import forms
 from estate.models import Estate
 
 class UpdateEstateForm(ModelForm):
-    image = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    image = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Estate
         exclude = ['id', 'estate_seller', 'open_house', 'date_listed', 'views', 'address','postal_code', 'size',
-                   'bedrooms', 'bathrooms', 'fasteignamat', 'brunabótamat', 'type', 'year_built', 'entry', 'garage',
+                   'bedrooms', 'bathrooms', 'fasteignamat', 'brunabotamat', 'type', 'year_built', 'entry', 'garage',
                    'elevator']
         widgets = {
             'price': widgets.NumberInput(attrs={'class': 'form-control'}),
