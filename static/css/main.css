@@ -1,11 +1,15 @@
 body {
     background-image: url('/static/images/castle-bg.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: contain;
 }
 
 .document-wrapper {
     height: 100%;
     background: rgba(255,255,255,0.5);
 }
+
 .login {
     width: 60%;
     background: #f5f5f5;
@@ -15,9 +19,16 @@ body {
 }
 
 .container {
-    margin-bottom: 200px;
-    /*background: pink;*/
-    overflow: hidden;
+    /*overflow: hidden;*/
+}
+
+.base-container {
+    margin-bottom: 160px;
+}
+
+.content-container {
+    background: rgba(230,230,230,0.9);
+    border-radius: 10px;
 }
 
 .filter-container, .estate-detail-container {
@@ -43,12 +54,16 @@ input[type="text"], input[type="password"], input[type="search"] {
     border: solid 1px #ddd;
 }
 
-.header, .footer {
+a {
+    color: #555;
+}
+
+.footer {
     position: fixed;
     bottom: 0;
     background: #818181;
     width: 100%;
-    padding: 50px 50px 20px;
+    padding: 20px 50px 10px;
     color: white;
     line-height: 0.5rem;
     font-size: 0.8rem;
@@ -56,7 +71,7 @@ input[type="text"], input[type="password"], input[type="search"] {
     margin-left: auto;
 }
 
-.header a, .footer a {
+.footer a {
     color: white;
 }
 
@@ -84,6 +99,10 @@ input[type="text"], input[type="password"], input[type="search"] {
 
 .image-wrapper img {
     width: 100%;
+}
+
+.estate .image-wrapper {
+    height: 212px;
 }
 
 .estate-detail-container .col-5, .estate-detail-container .col-12 {
@@ -116,4 +135,25 @@ input[type="text"], input[type="password"], input[type="search"] {
 
 .estate-detail-container .image-wrapper.all-images {
     margin-top: 10px;
+}
+
+span.step-links {
+    width: 100%;
+    text-align: center;
+}
+
+.paging-cube {
+    border: solid 1px #777;
+    text-align: center;
+    display: inline-block;
+    width: 25px;
+    border-radius: 3px;
+}
+
+.paging-cube:hover {
+    background: #777;
+}
+
+.paging-cube:hover a {
+    color: white;
 }

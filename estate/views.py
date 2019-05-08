@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from estate.models import Estate, EstateImage
 from estate.forms.estate_form import RegisterEstateForm, UpdateEstateForm
@@ -16,7 +17,14 @@ def index(request):
 
         } for x in Estate.objects.filter(address__icontains=search_filter) ]
         return JsonResponse({ 'data': estates })
-    context = {"estates": Estate.objects.all().order_by('address')}
+
+    estate_list = Estate.objects.all().order_by("address")
+    paginator = Paginator(estate_list, 6)
+
+    page = request.GET.get("page")
+    estates = paginator.get_page(page)
+
+    context = {"estates": estates}
     return render(request, "estate/index.html", context)
 
 def get_estate_by_id(request, id):
