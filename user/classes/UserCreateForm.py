@@ -14,10 +14,12 @@ class UserCreateForm(UserCreationForm):
     watchlist = forms.CharField(max_length=255)
 
     #Til að exclude-a reit við register.
-    exclude = ['id', 'user']
+    #exclude = ['id', 'user']
     class Meta:
         model = User
-        fields = '__all__'
+        exclude = ['id', 'is_active', 'date_joined', 'is_staff', 'last_login', 'is_superuser', 'auth_user_pkey'
+                    ,'group_id', 'user_permissions', 'groups']
+
 
     def save(self, commit=True):
         if not commit:
