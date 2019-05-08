@@ -1,16 +1,19 @@
 from django.db import models
 from user.models import User
 
+
 class Municipality(models.Model):
     postal_code = models.IntegerField(primary_key=True)
     municipality = models.CharField(max_length=255)
     def __str__(self):
         return str(self.postal_code) + " " + str(self.municipality)
 
+
 class EstateType(models.Model):
     type = models.CharField(max_length=255, primary_key=True)
     def __str__(self):
         return self.type
+
 
 class Estate(models.Model):
     address = models.CharField(max_length=255)
@@ -33,6 +36,7 @@ class Estate(models.Model):
     date_listed = models.DateTimeField()
     def __str__(self):
         return self.address
+
 
 class EstateImage(models.Model):
     image = models.CharField(max_length=999)
