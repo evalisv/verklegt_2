@@ -16,7 +16,7 @@ $(document).ready(function() {
                                 </a>
                             </div>'
                 });
-                $(.'estates').html(newHtml.join(''));
+                $('.estates').html(newHtml.join(''));
                 $('#search_box').val(value:'');
             },
             error: function(xhr, status, error) {

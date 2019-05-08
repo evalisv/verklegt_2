@@ -1,7 +1,7 @@
 from django.http import JsonResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from estate.models import Estate, EstateImage
-from estate.forms.estate_form import RegisterEstateForm
+from estate.forms.estate_form import RegisterEstateForm, UpdateEstateForm
 # Create your views here.
 
 
@@ -26,9 +26,36 @@ def get_estate_by_id(request, id):
 
 def register_estate(request):
     if request.method == 'POST':
-        print(1)
+        form = RegisterEstateForm(data=request.POST)
+        if form.is_valid():
+            estate = form.save()
+            estate_image = EstateImage(image=request.POST['image'], estate=estate)
+            estate_image.save()
+            return redirect('estate-index')
     else:
         form = RegisterEstateForm()
     return render(request, 'estate/register_estate.html', {
         'form' : form
     })
+
+def delete_estate(request, id):
+    estate = get_object_or_404(Estate, pk=id)
+    estate.delete()
+    return redirect('estate-index')
+
+def update_estate(request, id):
+    instance = get_object_or_404(Estate, pk=id)
+    if request.method == 'POST':
+        form = UpdateEstateForm(data=request.POST, instance=instance)
+        if form.is_valid():
+            estate = form.save()
+            estate_image = EstateImage(image=request.POST['image'], estate=estate)
+            estate_image.save()
+            return redirect('estate_details', id=id)
+    else:
+        form = UpdateEstateForm(instance=instance)
+    return render(request, 'estate/update_estate.html', {
+        'form': form,
+        'id': id
+    })
+
