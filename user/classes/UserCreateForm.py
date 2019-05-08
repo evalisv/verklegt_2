@@ -14,8 +14,8 @@ class UserCreateForm(UserCreationForm):
     #exclude = ['id', 'user']
     class Meta:
         model = User
-        exclude = ['id', 'email', 'password', 'username', 'is_active', 'date_joined', 'is_staff', 'last_login', 'is_superuser', 'auth_user_pkey'
-                       , 'group_id', 'user_permissions', 'groups',  'watchlist']
+        exclude = ['id', 'password', 'username', 'is_active', 'date_joined', 'is_staff', 'last_login'
+                       , 'is_superuser', 'auth_user_pkey', 'group_id', 'user_permissions', 'groups',  'watchlist']
 
     def save(self, commit=True):
         if not commit:
