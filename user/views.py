@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404
 from user.models import User, UserImage
 from user.forms.profile_form import UserUpdateForm
-=======
 from user.classes.UserCreateForm import UserCreateForm
 from django.shortcuts import render, redirect
 from user.models import Profile
