@@ -8,6 +8,7 @@ body {
 .document-wrapper {
     height: 100%;
     background: rgba(255,255,255,0.5);
+    min-height: 1080px;
 }
 
 .login {
