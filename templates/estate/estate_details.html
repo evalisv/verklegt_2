@@ -1,61 +1,120 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <h1>{{ estate.address }}, {{ estate.postal_code }}</h1>
-    {% for estate in estate.estateimage_set.all %}
-        <img src="{{ estate.image }}" class="estate_img"/>
-    {% endfor %}
-    <table>
-        <tr>
-            <td>Verð</td>
-            <td>{{ estate.price }} kr.</td>
-        </tr>
-        <tr>
-            <td>Fasteignamat</td>
-            <td>{{ estate.fasteignamat }} kr.</td>
-        </tr>
-        <tr>
-            <td>Brunabótamat</td>
-            <td>{{ estate.brunabotamat }} kr.</td>
-        </tr>
-        <tr>
-            <td>Gerð</td>
-            <td>{{ estate.type }}</td>
-        </tr>
-        <tr>
-            <td>Byggingarár</td>
-            <td>{{ estate.year_built }}</td>
-        </tr>
-        <tr>
-            <td>Stærð</td>
-            <td>{{ estate.size }} m2</td>
-        </tr>
-        <tr>
-            <td>Herbergi</td>
-            <td>{{ estate.bedrooms }}</td>
-        </tr>
-        <tr>
-            <td>Baðherbergi</td>
-            <td>{{ estate.bathrooms }}</td>
-        </tr>
-        <tr>
-            <td>Sérinngangur</td>
-            <td>{{ estate.entry }}</td>
-        </tr>
-        <tr>
-            <td>Bílskúr</td>
-            <td>{{ estate.garage }}</td>
-        </tr>
-        <tr>
-            <td>Lyfta</td>
-            <td>{{ estate.elevator }}</td>
-        </tr>
-        <tr>
-            <td>Skráð</td>
-            <td>{{ estate.date_listed }}</td>
-        </tr>
-    </table>
-
-    <p>Lýsing: {{ estate.description }}</p>
-
+    <div class="container estate-detail-container my-5">
+        <div class="row">
+            <div class="col col-7">
+                <div class="image-wrapper">
+                    <img src="{{ estate.estateimage_set.first }}" class="estate_img"/>
+                </div>
+                <button class="btn btn-outline-secondary btn-block mt-2" data-toggle="modal" data-target="#allImages">
+                    Sjá allar myndir
+                </button>
+                {% if estate.estateimage_set.all|length > 1 %}
+                    <div class="modal fade" id="allImages" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">{{ estate.address }}, {{ estate.postal_code }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Loka">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    {% for estate in estate.estateimage_set.all %}
+                                        <div class="image-wrapper all-images">
+                                            <img src="{{ estate.image }}" class="estate_img"/>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Loka</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col col-5">
+                <h2>{{ estate.address }},<br/>{{ estate.postal_code }}</h2>
+                <table>
+                    <tr>
+                        <td class="heading">Verð</td>
+                        <td>{{ estate.price }} kr.</td>
+                    </tr>
+                    <tr>
+                        <td class="heading">Fasteignamat</td>
+                        <td>{{ estate.fasteignamat }} kr.</td>
+                    </tr>
+                    <tr>
+                        <td class="heading">Brunabótamat</td>
+                        <td>{{ estate.brunabotamat }} kr.</td>
+                    </tr>
+                    <tr>
+                        <td class="heading">Gerð</td>
+                        <td>{{ estate.type }}</td>
+                    </tr>
+                    <tr>
+                        <td class="heading">Byggingarár</td>
+                        <td>{{ estate.year_built }}</td>
+                    </tr>
+                    <tr>
+                        <td class="heading">Stærð</td>
+                        <td>{{ estate.size }} m2</td>
+                    </tr>
+                    <tr>
+                        <td class="heading">Herbergi</td>
+                        <td>{{ estate.bedrooms }}</td>
+                    </tr>
+                    <tr>
+                        <td class="heading">Baðherbergi</td>
+                        <td>{{ estate.bathrooms }}</td>
+                    </tr>
+                    <tr>
+                        <td class="heading">Sérinngangur</td>
+                        <td>
+                            {% if estate.entry %}
+                            Já
+                            {% else %}
+                            Nei
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="heading">Bílskúr</td>
+                        <td>
+                            {% if estate.garage %}
+                            Já
+                            {% else %}
+                            Nei
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="heading">Lyfta</td>
+                        <td>
+                            {% if estate.elevator %}
+                            Já
+                            {% else %}
+                            Nei
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="heading">Skráð</td>
+                        <td>{{ estate.date_listed }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-12">
+                <strong>Lýsing</strong>
+                <p>{{ estate.description }}</p>
+            </div>
+        </div>
+        <button class="btn btn-danger float-left" onclick="window.history.go(-1); return false;">Til baka</button>
+        <button class="btn btn-primary float-right ml-2">Vakta eign</button>
+        <button class="btn btn-success float-right">Gera tilboð</button>
+    </div>
 {% endblock %}
