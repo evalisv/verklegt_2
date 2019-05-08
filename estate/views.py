@@ -41,7 +41,7 @@ def register_estate(request):
 def delete_estate(request, id):
     estate = get_object_or_404(Estate, pk=id)
     estate.delete()
-    return redirect('profile')
+    return redirect('estate-index')
 
 def update_estate(request, id):
     instance = get_object_or_404(Estate, pk=id)
