@@ -1,8 +1,10 @@
 <div class="well estate">
     <a href = "/estates/{{ estate.id }}">
-        <img class="estate-img" src="{{ estate.estateimage_set.first.image }}" />
-        <div> <h4>{{ estate.address }}</h4> </div>
-        <div> <h5>Verð: {{ estate.price }}</h5> </div>
-        <div> <p>{{ estate.description }}</p></div>
+        <div class="image-wrapper">
+            <img class="estate-img" src="{{ estate.estateimage_set.first.image }}" />
+        </div>
+        <div><h4>{{ estate.address }}</h4></div>
+        <div><h5>Verð: {{ estate.price }}</h5></div>
+        <div><p>{{ estate.description }}</p></div>
     </a>
 </div>

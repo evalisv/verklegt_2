@@ -1,0 +1,26 @@
+<div class="pagination">
+    <span class="step-links">
+        {% if list.has_previous %}
+            <span class="paging-cube">
+                <a href="?page=1">&laquo;</a>
+            </span>
+            <span class="paging-cube">
+                <a href="?page={{ list.previous_page_number }}">&lsaquo;</a>
+            </span>
+        {% endif %}
+        <span class="current">
+            <span class="current-page">{{ list.number }}</span> af
+            <span class="total-pages">
+                <a href="?page={{ list.paginator.num_pages }}">{{ list.paginator.num_pages }}</a>
+            </span>
+        </span>
+        {% if list.has_next %}
+            <span class="paging-cube">
+                <a href="?page={{ list.next_page_number }}">&rsaquo;</a>
+            </span>
+            <span class="paging-cube">
+                <a href="?page={{ list.paginator.num_pages }}">&raquo;</a>
+            </span>
+        {% endif %}
+    </span>
+</div>
