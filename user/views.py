@@ -1,11 +1,10 @@
-from django.shortcuts import render
-from django.shortcuts import render, get_object_or_404
-from user.models import User, UserImage
-from user.forms.profile_form import UserUpdateForm
 from user.classes.UserCreateForm import UserCreateForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from user.models import Profile
 from user.forms.profile_form import ProfileForm
+from django.contrib.auth.forms import UserCreationForm
+from user.forms.profile_form import UserUpdateForm
+from user.models import User, UserImage
 
 def index(request):
     return render(request, 'user/index.html')
@@ -25,12 +24,17 @@ def update_user(request, id):
             'id': id
         })
 
+
+#setti tímabundið inn UserCreationForm
 def register(request):
     if 'POST' == request.method:
         form = UserCreateForm(data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')
+            return redirect('user')
+    else:
+        form = UserCreateForm(data=request.POST)
+
     return render(request, 'user/register.html', {
         'form': UserCreateForm()
     })
@@ -49,4 +53,3 @@ def profile(request):
     return render(request, 'user/profile.html', {
         'form': ProfileForm(instance=profile)
     })
-
