@@ -2,7 +2,9 @@
 
 {% block content %}
     <h3>Allar fasteignir</h3>
+    <div class="estates">
     {% for estate in estates %}
         {% include 'estate/single_estate.html' with estate=estate %}
     {% endfor %}
+    </div>
 {% endblock %}
