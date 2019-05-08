@@ -1,6 +1,7 @@
 from django.forms import ModelForm, widgets
 from django import forms
 from estate.models import Estate
+import datetime
 
 class UpdateEstateForm(ModelForm):
     image = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -20,7 +21,7 @@ class RegisterEstateForm(ModelForm):
 
     class Meta:
         model = Estate
-        exclude = [ 'id', 'estate_seller', 'open_house', 'date_listed', 'views' ]
+        exclude = [ 'id', 'open_house']
         widgets = {
             'address' : widgets.TextInput(attrs={ 'class': 'form-control'}),
             'postal_code': widgets.Select(attrs={'class': 'form-control'}),
@@ -35,5 +36,8 @@ class RegisterEstateForm(ModelForm):
             'entry': widgets.CheckboxInput(attrs={ 'class': 'checkbox'}),
             'garage': widgets.CheckboxInput(attrs={ 'class': 'checkbox'}),
             'description': widgets.TextInput(attrs={ 'class': 'form-control'}),
-            'elevator': widgets.CheckboxInput(attrs={ 'class': 'checkbox'})
+            'elevator': widgets.CheckboxInput(attrs={ 'class': 'checkbox'}),
+            'views': widgets.HiddenInput(attrs={'value':0, 'required': False}),
+            'date_listed': widgets.HiddenInput(attrs={'value': datetime.datetime.now(), 'required': False}),
+            'estate_seller': widgets.Select(attrs={ 'class': 'form-control'})
         }

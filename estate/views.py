@@ -31,7 +31,7 @@ def register_estate(request):
             estate = form.save()
             estate_image = EstateImage(image=request.POST['image'], estate=estate)
             estate_image.save()
-            return redirect('profile')
+            return redirect('estate-index')
     else:
         form = RegisterEstateForm()
     return render(request, 'estate/register_estate.html', {
