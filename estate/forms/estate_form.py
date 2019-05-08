@@ -2,8 +2,22 @@ from django.forms import ModelForm, widgets
 from django import forms
 from estate.models import Estate
 
+class UpdateEstateForm(ModelForm):
+    image = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = Estate
+        exclude = ['id', 'estate_seller', 'open_house', 'date_listed', 'views', 'address','postal_code', 'size',
+                   'bedrooms', 'bathrooms', 'fasteignamat', 'brunabótamat', 'type', 'year_built', 'entry', 'garage',
+                   'elevator']
+        widgets = {
+            'price': widgets.NumberInput(attrs={'class': 'form-control'}),
+            'description': widgets.TextInput(attrs={'class': 'form-control'})
+        }
+
 class RegisterEstateForm(ModelForm):
     image = forms.CharField(required=True, widget=forms.TextInput(attrs={ 'class': 'form-control'}))
+
     class Meta:
         model = Estate
         exclude = [ 'id', 'estate_seller', 'open_house', 'date_listed', 'views' ]
