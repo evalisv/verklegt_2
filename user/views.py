@@ -29,14 +29,17 @@ def update_user(request, id):
 
 #setti tímabundið inn UserCreationForm
 def register(request):
-    if request.method == 'POST':
-        form = UserCreateForm(data=request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('login')
-    return render(request, 'user/register.html', {
-        'form': UserCreateForm()
-    })
+    try:
+        if request.method == 'POST':
+            form = UserCreateForm(data=request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('login')
+        return render(request, 'user/register.html', {
+            'form': UserCreateForm()
+        })
+    except Exception as e:
+        print(type(e))
 
 
 def profile(request):
