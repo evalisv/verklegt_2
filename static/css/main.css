@@ -1,3 +1,66 @@
-.red {
-    color: red;
+.login {
+    width: 60%;
+    background: #f5f5f5;
+    margin: 70px auto 0 auto;
+    padding: 25px;
+    border-radius: 10px;
+}
+.container {
+    margin-bottom: 200px;
+    /*background: pink;*/
+    overflow: hidden;
+}
+
+.container.filter-container {
+    margin-bottom: 0;
+}
+
+.filter-container .row {
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+input[type="text"], input[type="password"], input[type="search"] {
+    width: 100%;
+    display: block;
+    padding: 5px;
+    border-radius: 5px;
+    border: solid 1px #ddd;
+}
+
+.header, .footer {
+    position: fixed;
+    bottom: 0;
+    background: #818181;
+    width: 100%;
+    padding: 50px 50px 20px;
+    color: white;
+    line-height: 0.5rem;
+    font-size: 0.8rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.header a, .footer a {
+    color: white;
+}
+
+.open-filter {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.filter {
+    position: relative;
+    /*margin-top: 45px;*/
+}
+.filter li {
+    list-style: none;
+    cursor: pointer;
 }
