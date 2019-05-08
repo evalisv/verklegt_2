@@ -11,6 +11,11 @@ class User(models.Model):
     auth_user_id = models.ForeignKey(auth_user, on_delete=models.CASCADE)
 
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_image = models.CharField(max_length=9999)
+
+
 class UserImage(models.Model):
     image = models.CharField(max_length=999)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
