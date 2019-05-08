@@ -7,8 +7,20 @@
 }
 .container {
     margin-bottom: 200px;
-    background: pink;
+    /*background: pink;*/
     overflow: hidden;
+}
+
+.container.filter-container {
+    margin-bottom: 0;
+}
+
+.filter-container .row {
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    max-height: 400px;
+    overflow-y: scroll;
 }
 
 input[type="text"], input[type="password"], input[type="search"] {
@@ -46,7 +58,7 @@ input[type="text"], input[type="password"], input[type="search"] {
 
 .filter {
     position: relative;
-    margin-top: 45px;
+    /*margin-top: 45px;*/
 }
 .filter li {
     list-style: none;

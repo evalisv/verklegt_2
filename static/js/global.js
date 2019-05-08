@@ -1,163 +1,119 @@
-const postalCodes = {
-	"101": "Reykjavík",
-	"102": "Reykjavík",
-	"103": "Reykjavík",
-	"104": "Reykjavík",
-	"105": "Reykjavík",
-	"107": "Reykjavík",
-	"108": "Reykjavík",
-	"109": "Reykjavík",
-	"110": "Reykjavík",
-	"111": "Reykjavík",
-	"112": "Reykjavík",
-	"113": "Reykjavík",
-	"116": "Reykjavík",
-	"121": "Reykjavík",
-	"123": "Reykjavík",
-	"124": "Reykjavík",
-	"125": "Reykjavík",
-	"127": "Reykjavík",
-	"128": "Reykjavík",
-	"129": "Reykjavík",
-	"130": "Reykjavík",
-	"132": "Reykjavík",
-	"150": "Reykjavík",
-	"155": "Reykjavík",
-	"170": "Seltjarnarnes",
-	"172": "Seltjarnarnes",
-	"190": "Vogar",
-	"200": "Kópavogur",
-	"201": "Kópavogur",
-	"202": "Kópavogur",
-	"203": "Kópavogur",
-	"210": "Garðabær",
-	"212": "Garðabær",
-	"220": "Hafnarfjörður",
-	"221": "Hafnarfjörður",
-	"222": "Hafnarfjörður",
-	"225": "Álftanes",
-	"230": "Reykjanesbær",
-	"232": "Reykjanesbær",
-	"233": "Reykjanesbær",
-	"235": "Reykjanesbær",
-	"240": "Grindavík",
-	"245": "Sandgerði",
-	"250": "Garður",
-	"260": "Reykjanesbær",
-	"270": "Mosfellsbær",
-	"271": "Mosfellsbær",
-	"276": "Mosfellsbær",
-	"300": "Akranes",
-	"301": "Akranes",
-	"302": "Akranes",
-	"310": "Borgarnes",
-	"311": "Borgarnes",
-	"320": "Reykholt",
-	"340": "Stykkishólmur",
-	"345": "Flatey",
-	"350": "Grundarfjörður",
-	"355": "Ólafsvík",
-	"356": "Snæfellsbær",
-	"360": "Hellissandur",
-	"370": "Búðardalur",
-	"371": "Búðardalur",
-	"380": "Reykhólahreppur",
-	"400": "Ísafjörður",
-	"401": "Ísafjörður",
-	"410": "Hnífsdalur",
-	"415": "Bolungarvík",
-	"420": "Súðavík",
-	"425": "Flateyri",
-	"430": "Suðureyri",
-	"450": "Patreksfjörður",
-	"451": "Patreksfjörður",
-	"460": "Tálknafjörður",
-	"465": "Bíldudalur",
-	"470": "Þingeyri",
-	"471": "Þingeyri",
-	"500": "Staður",
-	"510": "Hólmavík",
-	"512": "Hólmavík",
-	"520": "Drangsnes",
-	"524": "Árneshreppur",
-	"530": "Hvammstangi",
-	"531": "Hvammstangi",
-	"540": "Blönduós",
-	"541": "Blönduós",
-	"545": "Skagaströnd",
-	"550": "Sauðárkrókur",
-	"551": "Sauðárkrókur",
-	"560": "Varmahlíð",
-	"565": "Hofsós",
-	"566": "Hofsós",
-	"570": "Fljót",
-	"580": "Siglufjörður",
-	"600": "Akureyri",
-	"601": "Akureyri",
-	"602": "Akureyri",
-	"603": "Akureyri",
-	"610": "Grenivík",
-	"611": "Grímsey",
-	"620": "Dalvík",
-	"621": "Dalvík",
-	"625": "Ólafsfjörður",
-	"630": "Hrísey",
-	"640": "Húsavík",
-	"641": "Húsavík",
-	"645": "Fosshóll",
-	"650": "Laugar",
-	"660": "Mývatn",
-	"670": "Kópasker",
-	"671": "Kópaskeri",
-	"675": "Raufarhöfn",
-	"680": "Þórshöfn",
-	"681": "Þórshöfn",
-	"685": "Bakkafjörður",
-	"690": "Vopnafjörður",
-	"700": "Fellabær og Egilsstaðir",
-	"701": "Egilsstaðir",
-	"710": "Seyðisfjörður",
-	"715": "Mjóifjörður",
-	"720": "Borgarfjörður",
-	"730": "Reyðarfjörður",
-	"735": "Eskifjörður",
-	"740": "Neskaupstaður",
-	"750": "Fáskrúðsfjörður",
-	"755": "Stöðvarfjörður",
-	"760": "Breiðdalsvík",
-	"765": "Djúpivogur",
-	"780": "Höfn",
-	"781": "Höfn",
-	"785": "Öræfi",
-	"800": "Selfoss",
-	"801": "Selfoss",
-	"802": "Selfoss",
-	"810": "Hveragerði",
-	"815": "Þorlákshöfn",
-	"816": "Ölfus",
-	"820": "Eyrarbakki",
-	"825": "Stokkseyri",
-	"840": "Laugarvatn",
-	"845": "Flúðir",
-	"850": "Hella",
-	"851": "Hella",
-	"860": "Hvolsvöllur",
-	"861": "Hvolsvöllur",
-	"870": "Vík",
-	"871": "Vík",
-	"880": "Kirkjubæjarklaustur",
-	"900": "Vestmannaeyjar",
-	"902": "Vestmannaeyjar"
-}
-
 $(document).ready(function() {
     $('[data-selector="filter"]').click(function() {
         $('.filter').toggleClass('hidden');
+        $(this).toggleClass('active');
     });
 
-    $('.filter li').click(function() {
-        // $('.filter').toggleClass('hidden');
-        // console.log($(this).children('ul').toggleClass('hidden'));
-        console.log($(this).text())
-    })
+    $('li.level1 > label').click(function() {
+        let region = $(this).text();
+        switch (region) {
+            case 'Höfuðborgarsvæðið':
+                $('#capital').toggleClass('hidden');
+                break;
+            case 'Vesturland':
+                $('#west').toggleClass('hidden');
+                break;
+            case 'Vestfirðir':
+                $('#northwest').toggleClass('hidden');
+                break;
+            case 'Norðurland':
+                $('#north').toggleClass('hidden');
+                break;
+            case 'Austurland':
+                $('#east').toggleClass('hidden');
+                break;
+            case 'Suðurland':
+                $('#south').toggleClass('hidden');
+                break;
+            case 'Suðurnes':
+                $('#southwest').toggleClass('hidden');
+                break;
+        }
+    });
+
+    $('li.level1').on('change', 'input[type="checkbox"]', function() {
+        let checkBoxes, isChecked, isCollapsed;
+        let region = $(this).next('label').text();
+        isCollapsed = $(this).parents('li.level1').find('ul.level2').hasClass('hidden');
+        isChecked = $(this).prop('checked');
+        switch (region) {
+            case 'Höfuðborgarsvæðið':
+                checkBoxes = $('#capital li input[type="checkbox"]');
+                if (isChecked) {
+                    checkBoxes.prop('checked', true);
+                    if (isCollapsed) {
+                        $('#capital').removeClass('hidden');
+                    }
+                } else {
+                    checkBoxes.prop('checked', false);
+                }
+                break;
+            case 'Vesturland':
+                checkBoxes = $('#west li input[type="checkbox"]');
+                if (isChecked) {
+                    checkBoxes.prop('checked', true);
+                    if (isCollapsed) {
+                        $('#west').removeClass('hidden');
+                    }
+                } else {
+                    checkBoxes.prop('checked', false);
+                }
+                break;
+            case 'Vestfirðir':
+                checkBoxes = $('#northwest li input[type="checkbox"]');
+                if (isChecked) {
+                    checkBoxes.prop('checked', true);
+                    if (isCollapsed) {
+                        $('#northwest').removeClass('hidden');
+                    }
+                } else {
+                    checkBoxes.prop('checked', false);
+                }
+                break;
+            case 'Norðurland':
+                checkBoxes = $('#north li input[type="checkbox"]');
+                if (isChecked) {
+                    checkBoxes.prop('checked', true);
+                    if (isCollapsed) {
+                        $('#north').removeClass('hidden');
+                    }
+                } else {
+                    checkBoxes.prop('checked', false);
+                }
+                break;
+            case 'Austurland':
+                checkBoxes = $('#east li input[type="checkbox"]');
+                if (isChecked) {
+                    checkBoxes.prop('checked', true);
+                    if (isCollapsed) {
+                        $('#east').removeClass('hidden');
+                    }
+                } else {
+                    checkBoxes.prop('checked', false);
+                }
+                break;
+            case 'Suðurland':
+                checkBoxes = $('#south li input[type="checkbox"]');
+                if (isChecked) {
+                    checkBoxes.prop('checked', true);
+                    if (isCollapsed) {
+                        $('#south').removeClass('hidden');
+                    }
+                } else {
+                    checkBoxes.prop('checked', false);
+                }
+                break;
+            case 'Suðurnes':
+                checkBoxes = $('#southwest li input[type="checkbox"]');
+                if (isChecked) {
+                    checkBoxes.prop('checked', true);
+                    if (isCollapsed) {
+                        $('#southwest').removeClass('hidden');
+                    }
+                } else {
+                    checkBoxes.prop('checked', false);
+                }
+                break;
+        }
+    });
 });

@@ -8,97 +8,148 @@
     </form>
     <span data-selector="filter" class="open-filter float-right btn btn-outline-secondary m-2">Ítarleg leit</span>
 
-    {% for code in postal_codes %}
-    <p>{{ code.postal_code }}</p>
-    {% endfor %}
-    <div class="filter hidden">
-        <div class="postalcodes">
+    <div class="container filter-container">
+    <div class="filter hidden row">
+        <div class="postalcodes col">
             <ul class="level1">
-                <li>Höfuðborgarsvæðið
-                    <ul class="level2 hidden">
-                        <li>Reykjavík
-                            <ul class="level3 hidden">
-                                <li><input type="checkbox" name="postal101" value="postal101">101</li>
-                                <li><input type="checkbox" name="postal102" value="postal102">102</li>
-                                <li><input type="checkbox" name="postal103" value="postal103">103</li>
-                                <li><input type="checkbox" name="postal104" value="postal104">104</li>
-                                <li><input type="checkbox" name="postal105" value="postal105">105</li>
-                                <li><input type="checkbox" name="postal107" value="postal107">107</li>
-                                <li><input type="checkbox" name="postal108" value="postal108">108</li>
-                                <li><input type="checkbox" name="postal109" value="postal109">109</li>
-                                <li><input type="checkbox" name="postal110" value="postal110">110</li>
-                                <li><input type="checkbox" name="postal111" value="postal111">111</li>
-                                <li><input type="checkbox" name="postal112" value="postal112">112</li>
-                                <li><input type="checkbox" name="postal113" value="postal113">113</li>
-                                <li><input type="checkbox" name="postal116" value="postal116">116</li>
-                                <li><input type="checkbox" name="postal121" value="postal121">121</li>
-                                <li><input type="checkbox" name="postal123" value="postal123">123</li>
-                                <li><input type="checkbox" name="postal124" value="postal124">124</li>
-                                <li><input type="checkbox" name="postal125" value="postal125">125</li>
-                                <li><input type="checkbox" name="postal127" value="postal127">127</li>
-                                <li><input type="checkbox" name="postal128" value="postal128">128</li>
-                                <li><input type="checkbox" name="postal129" value="postal129">129</li>
-                                <li><input type="checkbox" name="postal130" value="postal130">130</li>
-                                <li><input type="checkbox" name="postal132" value="postal132">132</li>
-                                <li><input type="checkbox" name="postall50" value="postal150">150</li>
-                                <li><input type="checkbox" name="postal155" value="postal155">155</li>
-                            </ul>
-                        </li>
-                        <li>Seltjarnarnes
-                            <ul class="level3 hidden">
-                                <li><input type="checkbox" name="postal170" value="postal170">170</li>
-                                <li><input type="checkbox" name="postal172" value="postal172">172</li>
-                            </ul>
-                        </li>
-                        <li>Kópavogur
-                            <ul class="level3 hidden">
-                                <li><input type="checkbox" name="postal200" value="postal200">200</li>
-                                <li><input type="checkbox" name="postal201" value="postal201">201</li>
-                                <li><input type="checkbox" name="postal202" value="postal202">202</li>
-                                <li><input type="checkbox" name="postal203" value="postal203">203</li>
-                            </ul>
-                        </li>
-                        <li>Garðabær
-                            <ul class="level3 hidden">
-                                <li><input type="checkbox" name="postal210" value="postal210">210</li>
-                                <li><input type="checkbox" name="postal212" value="postal212">212</li>
-                            </ul>
-                        </li>
-                        <li>Hafnarfjörður
-                            <ul class="level3 hidden">
-                                <li><input type="checkbox" name="postal220" value="postal220">220</li>
-                                <li><input type="checkbox" name="postal221" value="postal221">221</li>
-                                <li><input type="checkbox" name="postal222" value="postal222">222</li>
-                            </ul>
-                        </li>
-                        <li>Mosfellsbær
-                            <ul class="level3 hidden">
-                                <li><input type="checkbox" name="postal270" value="postal270">270</li>
-                                <li><input type="checkbox" name="postal271" value="postal271">271</li>
-                                <li><input type="checkbox" name="postal276" value="postal276">276</li>
-                            </ul>
-                        </li>
+                <li data-selector="capital" class="level1">
+                    <input type="checkbox" id="postal-capital" name="postal-capital" value="postal-capital" />
+                    <label>Höfuðborgarsvæðið</label>
+                    <ul class="level2 hidden" id="capital">
+                        {% for code in postal_codes %}
+                            {% if code.postal_code < 230 and code.postal_code != 190 or code.postal_code > 269 and code.postal_code < 277 %}
+                                <li>
+                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal{{ code.postal_code }}" value="postal{{ code.postal_code }}" />
+                                    <label for="postal{{ code.postal_code }}">{{ code.postal_code }}, {{ code.municipality }}</label>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
                     </ul>
                 </li>
-                <li>Vesturland</li>
-                <li>Norðurland</li>
-                <li>Austurland</li>
-                <li>Suðurland</li>
+                <li data-selector="west" class="level1">
+                    <input type="checkbox" id="postal-west" name="postal-west" value="postal-west" />
+                    <label>Vesturland</label>
+                    <ul class="level2 hidden" id="west">
+                        {% for code in postal_codes %}
+                            {% if code.postal_code > 299 and code.postal_code < 381 %}
+                                <li>
+                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal{{ code.postal_code }}" value="postal{{ code.postal_code }}" />
+                                    <label for="postal{{ code.postal_code }}">{{ code.postal_code }}, {{ code.municipality }}</label>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li data-selector="northwest" class="level1">
+                    <input type="checkbox" id="postal-northwest" name="postal-northwest" value="postal-northwest" />
+                    <label>Vestfirðir</label>
+                    <ul class="level2 hidden" id="northwest">
+                        {% for code in postal_codes %}
+                            {% if code.postal_code > 399 and code.postal_code < 525 %}
+                                <li>
+                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal{{ code.postal_code }}" value="postal{{ code.postal_code }}" />
+                                    <label for="postal{{ code.postal_code }}">{{ code.postal_code }}, {{ code.municipality }}</label>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li data-selector="north" class="level1">
+                    <input type="checkbox" id="postal-north" name="postal-north" value="postal-north" />
+                    <label>Norðurland</label>
+                    <ul class="level2 hidden" id="north">
+                        {% for code in postal_codes %}
+                            {% if code.postal_code > 499 and code.postal_code < 682 %}
+                                <li>
+                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal{{ code.postal_code }}" value="postal{{ code.postal_code }}" />
+                                    <label for="postal{{ code.postal_code }}">{{ code.postal_code }}, {{ code.municipality }}</label>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li data-selector="east" class="level1">
+                    <input type="checkbox" id="postal-east" name="postal-east" value="postal-east" />
+                    <label>Austurland</label>
+                    <ul class="level2 hidden" id="east">
+                        {% for code in postal_codes %}
+                            {% if code.postal_code > 684 and code.postal_code < 786 %}
+                                <li>
+                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal{{ code.postal_code }}" value="postal{{ code.postal_code }}" />
+                                    <label for="postal{{ code.postal_code }}">{{ code.postal_code }}, {{ code.municipality }}</label>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li data-selector="south" class="level1">
+                    <input type="checkbox" id="postal-south" name="postal-south" value="postal-south" />
+                    <label>Suðurland</label>
+                    <ul class="level2 hidden" id="south">
+                        {% for code in postal_codes %}
+                            {% if code.postal_code > 799 %}
+                                <li>
+                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal{{ code.postal_code }}" value="postal{{ code.postal_code }}" />
+                                    <label for="postal{{ code.postal_code }}">{{ code.postal_code }}, {{ code.municipality }}</label>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li data-selector="southwest" class="level1">
+                    <input type="checkbox" id="postal-southwest" name="postal-southwest" value="postal-southwest" />
+                    <label>Suðurnes</label>
+                    <ul class="level2 hidden" id="southwest">
+                        {% for code in postal_codes %}
+                            {% if code.postal_code == 799 or code.postal_code > 229 and code.postal_code < 263 %}
+                                <li>
+                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal{{ code.postal_code }}" value="postal{{ code.postal_code }}" />
+                                    <label for="postal{{ code.postal_code }}">{{ code.postal_code }}, {{ code.municipality }}</label>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
             </ul>
         </div>
 
-    <input type="checkbox" name="type1" value="einbyli">Einbýli<br>
-        <input type="checkbox" name="type1" value="parhus">Parhús<br>
-        <input type="checkbox" name="type1" value="radhus">Raðhús<br>
-        <input type="checkbox" name="type1" value="fjolbyli">Fjölbýli<br>
-        <input type="checkbox" name="lyfta" value="lyfta">Lyfta<br>
-        <input type="checkbox" name="serinngangur" value="serinngangur">Sérinngangur<br>
+        <div class="col extras">
+            <ul>
+                <li>
+                    <input type="checkbox" name="type1" value="einbyli" id="einbyli">
+                    <label for="">Einbýli</label>
+                </li>
+                <li>
+                    <input type="checkbox" name="type1" value="parhus" id="parhus">
+                    <label for="">Parhús</label>
+                </li>
+                <li>
+                    <input type="checkbox" name="type1" value="radhus" id="radhus">
+                    <label for="">Raðhús</label>
+                </li>
+                <li>
+                    <input type="checkbox" name="type1" value="fjolbyli" id="fjolbyli">
+                    <label for="">Fjölbýli</label>
+                </li>
+                <li>
+                    <input type="checkbox" name="lyfta" value="lyfta" id="lyfta">
+                    <label for="">Lyfta</label>
+                </li>
+                <li>
+                    <input type="checkbox" name="serinngangur" value="serinngangur" id="serinngangur">
+                    <label for="">Sérinngangur</label>
+                </li>
+            </ul>
+        </div>
+    </div>
+
     </div>
 
 
 
 
 
-
-    <h3>Vinsælar fasteignir</h3>
+    <div class="container">
+        <h3>Vinsælar fasteignir</h3>
+    </div>
 {% endblock %}
