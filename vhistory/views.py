@@ -28,6 +28,17 @@ def get_vhistory_by_user(user):
 #for entry in view_history:
 #    print(Estate.objects.filter(id=entry.estate_id))
 
+#user_list = []
+#estate_list = []
+#for user in User.objects.all():
+#    user_list.append(user)
+#for estate in Estate.objects.all():
+#    estate_list.append(estate)
+#update_vhistory(user2,estate2)
+#for entry in view_history:
+#    print(Estate.objects.filter(id=entry.estate_id))
+
+
 #To clear Vhistory:
 #Vhistory.objects.all().delete
 
