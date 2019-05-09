@@ -5,6 +5,8 @@ from user.forms.profile_form import ProfileForm
 from django.contrib.auth.forms import UserCreationForm
 from user.forms.profile_form import UserUpdateForm
 from user.models import User, UserImage
+from user import models
+
 
 def index(request):
     return render(request, 'user/index.html')
