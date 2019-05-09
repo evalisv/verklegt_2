@@ -5,6 +5,8 @@ from user.forms.profile_form import ProfileForm
 from django.contrib.auth.forms import UserCreationForm
 from user.forms.profile_form import UserUpdateForm
 from user.models import User, UserImage
+from user import models
+
 
 def index(request):
     return render(request, 'user/index.html')
@@ -29,17 +31,14 @@ def update_user(request, id):
 
 #setti tímabundið inn UserCreationForm
 def register(request):
-    try:
-        if request.method == 'POST':
-            form = UserCreateForm(data=request.POST)
-            if form.is_valid():
-                form.save()
-                return redirect('login')
-        return render(request, 'user/register.html', {
-            'form': UserCreateForm()
-        })
-    except Exception as e:
-        print(type(e))
+    if request.method == 'POST':
+        form = UserCreateForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    return render(request, 'user/register.html', {
+        'form': UserCreateForm()
+    })
 
 
 def profile(request):
