@@ -7,17 +7,6 @@ from estate.forms.estate_form import RegisterEstateForm, UpdateEstateForm
 
 
 def index(request):
-    if 'search_filter' in request.GET:
-        search_filter = request.GET['search_filter']
-        estates = [ {
-            'address': x.address,
-            'price': x.price,
-            'description': x.description,
-            'firstImage': x.estateimage_set.first().image
-
-        } for x in Estate.objects.filter(address__icontains=search_filter) ]
-        return JsonResponse({ 'data': estates })
-
     estate_list = Estate.objects.all().order_by("address")
     paginator = Paginator(estate_list, 6)
 
@@ -26,6 +15,7 @@ def index(request):
 
     context = {"estates": estates}
     return render(request, "estate/index.html", context)
+
 
 def get_estate_by_id(request, id):
     return render(request, 'estate/estate_details.html', {
@@ -67,3 +57,24 @@ def update_estate(request, id):
         'id': id
     })
 
+def search(request):
+    queryset = Estate.objects.all().order_by("address")
+    query = request.GET.get("q")
+    if query:
+        queryset_list = queryset_list.filter(address__icontains=query)
+
+    paginator = Paginator(queryset_list, 10)
+    page_request_var = "page"
+    page = request.GET.get(page_request_var)
+    try:
+        queryset_list = paginator.page(page)
+    except PageNotAnInteger:
+        queryset_list = paginator.page(1)
+    except EmptyPage:
+        queryset_list = paginator.page(paginator.num_pages)
+
+    context = {
+        "estates": queryset,
+        "title": "Leitarniðurstöður"
+    }
+    return render(request, "index.html", context)
