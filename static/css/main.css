@@ -3,6 +3,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: contain;
+    background-color: #050200;
 }
 
 .document-wrapper {
@@ -17,6 +18,7 @@ body {
     margin: 70px auto 0 auto;
     padding: 25px;
     border-radius: 10px;
+    overflow: hidden;
 }
 
 .container {
@@ -137,6 +139,12 @@ a {
 .estate-detail-container .image-wrapper.all-images {
     margin-top: 10px;
 }
+
+.register-estate .row {
+    background: white;
+}
+
+
 
 span.step-links {
     width: 100%;

@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-
-    <form class="form form-horizontal" action="{% url 'register_estate' %}" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Create" class="btn btn-primary"/>
-    </form>
+    <div class="content-container register-estate my-5 p-5">
+    <h3 class="text-center">Skrá fasteign til sölu</h3>
+        <div class="row">
+            <div class="col-12">
+                <form id="register-estate-form" class="form form-horizontal" action="{% url 'register_estate' %}" method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value="Skrá fasteign" class="btn btn-primary"/>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}

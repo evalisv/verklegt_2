@@ -1,10 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from estate.models import Estate, EstateImage
 from estate.forms.estate_form import RegisterEstateForm, UpdateEstateForm
-# Create your views here.
-
 
 def index(request):
     if 'search_filter' in request.GET:
@@ -32,6 +31,8 @@ def get_estate_by_id(request, id):
       'estate' : get_object_or_404(Estate, pk=id)
     })
 
+
+@login_required
 def register_estate(request):
     if request.method == 'POST':
         form = RegisterEstateForm(data=request.POST)
@@ -46,11 +47,13 @@ def register_estate(request):
         'form' : form
     })
 
+# TODO: Setja authentication decorator hér
 def delete_estate(request, id):
     estate = get_object_or_404(Estate, pk=id)
     estate.delete()
     return redirect('estate-index')
 
+# TODO: Setja authentication decorator hér
 def update_estate(request, id):
     instance = get_object_or_404(Estate, pk=id)
     if request.method == 'POST':
