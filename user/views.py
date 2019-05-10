@@ -32,7 +32,7 @@ def update_profile(request, id):
         form = ProfileForm(data=request.POST, instance=instance)
         if form.is_valid():
             form.save()
-            # {return redirect('profile.html', id=id)
+            return redirect('profile.html', id=id)
     else:
         form = ProfileForm(instance=instance)
         return render(request, 'user/update_profile.html', {
@@ -54,7 +54,7 @@ def register(request):
     })
 
 
-def profile(request):
+def profile(request, id):
     profile = Profile.objects.filter(user=request.user).first()
     if request.method == 'POST':
         form = ProfileForm(instance=profile, data=request.POST)

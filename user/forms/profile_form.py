@@ -1,5 +1,4 @@
 from django.forms import ModelForm, widgets
-from django import forms
 from django.contrib.auth.models import User
 from user.models import Profile
 
@@ -19,7 +18,9 @@ class ProfileForm(ModelForm):
         exclude = ['id', 'user', 'kennitala']
         widgets = {
             'profile_image': widgets.TextInput(attrs={'class': 'form-control'}),
+            'phone_number': widgets.NumberInput(attrs={'class': 'form-control'}),
             'address': widgets.TextInput(attrs={'class': 'form-control'}),
-            'phone_number': widgets.NumberInput(attrs={'class': 'form-control'})
+            'postal_code': widgets.Select(attrs={'class': 'form-control'})
+
         }
 
