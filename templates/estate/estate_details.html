@@ -5,12 +5,12 @@
         <div class="row">
             <div class="col col-7">
                 <div class="image-wrapper">
-                    <img src="{{ estate.estateimage_set.first }}" class="estate_img"/>
+                    <img src="/media/{{ estate.images }}" class="estate_img"/>
                 </div>
-                <button class="btn btn-outline-secondary btn-block mt-2" data-toggle="modal" data-target="#allImages">
-                    Sjá allar myndir
-                </button>
-                {% if estate.estateimage_set.all|length > 1 %}
+                {% if estate.estatepictures_set.all|length > 1 %}
+                    <button class="btn btn-outline-secondary btn-block mt-2" data-toggle="modal" data-target="#allImages">
+                        Sjá allar myndir
+                    </button>
                     <div class="modal fade" id="allImages" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -21,9 +21,9 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    {% for estate in estate.estateimage_set.all %}
+                                    {% for estate in estate.estatepictures_set.all %}
                                         <div class="image-wrapper all-images">
-                                            <img src="{{ estate.image }}" class="estate_img"/>
+                                            <img src="/media/{{ estate.url }}" class="estate_img"/>
                                         </div>
                                     {% endfor %}
                                 </div>
