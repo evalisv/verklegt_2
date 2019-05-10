@@ -4,12 +4,13 @@ from user.forms.registration_form import RegistrationForm
 from user.forms.profile_form import UpdateNameForm
 from user.models import Profile
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
     return render(request, 'user/index.html')
 
-
+@login_required()
 def update_user(request, id):
     instance = get_object_or_404(User, pk=id)
     if request.method == 'POST':
@@ -26,6 +27,7 @@ def update_user(request, id):
 
         })
 
+@login_required
 def update_profile(request, id):
     instance = get_object_or_404(User, pk=id)
     if request.method == 'POST':
@@ -53,7 +55,7 @@ def register(request):
         'form': RegistrationForm()
     })
 
-
+@login_required
 def profile(request, id):
     profile = Profile.objects.filter(user=request.user).first()
     if request.method == 'POST':
