@@ -16,7 +16,7 @@ def update_user(request, id):
         form = UpdateNameForm(data=request.POST, instance=instance)
         if form.is_valid():
             form.save()
-            #{return redirect('profile.html', id=id)
+            return redirect('user-index')
     else:
         form = UpdateNameForm(instance=instance)
         return render(request, 'user/update_user.html', {
@@ -32,7 +32,7 @@ def update_profile(request, id):
         form = ProfileForm(data=request.POST, instance=instance)
         if form.is_valid():
             form.save()
-            return redirect('profile.html', id=id)
+            return redirect('user-index')
     else:
         form = ProfileForm(instance=instance)
         return render(request, 'user/update_profile.html', {
@@ -63,7 +63,7 @@ def profile(request, id):
             #tengja foreign key við innskráðan notanda
             profile.user = request.user
             profile.save()
-            return redirect('profile')
+            return redirect('profile', id=id)
     return render(request, 'user/profile.html', {
         'form': ProfileForm(instance=profile)
     })
