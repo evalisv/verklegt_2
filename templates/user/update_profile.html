@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Uppfæra nafn</h1>
+    <h1>Uppfæra notandaupplýsingar</h1>
     <form class="form form-horizontal" action="{% url 'update_user' id %}" method="post">
         {%  csrf_token %}
         {{ form }}
