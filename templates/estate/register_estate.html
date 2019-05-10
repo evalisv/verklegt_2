@@ -4,10 +4,11 @@
     <h3 class="text-center">Skrá fasteign til sölu</h3>
         <div class="row">
             <div class="col-12">
-                <form id="register-estate-form" class="form form-horizontal" action="{% url 'register_estate' %}" method="post">
+                <form id="register-estate-form" class="form form-horizontal" action="{% url 'register_estate' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form }}
-                    <input type="submit" value="Skrá fasteign" class="btn btn-primary"/>
+                    <input type="submit" value="Skrá fasteign" class="btn btn-primary float-right my-3"/>
+                    <button class="btn btn-link float-right my-3 mx-2" onclick="window.history.go(-1); return false;">Til baka</button>
                 </form>
             </div>
         </div>

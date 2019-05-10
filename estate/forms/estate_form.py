@@ -19,11 +19,11 @@ class UpdateEstateForm(ModelForm):
         }
 
 class RegisterEstateForm(ModelForm):
-    image = forms.CharField(required=True, widget=forms.TextInput(attrs={ 'class': 'form-control'}))
+    # image = forms.CharField(required=True, widget=forms.TextInput(attrs={ 'class': 'form-control'}))
 
     class Meta:
         model = Estate
-        exclude = [ 'id', 'open_house', 'estate_seller']
+        exclude = ['id', 'open_house', 'estate_seller']
         widgets = {
             "address" : widgets.TextInput(attrs={"class": "form-control col-sm-6 address form-group-1"}),
             "postal_code": widgets.Select(attrs={"class": "form-control col-sm-2 postal-code form-group-1"}),
@@ -34,27 +34,29 @@ class RegisterEstateForm(ModelForm):
             "bedrooms": widgets.NumberInput(attrs={"class": "form-control col-sm-2 bedrooms form-group-2"}),
             "bathrooms": widgets.NumberInput(attrs={"class": "form-control col-sm-2 bathrooms form-group-2"}),
             "description": widgets.Textarea(attrs={"class": "form-control col-sm-10 form-group-6"}),
-            "type": widgets.Select(attrs={"class": "form-control col-sm-3 type form-group-4"}),
-            "year_built": widgets.NumberInput(attrs={"class": "form-control col-sm-3 year-built form-group-4"}),
+            "type": widgets.Select(attrs={"class": "form-control col-sm-2 type form-group-4"}),
+            "year_built": widgets.NumberInput(attrs={"class": "form-control col-sm-2 year-built form-group-4"}),
             "entry": widgets.CheckboxInput(attrs={"class": "checkbox col-sm-2 entry form-group-5"}),
             "garage": widgets.CheckboxInput(attrs={"class": "checkbox col-sm-2 garage form-group-5"}),
             "elevator": widgets.CheckboxInput(attrs={"class": "checkbox  col-sm-2 garage form-group-5"}),
             "views": widgets.HiddenInput(attrs={"value": 0, "required": False}),
             "date_listed": widgets.HiddenInput(attrs={"value": datetime.datetime.now(), "required": False}),
+            "images": widgets.ClearableFileInput(attrs={'multiple': True, "class": "col-sm-10 images form-group-7"}),
         }
         labels = {
             "address": "Heimilisfang",
             "postal_code": "Póstnúmer",
             "price": "Verð",
             "brunabotamat": "Brunabótamat",
-            "size": "Fjöldi fermetra",
-            "bedrooms": "Fjöldi svefnherbergja",
-            "bathrooms": "Fjöldi baðherbergja",
+            "size": "Fermetrar",
+            "bedrooms": "Svefnherbergi",
+            "bathrooms": "Baðherbergi",
             "description": "Lýsing",
             "type": "Tegund",
             "year_built": "Byggingarár",
             "entry": "Sérinngangur",
             "garage": "Bílskúr",
             "elevator": "Lyfta",
+            "images": "Myndir"
         }
 
