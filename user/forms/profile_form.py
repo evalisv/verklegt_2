@@ -21,7 +21,7 @@ class ProfileForm(ModelForm):
             'kennitala': widgets.NumberInput(attrs={'class': 'form-control'}),
             'phone_number': widgets.NumberInput(attrs={'class': 'form-control'}),
             'address': widgets.TextInput(attrs={'class': 'form-control'}),
-            'postal_code': widgets.Select(attrs={'class': 'form-control'})
-
+            'postal_code': widgets.Select(attrs={'class': 'form-control'}),
+            'country': widgets.Select(attrs={'class': 'form-control'})
         }
 
