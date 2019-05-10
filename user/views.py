@@ -11,7 +11,7 @@ def index(request):
     return render(request, 'user/index.html')
 
 @login_required
-def update_user(request, id):
+def update_name(request, id):
     instance = get_object_or_404(User, pk=id)
     if request.method == 'POST':
         form = UpdateNameForm(data=request.POST, instance=instance)
@@ -20,11 +20,9 @@ def update_user(request, id):
             return redirect('user-index')
     else:
         form = UpdateNameForm(instance=instance)
-        return render(request, 'user/update_user.html', {
+        return render(request, 'user/update_name.html', {
             'form': form,
             'id': id
-
-
         })
 
 
@@ -53,16 +51,7 @@ def register(request):
         'form': RegistrationForm()
     })
 
+#þetta fall er ekki notað til þess að uppfæra profile upplýsingar, heldur má þetta vera fallið sem opnar "Mínar síður"
 @login_required
 def profile(request):
-    profile = Profile.objects.filter(user=request.user).first()
-    if request.method == 'POST':
-        form = ProfileForm(data=request.POST, instance=profile)
-        if form.is_valid():
-            profile = form.save(commit=False)
-            profile.user = request.user
-            profile.save()
-            return redirect('profile')
-    return render(request, 'user/profile.html', {
-        'form': ProfileForm(instance=profile)
-    })
+    pass
