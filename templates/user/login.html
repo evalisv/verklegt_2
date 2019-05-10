@@ -1,9 +1,14 @@
 {%  extends "base.html" %}
 {% block content %}
-    <h1>Innskráning</h1>
-    <form class="form form-horizontal" method="POST">
-        {%  csrf_token %}
-        {{ form }}
-        <input type="submit" class="btn btn-primary" value="Login">
-    </form>
+    <div class="login">
+        <div class="text-center">
+            <h1>Innskráning</h1>
+        </div>
+        <form class="form form-horizontal" method="POST">
+            {%  csrf_token %}
+            {{ form }}
+            <input type="submit" class="btn btn-primary my-2 float-right" value="Innskrá">
+            <a href="#" class="btn btn-link-secondary my-2 mx-2 float-right">Gleymt lykilorð?</a>
+        </form>
+    </div>
 {% endblock %}
