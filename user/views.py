@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     return render(request, 'user/index.html')
 
-@login_required()
+@login_required
 def update_user(request, id):
     instance = get_object_or_404(User, pk=id)
     if request.method == 'POST':
@@ -27,21 +27,19 @@ def update_user(request, id):
 
         })
 
-@login_required
-def update_profile(request, id):
-    instance = get_object_or_404(User, pk=id)
-    if request.method == 'POST':
-        form = ProfileForm(data=request.POST, instance=instance)
-        if form.is_valid():
-            form.save()
-            return redirect('user-index')
-    else:
-        form = ProfileForm(instance=instance)
-        return render(request, 'user/update_profile.html', {
-            'form': form,
-            'id': id
 
-        })
+def update_profile(request, id):
+    user_profile = Profile.objects.filter(user=request.user).first()
+    if request.method == 'POST':
+        form = ProfileForm(data=request.POST, instance=user_profile)
+        if form.is_valid():
+            user_profile = form.save(commit=False)
+            user_profile.user = request.user
+            user_profile.save()
+            return redirect('user-index')
+    return render(request, 'user/update_profile.html', {
+        'form': ProfileForm(instance=user_profile)
+    })
 
 
 
@@ -56,16 +54,15 @@ def register(request):
     })
 
 @login_required
-def profile(request, id):
+def profile(request):
     profile = Profile.objects.filter(user=request.user).first()
     if request.method == 'POST':
-        form = ProfileForm(instance=profile, data=request.POST)
+        form = ProfileForm(data=request.POST, instance=profile)
         if form.is_valid():
             profile = form.save(commit=False)
-            #tengja foreign key við innskráðan notanda
             profile.user = request.user
             profile.save()
-            return redirect('profile', id=id)
+            return redirect('profile')
     return render(request, 'user/profile.html', {
         'form': ProfileForm(instance=profile)
     })
