@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from user.models import Profile
 from user.forms.profile_form import ProfileForm
 from user.forms.registration_form import RegistrationForm
 from user.forms.profile_form import UpdateNameForm
-from user.models import User
+from user.models import Profile
+from django.contrib.auth.models import User
 
 
 def index(request):
