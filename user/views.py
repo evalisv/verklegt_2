@@ -1,11 +1,10 @@
-from user.classes.UserCreateForm import UserCreateForm
 from django.shortcuts import render, redirect, get_object_or_404
-from user.models import Profile
 from user.forms.profile_form import ProfileForm
 from django.contrib.auth.forms import UserCreationForm
 from user.forms.profile_form import UserUpdateForm
-from user.models import User, UserImage
-from user import models
+from user.models import Profile
+from django.contrib.auth.models import User
+
 
 
 def index(request):
