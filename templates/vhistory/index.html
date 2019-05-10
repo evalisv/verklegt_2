@@ -1,8 +1,8 @@
-{% extents 'home.html' %}
+{% extents 'base.html' %}
 
 { % block content %}
 <h3>Recently viewed:</h3>
-{%  for  estate in Vhistory.objects.all() %}
+{%  for  estate in vhistory %}
     {% include 'vhistory/vhistory.html' with estate=estate %}
 {% endfor %}
 

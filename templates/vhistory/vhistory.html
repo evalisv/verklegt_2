@@ -1,6 +1,6 @@
 <div>
-    <a href="#">
-        <img class="estate-img" src="{{ estate.EstateImage_set.get(id=0).image }}" />
+    <a href="/estate/{{ estate.id }}">
+        <img src="{{ estate.estateimage_set.first.image }}" />
         <h1>{{ estate.address }}</h1>
         <h2>Verð: {{ estate.price }} kr.</h2>
         <h2>Stærð: {{ estate.size }} fm.</h2>
