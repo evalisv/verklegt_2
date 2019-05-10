@@ -1,7 +1,11 @@
 $(document).ready(function() {
-    if ($('.content-container.register-estate').length > 0) {
+    if ($('.content-container.register-estate').length > 0 || $('.content-container.update-estate')) {
         addClassNamesToLabels();
         manipulateHtml();
+        $('#id_open_house').after('<div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">\n' +
+            '<div class="input-group-text"><i class="fa fa-calendar"></i></div>\n' +
+            '</div>');
+        $('.datetimepicker-input, .input-group-append').wrapAll('<div class="input-group date col-sm-4" id="datetimepicker1" data-target-input="nearest" />')
     }
 });
 
@@ -18,7 +22,7 @@ function addClassNamesToLabels() {
         .addClass('form-group-5 col-sm-2');
     $('label[for="id_description"]')
         .addClass('form-group-6 col-sm-2');
-    $('label[for="id_images"]')
+    $('label[for="id_images"], label[for="id_open_house"]')
         .addClass('form-group-7 col-sm-2');
 }
 

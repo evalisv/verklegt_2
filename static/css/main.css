@@ -140,11 +140,13 @@ a {
     margin-top: 10px;
 }
 
-.register-estate .row {
+.register-estate .row, .update-estate .row {
     background: white;
 }
 
-
+#id_open_house {
+    border-radius: 5px 0 0 5px;
+}
 
 span.step-links {
     width: 100%;
