@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from vhistory.models import Vhistory
 from django.utils import timezone
 
@@ -17,8 +17,14 @@ def update_vhistory(user, estate):
     entry = Vhistory(user=user, estate=estate, view_date=today)
     entry.save()
 
-def get_vhistory_by_user(user):
-    return Vhistory.objects.filter(user_id=user.id).order_by('-view_date')
+#def get_vhistory_by_user(user):
+    #return Vhistory.objects.filter(user_id=user.id).order_by('-view_date')
+
+def get_vhistory_by_user(request, user):
+    return render(request, Vhistory.objects.filter(user_id=user.id).order_by('-view_date'), 'vhistory/index.html',{
+        'estate': get_object_or_404(estate,pk=id)
+    })
+
 
 ##To test in Python console:
 #view_history = get_vhistory_by_user(user)
