@@ -5,23 +5,26 @@ from user.models import User as MetaUser
 
 
 class UserCreateForm(UserCreationForm):
-    first_name = forms.CharField(max_length=255, required=True)
-    last_name = forms.CharField(max_length=255, required=True)
-    email = forms.EmailField(max_length=255, required=True)
-    kennitala = forms.IntegerField(required=True)
-    phone_number = forms.IntegerField(required=True)
-    address = forms.CharField(max_length=255, required=True)
+    kennitala = forms.IntegerField()
+    phone_number = forms.IntegerField()
+    address = forms.CharField(max_length=255)
     postal_code = forms.IntegerField()
 
     def save(self, commit=True):
         if not commit:
             raise NotImplementedError("Can't create User and Meta user without database save")
         user = super(UserCreateForm, self).save(commit=True)
-        user.email = self.cleaned_data["email"]
-        if commit:
-            user.save()
-        meta_user = MetaUser(auth_user_id=user, kennitala=self.cleaned_data['kennitala'],
-                             phone_number=self.cleaned_data['phone_number'])
+     #   user.email = self.cleaned_data["email"]
+     #   user.first_name = self.cleaned_data["first_name"]
+      #  user.last_name = self.cleaned_data["last_name"]
+
+      #  user.save()
+
+        meta_user = MetaUser(auth_user_id=user.id
+                             ,kennitala=self.cleaned_data['kennitala']
+                             ,phone_number=self.cleaned_data['phone_number']
+                             ,address=self.cleaned_data['address']
+                             ,postal_code=self.cleaned_data['postal_code'])
         meta_user.save()
-        return user
+        return user, meta_user
 
