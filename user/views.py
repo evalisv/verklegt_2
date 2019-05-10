@@ -39,8 +39,6 @@ def update_profile(request, id):
         'form': ProfileForm(instance=user_profile)
     })
 
-
-
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(data=request.POST)
