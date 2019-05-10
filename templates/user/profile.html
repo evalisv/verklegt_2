@@ -1,9 +1,17 @@
-{% extends "base.html" %}
+{%  extends "base.html" %}
 {% block content %}
-    <h1>Uppfæra notandaupplýsingar</h1>
-    <form class="form form-horizontal" method="post">
-        {%  csrf_token %}
-        {{ form }}
-        <input type="submit" value="Uppfæra" class="btn btn-primary pull-right" style="clear:both; margin: 10px 0" />
-    </form>
+    <h1>Mínar siður</h1>
+    <div class="myPageField">
+        <a href="#">Mín tilboð</a>
+    </div>
+    <div class="myPageField">
+        <a href="#">Mínar eignir á sölu</a>
+    </div>
+    <div class="myPageField">
+        <a href="{% url 'vhistory' %}">Skoðaðar eignir</a> #Áður: Mín leitarsaga (í hönnunnarskýrslunni).
+    </div>
+    <div class="myPageField">
+        <a href="#">Stillingar</a>
+    </div>
+
 {% endblock %}
