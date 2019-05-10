@@ -1,6 +1,7 @@
 from django.forms import ModelForm, widgets
 from django import forms
 from estate.models import Estate
+from django.contrib.auth.models import User
 import datetime
 
 class UpdateEstateForm(ModelForm):
@@ -21,7 +22,7 @@ class RegisterEstateForm(ModelForm):
 
     class Meta:
         model = Estate
-        exclude = [ 'id', 'open_house']
+        exclude = [ 'id', 'open_house', 'estate_seller']
         widgets = {
             'address' : widgets.TextInput(attrs={ 'class': 'form-control'}),
             'postal_code': widgets.Select(attrs={'class': 'form-control'}),
@@ -38,6 +39,5 @@ class RegisterEstateForm(ModelForm):
             'description': widgets.TextInput(attrs={ 'class': 'form-control'}),
             'elevator': widgets.CheckboxInput(attrs={ 'class': 'checkbox'}),
             'views': widgets.HiddenInput(attrs={'value':0, 'required': False}),
-            'date_listed': widgets.HiddenInput(attrs={'value': datetime.datetime.now(), 'required': False}),
-            'estate_seller': widgets.Select(attrs={ 'class': 'form-control'})
+            'date_listed': widgets.HiddenInput(attrs={'value': datetime.datetime.now(), 'required': False})
         }

@@ -36,7 +36,9 @@ def register_estate(request):
     if request.method == 'POST':
         form = RegisterEstateForm(data=request.POST)
         if form.is_valid():
-            estate = form.save()
+            estate = form.save(commit=False)
+            estate.estate_seller = request.user
+            estate.save()
             estate_image = EstateImage(image=request.POST['image'], estate=estate)
             estate_image.save()
             return redirect('estate-index')
