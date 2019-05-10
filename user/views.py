@@ -54,6 +54,6 @@ def register(request):
 #þetta fall er ekki notað til þess að uppfæra profile upplýsingar, heldur má þetta vera fallið sem opnar "Mínar síður"
 @login_required
 def profile(request, id):
-    return render(request, 'user/profile.html', {
+    return render('user/profile.html', {
         'user': get_object_or_404(User, pk=id)
     })
