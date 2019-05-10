@@ -1,6 +1,7 @@
 from django.forms import ModelForm, widgets
 from django import forms
 from estate.models import Estate
+from django.contrib.auth.models import User
 import datetime
 
 
@@ -22,9 +23,8 @@ class RegisterEstateForm(ModelForm):
 
     class Meta:
         model = Estate
-        exclude = [ 'id', 'open_house']
+        exclude = [ 'id', 'open_house', 'estate_seller']
         widgets = {
-            'estate_seller': widgets.Select(attrs={ 'class': 'form-control'})
             "address" : widgets.TextInput(attrs={"class": "form-control col-sm-6 address form-group-1"}),
             "postal_code": widgets.Select(attrs={"class": "form-control col-sm-2 postal-code form-group-1"}),
             "price": widgets.NumberInput(attrs={"class": "form-control col-sm-2 price form-group-3"}),
