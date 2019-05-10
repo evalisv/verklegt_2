@@ -78,16 +78,21 @@ def delete_estate(request, id):
 def update_estate(request, id):
     instance = get_object_or_404(Estate, pk=id)
     if request.method == 'POST':
-        form = UpdateEstateForm(data=request.POST, instance=instance)
+        form = UpdateEstateForm(request.POST, request.FILES, instance=instance)
         if form.is_valid():
-            estate = form.save()
-            estate_image = EstateImage(image=request.POST['image'], estate=estate)
-            estate_image.save()
+            estate = form.save(commit=False)
+            estate.images = request.FILES['images']
+            estate.save()
+            pics = request.FILES.getlist('images')
+            for img in pics:
+                estate_picture = EstatePictures(url=img, estate=estate)
+                estate_picture.save()
             return redirect('estate_details', id=id)
     else:
         form = UpdateEstateForm(instance=instance)
     return render(request, 'estate/update_estate.html', {
         'form': form,
-        'id': id
+        'id': id,
+        'estate': instance
     })
 
