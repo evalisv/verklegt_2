@@ -16,7 +16,7 @@ def update_user(request, id):
         form = UpdateNameForm(data=request.POST, instance=instance)
         if form.is_valid():
             form.save()
-            #{return redirect('profile.html', id=id)
+            return redirect('user-index')
     else:
         form = UpdateNameForm(instance=instance)
         return render(request, 'user/update_user.html', {
@@ -32,7 +32,7 @@ def update_profile(request, id):
         form = ProfileForm(data=request.POST, instance=instance)
         if form.is_valid():
             form.save()
-            return redirect('profile.html', id=id)
+            return redirect('profile', id=id)
     else:
         form = ProfileForm(instance=instance)
         return render(request, 'user/update_profile.html', {
@@ -47,7 +47,9 @@ def register(request):
     if request.method == 'POST':
         form = RegistrationForm(data=request.POST)
         if form.is_valid():
-            form.save()
+            auth_user = form.save(commit=False)
+            estate_image = EstateImage(image=request.POST['image'], estate=estate)
+            estate_image.save()
             return redirect('login')
     return render(request, 'user/register.html', {
         'form': RegistrationForm()
@@ -55,7 +57,7 @@ def register(request):
 
 
 def profile(request, id):
-    profile = Profile.objects.filter(user=request.user).first()
+    profile = Profile.objects.filter(user=request.user)
     if request.method == 'POST':
         form = ProfileForm(instance=profile, data=request.POST)
         if form.is_valid():
