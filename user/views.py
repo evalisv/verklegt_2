@@ -33,6 +33,7 @@ def update_user(request, id):
 def register(request):
     if request.method == 'POST':
         form = UserCreateForm(data=request.POST)
+        print(form.is_valid())
         if form.is_valid():
             form.save()
             return redirect('login')
