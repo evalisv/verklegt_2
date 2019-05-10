@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from estate.models import Estate, EstateImage, EstatePictures
 from estate.forms.estate_form import RegisterEstateForm, UpdateEstateForm
+from user_role.models import UserRole
 from django.contrib.auth.decorators import login_required
 
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
@@ -48,6 +49,8 @@ def register_estate(request):
             for img in pics:
                 estate_picture = EstatePictures(url=img, estate=estate)
                 estate_picture.save()
+            # TODO: Búa til tengingu á user role ef notandi hefur ekki seller role
+            print("seller", estate.estate_seller)
 
             # TODO: færa þetta inn í for lykkuna
             file_type = estate.images.url.split('.')[-1]
