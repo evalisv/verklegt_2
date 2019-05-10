@@ -10,9 +10,8 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     return render(request, 'user/index.html')
 
-
 @login_required
-def update_user(request, id):
+def update_name(request, id):
     instance = get_object_or_404(User, pk=id)
     if request.method == 'POST':
         form = UpdateNameForm(data=request.POST, instance=instance)
@@ -21,28 +20,24 @@ def update_user(request, id):
             return redirect('user-index')
     else:
         form = UpdateNameForm(instance=instance)
-        return render(request, 'user/update_user.html', {
+        return render(request, 'user/update_name.html', {
             'form': form,
             'id': id
         })
 
 
-@login_required
 def update_profile(request, id):
-    instance = get_object_or_404(User, pk=id)
+    user_profile = Profile.objects.filter(user=request.user).first()
     if request.method == 'POST':
-        form = ProfileForm(data=request.POST, instance=instance)
+        form = ProfileForm(data=request.POST, instance=user_profile)
         if form.is_valid():
-            form.save()
+            user_profile = form.save(commit=False)
+            user_profile.user = request.user
+            user_profile.save()
             return redirect('user-index')
-    else:
-        form = ProfileForm(instance=instance)
-        return render(request, 'user/update_profile.html', {
-            'form': form,
-            'id': id
-
-        })
-
+    return render(request, 'user/update_profile.html', {
+        'form': ProfileForm(instance=user_profile)
+    })
 
 def register(request):
     if request.method == 'POST':
@@ -54,18 +49,7 @@ def register(request):
         'form': RegistrationForm()
     })
 
-
+#þetta fall er ekki notað til þess að uppfæra profile upplýsingar, heldur má þetta vera fallið sem opnar "Mínar síður"
 @login_required
-def profile(request, id):
-    profile = Profile.objects.filter(user=request.user).first()
-    if request.method == 'POST':
-        form = ProfileForm(instance=profile, data=request.POST)
-        if form.is_valid():
-            profile = form.save(commit=False)
-            #tengja foreign key við innskráðan notanda
-            profile.user = request.user
-            profile.save()
-            return redirect('profile', id=id)
-    return render(request, 'user/profile.html', {
-        'form': ProfileForm(instance=profile)
-    })
+def profile(request):
+    pass
