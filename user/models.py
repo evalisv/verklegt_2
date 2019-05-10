@@ -9,4 +9,3 @@ class Profile(models.Model):
     address = models.CharField(max_length=255)
     postal_code = models.ForeignKey('estate.Municipality', on_delete=models.CASCADE)
 
-
