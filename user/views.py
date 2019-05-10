@@ -32,7 +32,7 @@ def update_profile(request, id):
         form = ProfileForm(data=request.POST, instance=instance)
         if form.is_valid():
             form.save()
-            return redirect('profile', id=id)
+            return redirect('user-index')
     else:
         form = ProfileForm(instance=instance)
         return render(request, 'user/update_profile.html', {
@@ -47,9 +47,7 @@ def register(request):
     if request.method == 'POST':
         form = RegistrationForm(data=request.POST)
         if form.is_valid():
-            auth_user = form.save(commit=False)
-            estate_image = EstateImage(image=request.POST['image'], estate=estate)
-            estate_image.save()
+            form.save()
             return redirect('login')
     return render(request, 'user/register.html', {
         'form': RegistrationForm()
@@ -57,7 +55,7 @@ def register(request):
 
 
 def profile(request, id):
-    profile = Profile.objects.filter(user=request.user)
+    profile = Profile.objects.filter(user=request.user).first()
     if request.method == 'POST':
         form = ProfileForm(instance=profile, data=request.POST)
         if form.is_valid():
@@ -65,7 +63,7 @@ def profile(request, id):
             #tengja foreign key við innskráðan notanda
             profile.user = request.user
             profile.save()
-            return redirect('profile')
+            return redirect('profile', id=id)
     return render(request, 'user/profile.html', {
         'form': ProfileForm(instance=profile)
     })
