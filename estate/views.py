@@ -3,6 +3,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from estate.models import Estate, EstateImage
 from estate.forms.estate_form import RegisterEstateForm, UpdateEstateForm
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -32,11 +33,15 @@ def get_estate_by_id(request, id):
       'estate' : get_object_or_404(Estate, pk=id)
     })
 
+
+@login_required
 def register_estate(request):
     if request.method == 'POST':
         form = RegisterEstateForm(data=request.POST)
         if form.is_valid():
-            estate = form.save()
+            estate = form.save(commit=False)
+            estate.estate_seller = request.user
+            estate.save()
             estate_image = EstateImage(image=request.POST['image'], estate=estate)
             estate_image.save()
             return redirect('estate-index')
@@ -46,11 +51,14 @@ def register_estate(request):
         'form' : form
     })
 
+
+@login_required
 def delete_estate(request, id):
     estate = get_object_or_404(Estate, pk=id)
     estate.delete()
     return redirect('estate-index')
 
+@login_required
 def update_estate(request, id):
     instance = get_object_or_404(Estate, pk=id)
     if request.method == 'POST':
