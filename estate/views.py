@@ -6,6 +6,7 @@ from estate.models import Estate, EstateImage, EstatePictures
 from estate.forms.estate_form import RegisterEstateForm, UpdateEstateForm
 from user_role.models import UserRole
 from django.contrib.auth.decorators import login_required
+from vhistory.views import update_vhistory
 
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
@@ -31,8 +32,10 @@ def index(request):
     return render(request, "estate/index.html", context)
 
 def get_estate_by_id(request, id):
+    estate = get_object_or_404(Estate, pk=id)
+    update_vhistory(request.user, estate)
     return render(request, 'estate/estate_details.html', {
-      'estate' : get_object_or_404(Estate, pk=id)
+      'estate' : estate
     })
 
 

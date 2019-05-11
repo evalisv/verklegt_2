@@ -51,12 +51,16 @@ def register(request):
     })
 
 #þetta fall er ekki notað til þess að uppfæra profile upplýsingar, heldur má þetta vera fallið sem opnar "Mínar síður"
-@login_required
-def profile(request):
-    pass
 
 @login_required
 def my_offers(request):
     offer_list = Offer.objects.all().order_by("offer_made")
     context = {"offers": offer_list}
     return render(request, "offer/offer_list.html", context)
+
+@login_required
+def profile(request, id):
+    return render(request,'user/profile.html', {
+        'user': get_object_or_404(User, pk=id)
+    })
+
