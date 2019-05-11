@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form class="form form-horizontal" action="{% url 'make_offer' id %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Senda inn tilboð" class="button"/>
+    </form>
+{% endblock %}
