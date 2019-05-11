@@ -30,23 +30,6 @@ def update_vhistory(user, estate):
 
 def get_vhistory_by_user(request, id):
     filtered_vhistory = Vhistory.objects.values('estate_id').filter(user_id=id).order_by('-view_date')
-
-    #TBD, þetta virkar, með eina eign:
-    #context = {'estates': Estate.objects.filter(id=filtered_vhistory[0]['estate_id'])}
-
-    #Þessi skipun virkar ekki alveg; ekki hægt að gera ráð fyrir að context sé dictioanry með lista:
-
-    #context = {'estates': []}
-    #for item in filtered_vhistory:
-        #context['estates'].append(Estate.objects.filter(id=item['estate_id']))
-
-    #Þetta virkar til að kalla fram eignirnar, en ekki í réttri röð:
-    #list_of_viewed = []
-    #for item in filtered_vhistory:
-        #list_of_viewed.append(item['estate_id'])
-    #context = {'estates': Estate.objects.filter(id__in=list_of_viewed)}
-
-    #sama og fyrir ofan, nema get_object bætt í lista í staðinn fyrir estate_id:
     list_of_viewed = []
     for item in filtered_vhistory:
         list_of_viewed.append(get_object_or_404(Estate, id=item['estate_id']))

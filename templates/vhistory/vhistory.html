@@ -1,10 +1,12 @@
 <div>
     <a href="/estate/{{ estate.id }}">
-        <img src="{{ estate.estateimage_set.first.image }}" />
-        <h1>{{ estate.address }}</h1>
-        <h2>Verð: {{ estate.price }} kr.</h2>
-        <h2>Stærð: {{ estate.size }} fm.</h2>
-        <h2>Tegund: {{ estate.type }}</h2>
-        <p>{{ estate.description }}</p>
+        <div class="image-wrapper">
+            <img class="estate-img" src="/media/{{ estate.images }}" />
+        </div>
+        <div><h4>{{ estate.address }}</h4></div>
+        <div><h2>Verð: {{ estate.price }} kr.</h2></div>
+        <div><h2>Stærð: {{ estate.size }} fm.</h2></div>
+        <div><h2>Tegund: {{ estate.type }}</h2></div>
+        <div><p>{{ estate.description }}</p></div>
     </a>
 </div>
