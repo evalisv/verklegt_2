@@ -12,7 +12,7 @@ class MakeOfferForm(ModelForm):
             "expires": widgets.DateInput(attrs={"class": "form-control"}),
             "offer_made": widgets.HiddenInput(attrs={"value": datetime.datetime.now()}),
             "payed": widgets.HiddenInput(attrs={"value": False}),
-            "status": widgets.HiddenInput(attrs={"value": "Nýtt"}),
+            "status": widgets.HiddenInput(attrs={"value": "Incoming"}),
         }
         labels = {
             "amount": "Upphæð",
