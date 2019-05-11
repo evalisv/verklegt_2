@@ -59,8 +59,8 @@ def my_offers(request):
     return render(request, "offer/offer_list.html", context)
 
 @login_required
-def profile(request, id):
+def profile(request):
     return render(request,'user/profile.html', {
-        'user': get_object_or_404(User, pk=id)
+        'user': request.user
     })
 
