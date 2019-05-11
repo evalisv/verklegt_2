@@ -43,8 +43,7 @@ INSTALLED_APPS = [
     'payment.apps.PaymentConfig',
     'user_role.apps.UserRoleConfig',
     'user.apps.UserConfig',
-    'vhistory.apps.VhistoryConfig',
-    'searches.apps.SearchesConfig',
+    'vhistory.apps.VhistoryConfig'
 ]
 
 MIDDLEWARE = [
