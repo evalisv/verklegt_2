@@ -1,8 +1,6 @@
-from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404, redirect
-from estate.models import Estate, EstateImage, EstatePictures
+from estate.models import Estate, EstatePictures
 from estate.forms.estate_form import RegisterEstateForm, UpdateEstateForm
 from user_role.models import UserRole
 from django.contrib.auth.decorators import login_required
@@ -101,25 +99,3 @@ def update_estate(request, id):
         'id': id,
         'estate': instance
     })
-
-def search(request):
-    queryset = Estate.objects.all().order_by("address")
-    query = request.GET.get("q")
-    if query:
-        queryset_list = queryset_list.filter(address__icontains=query)
-
-    paginator = Paginator(queryset_list, 10)
-    page_request_var = "page"
-    page = request.GET.get(page_request_var)
-    try:
-        queryset_list = paginator.page(page)
-    except PageNotAnInteger:
-        queryset_list = paginator.page(1)
-    except EmptyPage:
-        queryset_list = paginator.page(paginator.num_pages)
-
-    context = {
-        "estates": queryset,
-        "title": "Leitarniðurstöður"
-    }
-    return render(request, "index.html", context)
