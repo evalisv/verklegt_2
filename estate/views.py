@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from estate.models import Estate, EstateImage, EstatePictures
 from estate.forms.estate_form import RegisterEstateForm, UpdateEstateForm
+from user_role.models import UserRole
 from django.contrib.auth.decorators import login_required
 
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
@@ -49,7 +50,7 @@ def register_estate(request):
                 estate_picture = EstatePictures(url=img, estate=estate)
                 estate_picture.save()
 
-            # TODO: færa þetta inn í for lykkuna
+            # TODO: færa þetta inn í for lykkuna fyrir myndir
             file_type = estate.images.url.split('.')[-1]
             file_type = file_type.lower()
             if file_type not in IMAGE_FILE_TYPES:
@@ -59,6 +60,18 @@ def register_estate(request):
                     "error_message": "Mynd þarf að vera af gerðinni PNG, JPG, eða JPEG",
                 }
                 return render(request, 'estate/register_estate.html', context)
+
+            user_roles_set = UserRole.objects.filter(user=estate.estate_seller_id)
+            user_roles = list(user_roles_set.values_list("role", flat=True))
+            user_role_exists = False
+            try:
+                if user_roles.index("seller"):
+                    user_role_exists = True
+            except:
+                print("The user_id ", estate.estate_seller_id, " is not a seller")
+            if user_role_exists == False:
+                user_role = UserRole(role="seller", user=estate.estate_seller)
+                user_role.save()
 
             return redirect('estate-index')
     else:
