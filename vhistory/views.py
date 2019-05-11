@@ -1,10 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from estate.models import Estate
 from vhistory.models import Vhistory
 from django.utils import timezone
 
-def index(request):
-    context = {'estate': estate}
-    return render('vhistory/index.html', context)
+def index(request, id):
+    filtered_vhistory = Vhistory.objects.values('estate_id').filter(user_id=id).order_by('-view_date')
+    list_of_viewed = []
+    for item in filtered_vhistory:
+        list_of_viewed.append(get_object_or_404(Estate, id=item['estate_id']))
+    context = {'estates': list_of_viewed}
+
+    return render(request, 'vhistory/index.html', context)
+
 
 def update_vhistory(user, estate):
     today = timezone.now()
@@ -20,10 +27,32 @@ def update_vhistory(user, estate):
 #def get_vhistory_by_user(user):
     #return Vhistory.objects.filter(user_id=user.id).order_by('-view_date')
 
-def get_vhistory_by_user(request, user):
-    return render(request, Vhistory.objects.filter(user_id=user.id).order_by('-view_date'), 'vhistory/index.html',{
-        'estate': get_object_or_404(estate,pk=id)
-    })
+
+def get_vhistory_by_user(request, id):
+    filtered_vhistory = Vhistory.objects.values('estate_id').filter(user_id=id).order_by('-view_date')
+
+    #TBD, þetta virkar, með eina eign:
+    #context = {'estates': Estate.objects.filter(id=filtered_vhistory[0]['estate_id'])}
+
+    #Þessi skipun virkar ekki alveg; ekki hægt að gera ráð fyrir að context sé dictioanry með lista:
+
+    #context = {'estates': []}
+    #for item in filtered_vhistory:
+        #context['estates'].append(Estate.objects.filter(id=item['estate_id']))
+
+    #Þetta virkar til að kalla fram eignirnar, en ekki í réttri röð:
+    #list_of_viewed = []
+    #for item in filtered_vhistory:
+        #list_of_viewed.append(item['estate_id'])
+    #context = {'estates': Estate.objects.filter(id__in=list_of_viewed)}
+
+    #sama og fyrir ofan, nema get_object bætt í lista í staðinn fyrir estate_id:
+    list_of_viewed = []
+    for item in filtered_vhistory:
+        list_of_viewed.append(get_object_or_404(Estate, id=item['estate_id']))
+    context = {'estates': list_of_viewed}
+
+    return render(request, 'vhistory/index.html', context)
 
 
 ##To test in Python console:
@@ -48,8 +77,3 @@ def get_vhistory_by_user(request, user):
 #To clear Vhistory:
 #Vhistory.objects.all().delete
 
-#Þessa skipun á eftir að laga til:
-def get_vhistory(request):
-    return render(Vhistory.objects.all().order_by('-date'), 'vhistory/index.html',{
-        'estate': get_object_or_404(estate,pk=id)
-    })

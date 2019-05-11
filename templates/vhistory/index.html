@@ -1,9 +1,8 @@
-{% extents 'base.html' %}
+{% extends 'base.html' %}
 
-{ % block content %}
-<h3>Recently viewed:</h3>
-{%  for  estate in vhistory %}
+{% block content %}
+<h3>Skoðaðar eignir:</h3>
+{%  for  estate in estates %}
     {% include 'vhistory/vhistory.html' with estate=estate %}
 {% endfor %}
-
 {% endblock %}

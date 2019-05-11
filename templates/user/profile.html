@@ -11,9 +11,8 @@
                     <div class="myPageField" style="background-color:yellow">
                         <a href="#">Mínar eignir á sölu</a>
                     </div>
-                    <div class="myPageField" style="background-color:green">
-                        <a href="/vhistory/{{ user.id }}">Skoðaðar eignir</a>
-                    </div>
+                    <button type="button" class="myPageField" onclick="window.location.href = '/vhistory/{{ user.id }}';">
+                        Skoðaðar eignir</button>
                     <div class="myPageField"  style="background-color:blue">
                         <a href="#">Stillingar</a>
                     </div>
