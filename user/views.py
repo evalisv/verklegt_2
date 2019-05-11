@@ -5,6 +5,7 @@ from user.forms.profile_form import UpdateNameForm
 from user.models import Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from offer.models import Offer
 
 
 def index(request):
@@ -53,3 +54,9 @@ def register(request):
 @login_required
 def profile(request):
     pass
+
+@login_required
+def my_offers(request):
+    offer_list = Offer.objects.all().order_by("offer_made")
+    context = {"offers": offer_list}
+    return render(request, "offer/offer_list.html", context)

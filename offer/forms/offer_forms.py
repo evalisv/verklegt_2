@@ -9,7 +9,7 @@ class MakeOfferForm(ModelForm):
         exclude = ['id', 'estate', 'offer_maker', 'payment', 'counter_offer_to',]
         widgets = {
             "amount": widgets.NumberInput(attrs={"class": "form-control"}),
-            "expires": widgets.DateInput(attrs={"class": "form-control"}),
+            "expires": widgets.SelectDateWidget(attrs={"class": "form-control"}),
             "offer_made": widgets.HiddenInput(attrs={"value": datetime.datetime.now()}),
             "payed": widgets.HiddenInput(attrs={"value": False}),
             "status": widgets.HiddenInput(attrs={"value": "Incoming"}),

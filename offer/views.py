@@ -17,9 +17,9 @@ def make_offer(request, id):
         if form.is_valid():
             offer = form.save(commit=False)
             offer.offer_maker = request.user
-            offer.estate = estate.id
+            offer.estate = estate
             offer.save()
-            return redirect('estate-index')
+            return redirect('my_offers')
     else:
         form = MakeOfferForm()
     return render(request, 'offer/make_offer.html',{
