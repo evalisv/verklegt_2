@@ -25,7 +25,7 @@ def update_name(request, id):
             'id': id
         })
 
-
+@login_required
 def update_profile(request, id):
     user_profile = Profile.objects.filter(user=request.user).first()
     if request.method == 'POST':
@@ -44,7 +44,7 @@ def register(request):
         form = RegistrationForm(data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')
+            return redirect('user-index')
     return render(request, 'user/register.html', {
         'form': RegistrationForm()
     })
