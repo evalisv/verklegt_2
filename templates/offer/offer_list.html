@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="content-container my-5 p-5 estates-container">
+        <h3 class="text-center">Öll mín tilboð</h3>
+        <div class="row">
+            {% for offer in offers %}
+                {% if offer.offer_maker == request.user %}
+                    <h4>Upphæð: {{ offer.amount }} Eign: {{ offer.estate.address }} </h4>
+                    <h5>Tilboð skráð: {{ offer.offer_made }} Rennur út: {{ offer.expires }}</h5><br>
+                    {% if offer.status == 'Incoming' %}
+                        <div><p>Staða: Sent</p></div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

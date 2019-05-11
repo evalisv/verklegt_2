@@ -25,7 +25,8 @@ urlpatterns = [
     path('users/', include('user.urls')),
     path('', views.homepage, name="homepage"),
     path('admin/', admin.site.urls),
-    path('vhistory/', include('vhistory.urls')),
+    path('offer/', include('offer.urls')),
+    path('vhistory/', include('vhistory.urls'))
 ]
 
 if settings.DEBUG:

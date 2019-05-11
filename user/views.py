@@ -5,6 +5,7 @@ from user.forms.profile_form import UpdateNameForm
 from user.models import Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from offer.models import Offer
 
 
 def index(request):
@@ -50,8 +51,16 @@ def register(request):
     })
 
 #þetta fall er ekki notað til þess að uppfæra profile upplýsingar, heldur má þetta vera fallið sem opnar "Mínar síður"
+
+@login_required
+def my_offers(request):
+    offer_list = Offer.objects.all().order_by("offer_made")
+    context = {"offers": offer_list}
+    return render(request, "offer/offer_list.html", context)
+
 @login_required
 def profile(request, id):
     return render(request,'user/profile.html', {
         'user': get_object_or_404(User, pk=id)
     })
+
