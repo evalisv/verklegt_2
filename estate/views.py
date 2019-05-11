@@ -1,4 +1,4 @@
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from estate.models import Estate, EstatePictures
 from estate.forms.estate_form import RegisterEstateForm, UpdateEstateForm
