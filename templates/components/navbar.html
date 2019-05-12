@@ -16,6 +16,11 @@
               <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Innskráning</a></li>
               <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Nýskráning</a></li>
           {% endif %}
-      </ul>
+        </ul>
+        {% if user.is_authenticated %}
+            <img src="{{ user.profile.profile_image }}" class ="profile-image"/>
+            <p>Velkomin/n {{ request.user.get_full_name }}</p>
+
+        {% endif %}
   </div>
 </nav>
