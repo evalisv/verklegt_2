@@ -4,7 +4,6 @@ from estate.models import Estate
 from django.core.paginator import Paginator
 from django.db.models import Q
 
-
 def search_view(request):
     query = request.GET.get('q', None)
     user = None
@@ -26,4 +25,8 @@ def search_view(request):
         context['estates'] = estates
     return render(request, 'search/search_results.html', context)
 
+def view_search_words(request, id):
+    filtered_search_query = SearchQuery.objects.filter(user_id=id).order_by('-timestamp')
+    context = {'searches': filtered_search_query}
+    return render(request, 'search/search_words.html', context)
 
