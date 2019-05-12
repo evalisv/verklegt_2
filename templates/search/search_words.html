@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Leitarorð:</h3>
+{%  for  search in searches %}
+    <div class="col-4">
+        {% include 'search/single_word.html' with search=search %}
+    </div>
+{% endfor %}
+{% endblock %}
