@@ -99,3 +99,20 @@ def update_estate(request, id):
         'id': id,
         'estate': instance
     })
+
+def sort_estates(request):
+    estates = Estate.objects.all()
+
+    if request.GET.get('orderbyaddress'):
+        estates = Estate.objects.all().order_by('address')
+    if request.GET.get('orderbyprice'):
+        estates = Estate.objects.all().order_by('price')
+    if request.GET.get('orderbydate'):
+        estates = Estate.objects.all().order_by('date_listed')
+
+    paginator = Paginator(estates, 6)
+    page = request.GET.get("page")
+    estates = paginator.get_page(page)
+
+    context = {'estates': estates}
+    return render(request, 'estate/index.html', context)

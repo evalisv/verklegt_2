@@ -4,10 +4,18 @@
     <div class="content-container my-5 p-5 estates-container">
         {% if query %}
             <h3 class="text-center">Leitarniðurstöður fyrir "{{ query }}"</h3>
-            <button type="button">Raða eftir heimilisfangi</button>
-            <button type="button">Raða eftir verði</button>
-            <button type="button">Raða eftir skráningardagsetningu</button>
-            <br>
+            <form action="sort_estates" method="GET">
+                <button type="submit" name="orderbyaddress">Raða eftir heimilisfangi</button>
+            </form>
+
+            <form action="sort_estates" method="GET">
+                <button type="submit" name="orderbyprice">Raða eftir verði</button>
+            </form>
+
+            <form action="sort_estates" method="GET">
+                <button type="submit" name="orderbydate">Raða eftir skráningardagsetningu</button>
+            </form>
+
             <div class="row">
                 {% for estate in estates %}
                     <div class="col-4">
