@@ -8,9 +8,8 @@
                     <div class="myPageField" style="background-color:red">
                         <a href="my_offers">Mín tilboð</a>
                     </div>
-                    <div class="myPageField" style="background-color:yellow">
-                        <a href="#">Mínar eignir á sölu</a>
-                    </div>
+                        <button type="button" class="myPageField" onclick="window.location.href = '/estates/my_estates/{{ user.id }}';">
+                        Mínar eignir á sölu</button>
                     <button type="button" class="myPageField" onclick="window.location.href = '/vhistory/{{ user.id }}';">
                         Skoðaðar eignir</button>
                     <div class="myPageField"  style="background-color:blue">

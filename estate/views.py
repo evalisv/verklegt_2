@@ -100,6 +100,7 @@ def update_estate(request, id):
         'estate': instance
     })
 
+
 def sort_estates(request):
     estates = Estate.objects.all()
 
@@ -116,3 +117,19 @@ def sort_estates(request):
 
     context = {'estates': estates}
     return render(request, 'estate/index.html', context)
+
+
+#Fall til að kalla fram eignir notanda, fyrir 'Mínar eignir á sölu' - áfs:
+@login_required
+def seller_index(request, id):
+    list_of_estates = []
+    for estate in Estate.objects.all():
+        if estate.estate_seller.id == id:
+            list_of_estates.append(estate)
+    paginator = Paginator(list_of_estates, 6)
+
+    page = request.GET.get("page")
+    estates = paginator.get_page(page)
+
+    context = {"estates": estates}
+    return render(request, "estate/my_estates.html", context)
