@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Fasteignasalar:</h3>
+{%  for  agent in agents %}
+    <div class="col-4">
+        {% include 'agent/single_agent.html' with agent=agent %}
+    </div>
+{% endfor %}
+{% endblock %}
