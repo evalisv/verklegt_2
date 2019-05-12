@@ -21,6 +21,27 @@ body {
     overflow: hidden;
 }
 
+.register-user input#id_username, .register-user label[for="id_username"] {
+    pointer-events: none;
+    background: transparent;
+    color: transparent;
+    border: none;
+    height: 0;
+    width: 0;
+    font-size: 0;
+    padding: 0;
+    margin: -24px 0 0;
+}
+
+ul.errorlist li {
+    list-style: none;
+}
+
+.register-user .errorlist.username-error {
+    margin-top: -1.5rem;
+    margin-bottom: 1.5rem;
+}
+
 .container {
     /*overflow: hidden;*/
 }
