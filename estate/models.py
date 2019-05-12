@@ -48,3 +48,4 @@ class EstateImage(models.Model):
 class EstatePictures(models.Model):
     url = models.FileField()
     estate = models.ForeignKey(Estate, on_delete=models.CASCADE)
+

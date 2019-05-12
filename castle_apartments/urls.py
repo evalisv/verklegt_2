@@ -19,12 +19,17 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from castle_apartments import views
+from searches.views import search_view
 
 urlpatterns = [
     path('estates/', include('estate.urls')),
     path('users/', include('user.urls')),
     path('', views.homepage, name="homepage"),
     path('admin/', admin.site.urls),
+    path('offer/', include('offer.urls')),
+    path('vhistory/', include('vhistory.urls')),
+    path('search/', search_view),
+    path('searchlist/', include('searches.urls'))
 ]
 
 if settings.DEBUG:

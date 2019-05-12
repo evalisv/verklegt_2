@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% now "Y-m-d-h" as todays_date %}
+    <div class="content-container my-5 p-5 estates-container">
+        <h3 class="text-center">Öll mín tilboð</h3>
+        <div class="offer-to-user">
+            <h3>Tilboð til mín</h3>
+            {% for offer in offers %}
+                <div class="single-offer">
+                {% if offer.estate.estate_seller == reguest.user %}
+                    <h4>Upphæð: {{ offer.amount }} Eign: {{ offer.estate.address }} </h4>
+                    <h5>Tilboð skráð: {{ offer.offer_made }} Rennur út: {{ offer.expires }}</h5>
+                    {% if offer.status == 'Approved' and todays_date > offer.expires|date:"Y-m-d-h" %}
+                        <div><p>Staða: Nýtt</p></div>
+                    {% endif %}
+                    <button value="Hafna">Hafna</button>
+                    <button value="Samþykkja">Samþykkja</button>
+                {% endif %}
+                </div>
+            {% endfor %}
+
+        </div>
+        <div class="offer-from-user">
+            <h3>Tilboð frá mér</h3>
+            {% for offer in offers %}
+                <div class="single-offer">
+                {% if offer.offer_maker == request.user %}
+                    <h4>Upphæð: {{ offer.amount }} Eign: {{ offer.estate.address }} </h4>
+                    <h5>Tilboð skráð: {{ offer.offer_made }} Rennur út: {{ offer.expires }}</h5>
+                    {% if offer.status == 'Incoming' and todays_date < offer.expires|date:"Y-m-d-h" %}
+                        <p>Staða: Í vinnslu</p>
+                        {% elif offer.status == 'Approved' and todays_date < offer.expires|date:"Y-m-d-h"%}
+                            <p>Staða: Sent</p>
+                        {% elif todays_date > offer.expires|date:"Y-m-d-h" and offer.status != 'Accepted' %}
+                            <p>Staða: Útrunnið</p>
+                        {% elif offer.status == 'Rejected' %}
+                            <p>Staða: Hafnað</p>
+                        {% elif offer.status == 'Accepted' %}
+                            <p>Staða: Samþykkt</p>
+                            <button value="payment-button">Greiða</button>
+                    {% endif %}
+                {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        </div>
+{% endblock %}

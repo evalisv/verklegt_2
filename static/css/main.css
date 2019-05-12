@@ -189,3 +189,24 @@ span.step-links {
 .paging-cube:hover a {
     color: white;
 }
+.myPageArea {
+    margin-left:20px;
+    margin-right:20px;
+}
+
+.myPageSurroundings {
+    margin: 0 auto;
+}
+
+.myPageField {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 40%;
+    padding: 40px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 10px;
+    border: 1px solid #000000;
+}
+

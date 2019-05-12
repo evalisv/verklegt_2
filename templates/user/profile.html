@@ -1,9 +1,24 @@
-{% extends "base.html" %}
+{%  extends "base.html" %}
 {% block content %}
-    <h1>Uppfæra notandaupplýsingar</h1>
-    <form class="form form-horizontal" method="post">
-        {%  csrf_token %}
-        {{ form }}
-        <input type="submit" value="Uppfæra" class="btn btn-primary pull-right" style="clear:both; margin: 10px 0" />
-    </form>
+    <div class="content-container my-5 p-5 estates-container">
+        <div class="myPageArea">
+        <h3 class="text-center">Mínar síður</h3>
+            <div class="row">
+                <div class="myPageSurroundings">
+                    <div class="myPageField" style="background-color:red">
+                        <a href="my_offers">Mín tilboð</a>
+                    </div>
+                        <button type="button" class="myPageField" onclick="window.location.href = '/estates/my_estates/{{ user.id }}';">
+                        Mínar eignir á sölu</button>
+                    <button type="button" class="myPageField" onclick="window.location.href = '/vhistory/{{ user.id }}';">
+                        Skoðaðar eignir</button>
+                    <button type="button" class="myPageField" onclick="window.location.href = '/searchlist/{{ user.id }}';">
+                        Leitarorðin mín</button>
+                    <div class="myPageField"  style="background-color:blue">
+                        <a href="#">Stillingar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

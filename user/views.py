@@ -6,6 +6,7 @@ from user.models import Profile
 from user_role.models import UserRole
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from offer.models import Offer
 
 
 def index(request):
@@ -26,7 +27,7 @@ def update_name(request, id):
             'id': id
         })
 
-
+@login_required
 def update_profile(request, id):
     user_profile = Profile.objects.filter(user=request.user).first()
     if request.method == 'POST':
@@ -75,8 +76,17 @@ def register(request):
             'form': RegistrationForm()
         })
 
-
 #þetta fall er ekki notað til þess að uppfæra profile upplýsingar, heldur má þetta vera fallið sem opnar "Mínar síður"
+
+@login_required
+def my_offers(request):
+    offer_list = Offer.objects.all().order_by("offer_made")
+    context = {"offers": offer_list}
+    return render(request, "offer/offer_list.html", context)
+
 @login_required
 def profile(request):
-    pass
+    return render(request,'user/profile.html', {
+        'user': request.user
+    })
+
