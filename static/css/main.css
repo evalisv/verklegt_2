@@ -125,6 +125,12 @@ a {
     width: 100%;
 }
 
+.profile.image-wrapper {
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 100%;
+}
+
 .estate .image-wrapper {
     height: 212px;
 }

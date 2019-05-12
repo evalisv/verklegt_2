@@ -31,14 +31,16 @@ def update_name(request, id):
 def update_profile(request, id):
     user_profile = Profile.objects.filter(user=request.user).first()
     if request.method == 'POST':
-        form = ProfileForm(data=request.POST, instance=user_profile)
+        form = ProfileForm(request.POST, request.FILES, instance=user_profile)
         if form.is_valid():
             user_profile = form.save(commit=False)
+            user_profile.profile_image = request.FILES['profile_image']
             user_profile.user = request.user
             user_profile.save()
             return redirect('user-index')
     return render(request, 'user/update_profile.html', {
-        'form': ProfileForm(instance=user_profile)
+        'form': ProfileForm(instance=user_profile),
+        'error_messages': ProfileForm(request.POST, request.FILES, instance=user_profile).errors
     })
 
 def register(request):
