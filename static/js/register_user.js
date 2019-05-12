@@ -12,6 +12,13 @@ $(document).ready(function(){
             $('.register-user ul.errorlist li').text('Notandi með þetta netfang er þegar skráður.');
         }
     }
+
+
+    if ($('.content-container.login-user').length > 0) {
+        console.log('login');
+        $('label[for="id_username"]').text('Notendanafn:');
+        $('label[for="id_password"]').text('Lykilorð:');
+    }
 });
 
 function addClassNamesToLabels() {

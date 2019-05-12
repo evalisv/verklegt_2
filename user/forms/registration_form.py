@@ -64,10 +64,6 @@ class RegistrationForm(UserCreationForm):
         widget=forms.Select(attrs={'class': 'form-control col-sm-3 form-group-8'})
     )
 
-    error_messages = {
-        "username_exists": "username_exists"
-    }
-
     class Meta:
         model = User
         fields = (
@@ -93,16 +89,6 @@ class RegistrationForm(UserCreationForm):
         if commit:
             user.save()
         return user
-
-    # def clean_username(self):
-    #     username = self.cleaned_data.get('username')
-    #     raise_error = False
-    #     print(self.error_messages.values())
-    #     if 'username_exists' in self.error_messages.values():
-    #         raise_error = True
-    #     if raise_error:
-    #         raise forms.ValidationError('Notandi með þetta netfang er þegar skráður.')
-    #     return username
 
     def clean_password2(self):
         password1 = self.cleaned_data['password1']
