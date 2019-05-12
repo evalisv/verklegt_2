@@ -10,7 +10,7 @@
             <li class="nav-item"><a class="nav-link" href="{% url 'estate-index' %}">Allar fasteignir</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'register_estate' %}">Skrá fasteign á sölu</a></li>
           {% if user.is_authenticated %}
-              <li class="nav-item"><a class="nav-link" href="/users/profile/{{ user.id }}">Mínar síður</a></li>
+              <li class="nav-item"><a class="nav-link" href="/users/profile/">Mínar síður</a></li>
               <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Útskrá</a></li>
           {% else %}
               <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Innskráning</a></li>
