@@ -21,7 +21,8 @@ def index(request):
 
 def get_estate_by_id(request, id):
     estate = get_object_or_404(Estate, pk=id)
-    update_vhistory(request.user, estate)
+    if request.user.is_authenticated:
+        update_vhistory(request.user, estate)
     return render(request, 'estate/estate_details.html', {
       'estate' : estate
     })
