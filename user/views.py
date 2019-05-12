@@ -6,7 +6,7 @@ from user.models import Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from offer.models import Offer
-
+from user_role.models import UserRole
 
 def index(request):
     return render(request, 'user/index.html')
@@ -60,7 +60,20 @@ def my_offers(request):
 
 @login_required
 def profile(request):
-    return render(request,'user/profile.html', {
-        'user': request.user
-    })
+
+    active_user = UserRole.objects.filter(user=request.user)
+    admin_user = False
+    for entry in active_user:
+        if entry.role == 'admin':
+            admin_user = True
+    #active_user = get_object_or_404(UserRole, user=request.user)
+
+    if admin_user:
+        return render(request,'user/admin_profile.html', {
+            'user': request.user
+        })
+    else:
+        return render(request,'user/profile.html', {
+            'user': request.user
+        })
 
