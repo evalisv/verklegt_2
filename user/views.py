@@ -83,7 +83,7 @@ def register(request):
 
 @login_required
 def my_offers(request):
-    offer_list = Offer.objects.all().order_by("offer_made")
+    offer_list = Offer.objects.all().order_by("-offer_made")
     context = {"offers": offer_list}
     return render(request, "offer/offer_list.html", context)
 
