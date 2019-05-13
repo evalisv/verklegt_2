@@ -1,0 +1,33 @@
+<tr>
+    <td>{{ offer.amount }}</td>
+    <td>{{ offer.estate.address }}</td>
+    <td>{{ offer.offer_made }}</td>
+    <td>{{ offer.expires }}</td>
+    <td>
+        {% if to_me %}
+            {% if offer.status == 'Approved' and todays_date > offer.expires|date:"Y-m-d-h" %}
+                Nýtt
+            {% endif %}
+        {% elif from_me %}
+            {% if offer.status == 'Incoming' and todays_date < offer.expires|date:"Y-m-d-h" %}
+                <p>Staða: Í vinnslu</p>
+                {% elif offer.status == 'Approved' and todays_date < offer.expires|date:"Y-m-d-h"%}
+                    <p>Staða: Sent</p>
+                {% elif todays_date > offer.expires|date:"Y-m-d-h" and offer.status != 'Accepted' %}
+                    <p>Staða: Útrunnið</p>
+                {% elif offer.status == 'Rejected' %}
+                    <p>Staða: Hafnað</p>
+                {% elif offer.status == 'Accepted' %}
+                    <p>Staða: Samþykkt</p>
+            {% endif %}
+        {% endif %}
+    </td>
+    <td>
+        {% if to_me %}
+            <button value="Hafna">Hafna</button>
+            <button value="Samþykkja">Samþykkja</button>
+        {% elif from_me and offer.status == 'Accepted'%}
+            <button value="payment-button">Greiða</button>
+        {% endif %}
+    </td>
+</tr>

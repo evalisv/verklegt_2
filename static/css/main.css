@@ -231,3 +231,11 @@ span.step-links {
     display: block;
     clear: right;
 }
+
+.tab-pane {
+    background: white;
+    border-radius: 5px;
+}
+.nav-tabs {
+    margin-left: 20px
+}
