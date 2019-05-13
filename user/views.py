@@ -40,6 +40,7 @@ def update_profile(request, id):
             return redirect('user-index')
     return render(request, 'user/update_profile.html', {
         'form': ProfileForm(instance=user_profile),
+        'readOnlyData': request.user,
         'error_messages': ProfileForm(request.POST, request.FILES, instance=user_profile).errors
     })
 
