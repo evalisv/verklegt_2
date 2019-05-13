@@ -1,10 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h3>Skoðaðar eignir:</h3>
-{%  for  estate in estates %}
-    <div class="col-4">
-        {% include 'vhistory/vhistory.html' with estate=estate %}
+    <div class="content-container view-history my-5 p-5">
+        <h3 class="text-center">Skoðaðar eignir</h3>
+        <div class="row">
+            {% if estates|length == 0 %}
+                <p>Þú hefur ekki skoðað neina eign.</p>
+            {% else %}
+                {%  for  estate in estates %}
+                    <div class="col-4">
+                        {% include 'estate/single_estate.html' with estate=estate vhistory=True %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <button class="btn btn-link float-right" onclick="window.history.go(-1); return false;">Til baka</button>
     </div>
-{% endfor %}
 {% endblock %}
+
