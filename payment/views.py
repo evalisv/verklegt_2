@@ -5,26 +5,28 @@ from estate.models import Estate
 from payment.models import Payment
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-
+from offer.models import Offer
 
 def index(request):
     return HttpResponse('<h1>payment</h1>')
 
 @login_required
 def make_payment(request, id):
-    estate = get_object_or_404(Estate, pk=id)  #veit ekki, þarf að laga
+    offer = get_object_or_404(Offer, pk=id)
     if request.method == 'POST':
-        form = PaymentForm(request.POST) #veit ekki, þarf að laga
+        form = PaymentForm(data=request.POST, instance=offer)
         if form.is_valid():
             payment = form.save(commit=False)
-            payment.buyer_id = request.user
-            payment.estate_id = estate
+            payment.amount = offer.amount
             payment.save()
-            return redirect('')
+            #return redirect('url')
     else:
         form = PaymentForm()
         return render(request, 'payment/payment_step.html', {
-            'form': form,
-            'id': id
+            'form': form
         })
 
+def get_review_info(request, id):
+    offer = get_object_or_404(Offer, pk=id)
+    context = {'offer': offer}
+    return render(request, 'payment/review_step.html', context)

@@ -19,6 +19,8 @@ class ProfileForm(ModelForm):
         exclude = ['id', 'user']
         widgets = {
             'profile_image': widgets.ClearableFileInput(attrs={'class': 'form-control'}),
+            'first name': widgets.TextInput(attrs={'class': 'form-control'}),
+            'last name': widgets.TextInput(attrs={'class': 'form-control'}),
             'kennitala': widgets.NumberInput(attrs={'class': 'form-control'}),
             'phone_number': widgets.NumberInput(attrs={'class': 'form-control'}),
             'address': widgets.TextInput(attrs={'class': 'form-control'}),
@@ -27,9 +29,10 @@ class ProfileForm(ModelForm):
         }
         labels = {
             'profile_image': 'Mynd',
+            'first_name': 'Eigið nafn',
+            'last_nane': 'Eftirnafn',
             'phone_number': 'Sími',
             'address': 'Heimilisfang',
             'postal_code': 'Póstnúmer',
             'country': 'Land'
         }
-
