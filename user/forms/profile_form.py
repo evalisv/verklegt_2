@@ -2,6 +2,11 @@ from django.forms import ModelForm, widgets
 from django.contrib.auth.models import User
 from user.models import Profile
 from django.core.exceptions import ValidationError
+from django.forms.widgets import ClearableFileInput
+
+class ClearableFileUpload(ClearableFileInput):
+    initial_text = 'Núverandi mynd'
+    input_text = 'Skipta um mynd'
 
 class UpdateNameForm(ModelForm):
     class Meta:
@@ -13,26 +18,29 @@ class UpdateNameForm(ModelForm):
         }
 
 
-class ProfileForm(ModelForm):
+class ProfileForm(ModelForm, ClearableFileUpload):
     class Meta:
         model = Profile
-        exclude = ['id', 'user']
+        exclude = ['id', 'user', 'kennitala']
         widgets = {
-            'profile_image': widgets.ClearableFileInput(attrs={'class': 'form-control'}),
-            'first name': widgets.TextInput(attrs={'class': 'form-control'}),
-            'last name': widgets.TextInput(attrs={'class': 'form-control'}),
+            'profile_image': ClearableFileUpload(attrs={'class': 'col-4'}),
             'kennitala': widgets.NumberInput(attrs={'class': 'form-control'}),
-            'phone_number': widgets.NumberInput(attrs={'class': 'form-control'}),
-            'address': widgets.TextInput(attrs={'class': 'form-control'}),
-            'postal_code': widgets.Select(attrs={'class': 'form-control'}),
-            'country': widgets.Select(attrs={'class': 'form-control'})
+            'phone_number': widgets.NumberInput(attrs={'class': 'form-control col-2 form-group-3'}),
+            'address': widgets.TextInput(attrs={'class': 'form-control col-10 form-group-2'}),
+            'postal_code': widgets.Select(attrs={'class': 'form-control col-2 form-group-3'}),
+            'country': widgets.Select(attrs={'class': 'form-control col-2 form-group-3'}),
         }
         labels = {
-            'profile_image': 'Mynd',
-            'first_name': 'Eigið nafn',
-            'last_nane': 'Eftirnafn',
+            'profile_image': '',
             'phone_number': 'Sími',
             'address': 'Heimilisfang',
             'postal_code': 'Póstnúmer',
             'country': 'Land'
         }
+
+# initial_text = 'currently'
+#     input_text = 'change'
+#     clear_checkbox_label = 'clear'
+
+# 'kennitala': widgets.NumberInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
+
