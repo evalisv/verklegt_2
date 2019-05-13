@@ -126,7 +126,7 @@ def sort_estates(request):
 def seller_index(request, id):
     list_of_estates = []
     for estate in Estate.objects.all():
-        if estate.estate_seller.id == request.user:
+        if estate.estate_seller == request.user:
             list_of_estates.append(estate)
     paginator = Paginator(list_of_estates, 6)
 

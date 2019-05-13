@@ -9,9 +9,11 @@
                     <a class="btn btn-primary float-right" href="/estates/register_estate">Skrá fasteign á sölu</a>
                 {% else %}
                     {%  for  estate in estates %}
-                        {% if requst.user == estate.estate_seller %}
+                        {% if request.user == estate.estate_seller %}
                             <div class="col-4">
                                 {% include 'estate/single_estate.html' with estate=estate %}
+                                <a href="{% url 'update_estate' estate.id %}" class="btn btn-primary float-right ml-2">Uppfæra</a>
+                                <a href="{% url 'delete_estate' estate.id %}" class="btn btn-primary float-right ml-2">Eyða</a>
                             </div>
                         {% endif %}
                     {% endfor %}
