@@ -5,7 +5,7 @@
     <div class="content-container my-5 p-5 estates-container">
         <h3 class="text-center">Öll mín tilboð</h3>
         <div class="offer-to-user">
-            <h3>Tilboð til mín</h3>
+            <h3 class="text-center">Tilboð til mín</h3>
             {% for offer in offers %}
                 <div class="single-offer">
                 {% if offer.estate.estate_seller == reguest.user %}
@@ -22,7 +22,7 @@
 
         </div>
         <div class="offer-from-user">
-            <h3>Tilboð frá mér</h3>
+            <h3 class="text-center">Tilboð frá mér</h3>
             {% for offer in offers %}
                 <div class="single-offer">
                 {% if offer.offer_maker == request.user %}

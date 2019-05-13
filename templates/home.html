@@ -145,11 +145,14 @@
 
     </div>
 
-
-
-
-
-    <div class="container">
-        <h3>Nýjar fasteignir á skrá</h3>
+    <div class="content-container my-5 p-5 estates-container">
+        <h3 class="text-center">Nýjustu fasteignir á skrá</h3>
+            <div class="row">
+            {% for estate in estates %}
+                <div class="col-4">
+                {% include 'estate/single_estate.html' with estate=estate %}
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
