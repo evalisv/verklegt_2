@@ -2,7 +2,7 @@ body {
     background-image: url('/static/images/castle-bg.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: contain;
+    /*background-size: contain;*/
     background-position-x: center;
 }
 
@@ -125,6 +125,12 @@ a {
     width: 100%;
 }
 
+.profile.image-wrapper {
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 100%;
+}
+
 .estate .image-wrapper {
     height: 212px;
 }
@@ -189,24 +195,31 @@ span.step-links {
 .paging-cube:hover a {
     color: white;
 }
-.myPageArea {
-    margin-left:20px;
-    margin-right:20px;
-}
 
-.myPageSurroundings {
-    margin: 0 auto;
-}
-
-.myPageField {
-    margin-bottom: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    width: 40%;
-    padding: 40px;
-    text-align: center;
-    display: inline-block;
+.my-page-area .card {
+    max-width: 48%;
+    margin-left: 1%;
+    margin-right: 1%;
     border-radius: 10px;
-    border: 1px solid #000000;
 }
+/*.my-page-area {*/
+    /*margin-left:20px;*/
+    /*margin-right:20px;*/
+/*}*/
+
+/*.myPageSurroundings {*/
+/*    margin: 0 auto;*/
+/*}*/
+
+/*.myPageField {*/
+/*    margin-bottom: 10px;*/
+/*    margin-left: 10px;*/
+/*    margin-right: 10px;*/
+/*    width: 40%;*/
+/*    padding: 40px;*/
+/*    text-align: center;*/
+/*    display: inline-block;*/
+/*    border-radius: 10px;*/
+/*    border: 1px solid #000000;*/
+/*}*/
 

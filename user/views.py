@@ -31,14 +31,16 @@ def update_name(request, id):
 def update_profile(request, id):
     user_profile = Profile.objects.filter(user=request.user).first()
     if request.method == 'POST':
-        form = ProfileForm(data=request.POST, instance=user_profile)
+        form = ProfileForm(request.POST, request.FILES, instance=user_profile)
         if form.is_valid():
             user_profile = form.save(commit=False)
+            user_profile.profile_image = request.FILES['profile_image']
             user_profile.user = request.user
             user_profile.save()
             return redirect('user-index')
     return render(request, 'user/update_profile.html', {
-        'form': ProfileForm(instance=user_profile)
+        'form': ProfileForm(instance=user_profile),
+        'error_messages': ProfileForm(request.POST, request.FILES, instance=user_profile).errors
     })
 
 def register(request):
@@ -85,6 +87,7 @@ def my_offers(request):
     return render(request, "offer/offer_list.html", context)
 
 @login_required
+<<<<<<< HEAD
 def profile(request):
 
     active_user = UserRole.objects.filter(user=request.user)
@@ -102,4 +105,22 @@ def profile(request):
         return render(request,'user/profile.html', {
             'user': request.user
         })
+=======
+def profile(request, id):
+    user_roles_set = UserRole.objects.filter(user_id=request.user.id)
+    user_roles = list(user_roles_set.values_list('role', flat=True))
+    is_admin = False
+    number_of_columns = 6
+    try:
+        if user_roles.index('admin'):
+            is_admin = True
+            number_of_columns = 4
+    except:
+        pass
+    return render(request,'user/profile.html', {
+        'user': request.user,
+        'is_admin': is_admin,
+        'number_of_cols': number_of_columns
+    })
+>>>>>>> ce7b97287cadbc035d58dbeea6153a64e82aeeaf
 
