@@ -25,4 +25,11 @@ class ProfileForm(ModelForm):
             'postal_code': widgets.Select(attrs={'class': 'form-control'}),
             'country': widgets.Select(attrs={'class': 'form-control'})
         }
+        labels = {
+            'profile_image': 'Mynd',
+            'phone_number': 'Sími',
+            'address': 'Heimilisfang',
+            'postal_code': 'Póstnúmer',
+            'country': 'Land'
+        }
 
