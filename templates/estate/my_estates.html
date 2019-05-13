@@ -3,8 +3,10 @@
 {% block content %}
 <h3>Mínar eignir á skrá:</h3>
 {%  for  estate in estates %}
+    {% if requst.user == estate.estate_seller %}
     <div class="col-4">
         {% include 'vhistory/vhistory.html' with estate=estate %}
     </div>
+    {% endif %}
 {% endfor %}
 {% endblock %}
