@@ -30,3 +30,5 @@ def view_search_words(request, id):
     context = {'searches': filtered_search_query}
     return render(request, 'search/search_words.html', context)
 
+def search_history(request, id):
+    return render(request, 'search/search_history.html')
