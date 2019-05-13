@@ -40,6 +40,7 @@ def update_profile(request, id):
             return redirect('user-index')
     return render(request, 'user/update_profile.html', {
         'form': ProfileForm(instance=user_profile),
+        'readOnlyData': request.user,
         'error_messages': ProfileForm(request.POST, request.FILES, instance=user_profile).errors
     })
 
@@ -82,7 +83,7 @@ def register(request):
 
 @login_required
 def my_offers(request):
-    offer_list = Offer.objects.all().order_by("offer_made")
+    offer_list = Offer.objects.all().order_by("-offer_made")
     context = {"offers": offer_list}
     return render(request, "offer/offer_list.html", context)
 

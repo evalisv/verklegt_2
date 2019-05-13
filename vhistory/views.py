@@ -4,7 +4,7 @@ from vhistory.models import Vhistory
 from django.utils import timezone
 
 def index(request, id):
-    filtered_vhistory = Vhistory.objects.values('estate_id').filter(user_id=id).order_by('-view_date')
+    filtered_vhistory = Vhistory.objects.values('estate_id').filter(user_id=request.user.id).order_by('-view_date')
     list_of_viewed = []
     for item in filtered_vhistory:
         list_of_viewed.append(get_object_or_404(Estate, id=item['estate_id']))
@@ -29,7 +29,7 @@ def update_vhistory(user, estate):
 
 
 def get_vhistory_by_user(request, id):
-    filtered_vhistory = Vhistory.objects.values('estate_id').filter(user_id=id).order_by('-view_date')
+    filtered_vhistory = Vhistory.objects.values('estate_id').filter(user_id=request.user.id).order_by('-view_date')
     list_of_viewed = []
     for item in filtered_vhistory:
         list_of_viewed.append(get_object_or_404(Estate, id=item['estate_id']))

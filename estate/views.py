@@ -76,8 +76,9 @@ def register_estate(request):
 @login_required
 def delete_estate(request, id):
     estate = get_object_or_404(Estate, pk=id)
-    estate.delete()
-    return redirect('estate-index')
+    if request.user == estate.estate_seller:
+        estate.delete()
+    return redirect('my_estates')
 
 @login_required
 def update_estate(request, id):
