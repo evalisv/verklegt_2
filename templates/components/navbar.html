@@ -18,7 +18,7 @@
           {% endif %}
         </ul>
         {% if user.is_authenticated %}
-            <img src="{{ user.profile.profile_image }}" class ="profile-image"/>
+            <img src="{{ request.user.profile.profile_image }}" class ="profile-image"/>
             <p>Velkomin/n {{ request.user.get_full_name }}</p>
 
         {% endif %}
