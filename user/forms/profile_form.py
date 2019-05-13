@@ -1,6 +1,7 @@
 from django.forms import ModelForm, widgets
 from django.contrib.auth.models import User
 from user.models import Profile
+from django.core.exceptions import ValidationError
 
 class UpdateNameForm(ModelForm):
     class Meta:
@@ -17,7 +18,7 @@ class ProfileForm(ModelForm):
         model = Profile
         exclude = ['id', 'user']
         widgets = {
-            'profile_image': widgets.TextInput(attrs={'class': 'form-control'}),
+            'profile_image': widgets.ClearableFileInput(attrs={'class': 'form-control'}),
             'kennitala': widgets.NumberInput(attrs={'class': 'form-control'}),
             'phone_number': widgets.NumberInput(attrs={'class': 'form-control'}),
             'address': widgets.TextInput(attrs={'class': 'form-control'}),
