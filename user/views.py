@@ -87,8 +87,20 @@ def my_offers(request):
     return render(request, "offer/offer_list.html", context)
 
 @login_required
-def profile(request):
+def profile(request, id):
+    user_roles_set = UserRole.objects.filter(user_id=request.user.id)
+    user_roles = list(user_roles_set.values_list('role', flat=True))
+    is_admin = False
+    number_of_columns = 6
+    try:
+        if user_roles.index('admin'):
+            is_admin = True
+            number_of_columns = 4
+    except:
+        pass
     return render(request,'user/profile.html', {
-        'user': request.user
+        'user': request.user,
+        'is_admin': is_admin,
+        'number_of_cols': number_of_columns
     })
 

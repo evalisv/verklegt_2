@@ -1,22 +1,22 @@
 {%  extends "base.html" %}
 {% block content %}
-    <div class="content-container my-5 p-5 estates-container">
-        <div class="myPageArea">
+    <div class="content-container my-5 p-5 dashboard-container">
+        <div class="my-page-area">
         <h3 class="text-center">Mínar síður</h3>
             <div class="row">
-                <div class="myPageSurroundings">
-                    <div class="myPageField" style="background-color:red">
-                        <a href="my_offers">Mín tilboð</a>
-                    </div>
-                        <button type="button" class="myPageField" onclick="window.location.href = '/estates/my_estates/{{ user.id }}';">
-                        Mínar eignir á sölu</button>
-                    <button type="button" class="myPageField" onclick="window.location.href = '/vhistory/{{ user.id }}';">
-                        Skoðaðar eignir</button>
-                    <button type="button" class="myPageField" onclick="window.location.href = '/searchlist/{{ user.id }}';">
-                        Leitarorðin mín</button>
-                    <div class="myPageField"  style="background-color:blue">
-                        <a href="#">Stillingar</a>
-                    </div>
+                <div class="col-{{ number_of_cols }} card my-1 p-5 text-center">
+                    <a href="my_offers">Tilboð</a>
+                </div>
+                <div class="col-{{ number_of_cols }} card my-1 p-5 text-center">
+                    <a href="/estates/my_estates/{{ user.id }}">Eignir</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-{{ number_of_cols }} card my-1 p-5 text-center">
+                    <a href="/searchlist/{{ user.id }}/search_history">Leitarsaga</a>
+                </div>
+                <div class="col-{{ number_of_cols }} card my-1 p-5 text-center">
+                    <a href="/users/{{ user.id }}/update">Stillingar</a>
                 </div>
             </div>
         </div>
