@@ -223,3 +223,11 @@ span.step-links {
 /*    border: 1px solid #000000;*/
 /*}*/
 
+.profile-image-display a {
+    pointer-events: none;
+}
+
+#for-changing {
+    display: block;
+    clear: right;
+}

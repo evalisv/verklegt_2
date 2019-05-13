@@ -76,8 +76,9 @@ def register_estate(request):
 @login_required
 def delete_estate(request, id):
     estate = get_object_or_404(Estate, pk=id)
-    estate.delete()
-    return redirect('estate-index')
+    if request.user == estate.estate_seller:
+        estate.delete()
+    return redirect('my_estates')
 
 @login_required
 def update_estate(request, id):
@@ -125,7 +126,7 @@ def sort_estates(request):
 def seller_index(request, id):
     list_of_estates = []
     for estate in Estate.objects.all():
-        if estate.estate_seller.id == id:
+        if estate.estate_seller.id == request.user:
             list_of_estates.append(estate)
     paginator = Paginator(list_of_estates, 6)
 
