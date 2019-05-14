@@ -7,7 +7,7 @@ from user_role.models import UserRole
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from offer.models import Offer
-from user_role.models import UserRole
+
 
 def index(request):
     return render(request, 'user/index.html')
@@ -83,30 +83,36 @@ def register(request):
 
 @login_required
 def my_offers(request):
+    user_roles_set = UserRole.objects.filter(user_id=request.user.id)
+    user_roles = list(user_roles_set.values_list('role', flat=True))
+    is_admin = False
+    try:
+        if user_roles.index('admin'):
+            is_admin = True
+    except:
+        pass
     offer_list = Offer.objects.all().order_by("-offer_made")
-    context = {"offers": offer_list}
+    no_received_offers = True
+    no_made_offers = True
+    if request.user.id in list(offer_list.values_list('offer_maker', flat=True)):
+        no_made_offers = False
+
+    if request.user.id in list(request.user.estate_set.values_list('estate_seller_id', flat=True)):
+        no_received_offers = False
+
+    # if request.user.id in list(offer_list.values_list('estate', flat=True)):
+    #     no_received_offers = False
+
+    context = {
+        'offers': offer_list,
+        'is_admin': is_admin,
+        'no_made_offers': no_made_offers,
+        'no_received_offers': no_received_offers
+    }
     return render(request, "offer/offer_list.html", context)
 
+
 @login_required
-<<<<<<< HEAD
-def profile(request):
-
-    active_user = UserRole.objects.filter(user=request.user)
-    admin_user = False
-    for entry in active_user:
-        if entry.role == 'admin':
-            admin_user = True
-    #active_user = get_object_or_404(UserRole, user=request.user)
-
-    if admin_user:
-        return render(request,'user/admin_profile.html', {
-            'user': request.user
-        })
-    else:
-        return render(request,'user/profile.html', {
-            'user': request.user
-        })
-=======
 def profile(request, id):
     user_roles_set = UserRole.objects.filter(user_id=request.user.id)
     user_roles = list(user_roles_set.values_list('role', flat=True))
@@ -123,5 +129,3 @@ def profile(request, id):
         'is_admin': is_admin,
         'number_of_cols': number_of_columns
     })
->>>>>>> ce7b97287cadbc035d58dbeea6153a64e82aeeaf
-
