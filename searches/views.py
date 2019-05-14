@@ -18,11 +18,12 @@ def search_view(request):
                   Q(postal_code__municipality__icontains=query))
         estates = Estate.objects.all().filter(lookup)
 
-        paginator = Paginator(estates, 6)
-        page = request.GET.get("page")
-        estates = paginator.get_page(page)
+        #paginator = Paginator(estates, 6)
+        #page = request.GET.get("page")
+        #estates = paginator.get_page(page)
 
         context['estates'] = estates
+        print(context)
     return render(request, 'search/search_results.html', context)
 
 def view_search_words(request, id):

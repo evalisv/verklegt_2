@@ -19,14 +19,16 @@ def make_payment(request, id):
             payment = form.save(commit=False)
             payment.amount = offer.amount
             payment.save()
-            #return redirect('url')
+            #return redirect('review_step.html url')
     else:
         form = PaymentForm()
         return render(request, 'payment/payment_step.html', {
-            'form': form
+            'form': form,
+            'offer': offer
         })
 
 def get_review_info(request, id):
     offer = get_object_or_404(Offer, pk=id)
-    context = {'offer': offer}
-    return render(request, 'payment/review_step.html', context)
+    return render(request, 'payment/review_step.html', {
+        'offer': offer
+    })

@@ -1,6 +1,5 @@
 from django.db import models
 from estate.models import Estate
-#from payment.models import Payment
 from user.models import User
 
 
@@ -13,4 +12,3 @@ class Offer(models.Model):
     payed = models.BooleanField()
     counter_offer_to = models.OneToOneField("self", blank=True, null=True, on_delete=models.PROTECT)
     expires = models.DateTimeField()
-    #payment = models.ForeignKey(Payment, blank=True, null=True, on_delete=models.PROTECT)

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from user.models import Profile
 from django.core.exceptions import ValidationError
 from django.forms.widgets import ClearableFileInput
+from django.core.exceptions import ValidationError
 
 class ClearableFileUpload(ClearableFileInput):
     initial_text = 'Núverandi mynd'
@@ -21,7 +22,7 @@ class UpdateNameForm(ModelForm):
 class ProfileForm(ModelForm, ClearableFileUpload):
     class Meta:
         model = Profile
-        exclude = ['id', 'user', 'kennitala']
+        exclude = ['id', 'user']
         widgets = {
             'profile_image': ClearableFileUpload(attrs={'class': 'col-4'}),
             'kennitala': widgets.NumberInput(attrs={'class': 'form-control'}),
@@ -38,6 +39,30 @@ class ProfileForm(ModelForm, ClearableFileUpload):
             'country': 'Land'
         }
 
+    def clean_kennitala(self):
+        kennitala_passed = self.cleaned.data.get('kennitala')
+        kennitala_str = str(kennitala_passed)
+        if len(kennitala_str) != 10 and 31 < int(kennitala_str[0:2]) < 0 and 13 < int(kennitala_str[2:4]) < 0:
+            raise ValidationError('Kennitala er ógild.')
+        return kennitala_passed
+
+    def clean_phone_number(self):
+        phone_number_passed = self.cleaned.data.get('phone_number')
+        if 10 < len(str(phone_number_passed)) < 7:
+            raise ValidationError('Símanúmer verður að vera á milli 7-10 tölustafir að lengd.')
+        return phone_number_passed
+
+
+
+
+
+
+
+        def clean_card_number(self):
+            card_number_passed = self.cleaned_data.get('card_number')
+            if len(str(card_number_passed)) != 16:
+                raise ValidationError('Kortanúmer er ógilt.')
+            return card_number_passed
 # initial_text = 'currently'
 #     input_text = 'change'
 #     clear_checkbox_label = 'clear'
