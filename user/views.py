@@ -79,41 +79,56 @@ def register(request):
             'form': RegistrationForm()
         })
 
-#þetta fall er ekki notað til þess að uppfæra profile upplýsingar, heldur má þetta vera fallið sem opnar "Mínar síður"
-
 @login_required
 def my_offers(request):
-    user_roles_set = UserRole.objects.filter(user_id=request.user.id)
-    user_roles = list(user_roles_set.values_list('role', flat=True))
-    is_admin = False
+    offer_list = Offer.objects.all().order_by("offer_made")
 
-    if 'admin' in user_roles:
-        is_admin = True
-
-    offer_list = Offer.objects.all().order_by("-offer_made")
-    for o in offer_list:
-        print(o.expires)
-
+    try:
+        user_role = UserRole.objects.get(user_id = request.user.id)
+    except:
+        user_role = 'user'
+        
     no_received_offers = True
     no_made_offers = True
 
-    if request.user.id in list(offer_list.values_list('offer_maker', flat=True)):
-        no_made_offers = False
+    for offer in offer_list:
+        if offer.estate.estate_seller == request.user:
+            no_received_offers = False
+            break
 
-    if request.user.id in list(request.user.estate_set.values_list('estate_seller_id', flat=True)):
-        no_received_offers = False
+    for offer in offer_list:
+        if offer.offer_maker == request.user:
+            no_made_offers = False
+            break
 
     context = {
         'offers': offer_list,
-        'is_admin': is_admin,
         'no_made_offers': no_made_offers,
-        'no_received_offers': no_received_offers
+        'no_received_offers': no_received_offers,
+        'user_role': user_role
     }
     return render(request, "offer/offer_list.html", context)
 
+def approve_offer(request, id):
+    offer = get_object_or_404(Offer, pk=id)
+    offer.status = 'Approved'
+    offer.save()
+    return redirect('my_offers')
+
+def reject_offer(request, id):
+    offer = get_object_or_404(Offer, pk=id)
+    offer.status = 'Rejected'
+    offer.save()
+    return redirect('my_offers')
+
+def accept_offer(request,id):
+    offer = get_object_or_404(Offer, pk=id)
+    offer.status = 'Accepted'
+    offer.save()
+    return redirect('my_offers')
 
 @login_required
-def profile(request, id):
+def profile(request):
     user_roles_set = UserRole.objects.filter(user_id=request.user.id)
     user_roles = list(user_roles_set.values_list('role', flat=True))
     is_admin = False
