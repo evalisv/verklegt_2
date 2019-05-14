@@ -86,22 +86,22 @@ def my_offers(request):
     user_roles_set = UserRole.objects.filter(user_id=request.user.id)
     user_roles = list(user_roles_set.values_list('role', flat=True))
     is_admin = False
-    try:
-        if user_roles.index('admin'):
-            is_admin = True
-    except:
-        pass
+
+    if 'admin' in user_roles:
+        is_admin = True
+
     offer_list = Offer.objects.all().order_by("-offer_made")
+    for o in offer_list:
+        print(o.expires)
+
     no_received_offers = True
     no_made_offers = True
+
     if request.user.id in list(offer_list.values_list('offer_maker', flat=True)):
         no_made_offers = False
 
     if request.user.id in list(request.user.estate_set.values_list('estate_seller_id', flat=True)):
         no_received_offers = False
-
-    # if request.user.id in list(offer_list.values_list('estate', flat=True)):
-    #     no_received_offers = False
 
     context = {
         'offers': offer_list,
@@ -118,13 +118,12 @@ def profile(request, id):
     user_roles = list(user_roles_set.values_list('role', flat=True))
     is_admin = False
     number_of_columns = 6
-    try:
-        if user_roles.index('admin'):
-            is_admin = True
-            number_of_columns = 4
-    except:
-        pass
-    return render(request,'user/profile.html', {
+
+    if 'admin' in user_roles:
+        is_admin = True
+        number_of_columns = 4
+
+    return render(request, 'user/profile.html', {
         'user': request.user,
         'is_admin': is_admin,
         'number_of_cols': number_of_columns
