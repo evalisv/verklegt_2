@@ -29,8 +29,7 @@ urlpatterns = [
     path('offer/', include('offer.urls')),
     path('vhistory/', include('vhistory.urls')),
     path('search/', search_view),
-    path('searchlist/', include('searches.urls')),
-    path('agents/', include('user_role.urls'))
+    path('searchlist/', include('searches.urls'))
 ]
 
 if settings.DEBUG:

@@ -13,7 +13,10 @@ urlpatterns = [
     path('login', LoginView.as_view(template_name='user/login.html'), name='login'),
     path('logout', LogoutView.as_view(next_page='login'), name='logout'),
     path('profile/my_offers', views.my_offers, name='my_offers'),
-    path('<int:id>/profile/', views.profile, name='profile')
+    path('profile/', views.profile, name='profile'),
+    path('profile/agents/', views.view_agents, name='agent-index'),
+    path('profile/agents/register_agent/', views.register_agent, name='register_agent')
 ]
+
 
 # path('update_profile/<int:id>', views.update_profile, name="update_profile"),

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<h3>Fasteignasalar:</h3>
+<button onclick="window.location.href = 'register_agent';">Skrá nýjan fasteignasala</button>
+    <h3>Fasteignasalar:</h3>
 {%  for  agent in agents %}
     <div class="col-4">
         {% include 'agent/single_agent.html' with agent=agent %}

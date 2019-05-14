@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from user.forms.profile_form import ProfileForm
 from user.forms.registration_form import RegistrationForm
+from user.forms.agent_registration_form import AgentRegistrationForm
 from user.forms.profile_form import UpdateNameForm
 from user.models import Profile
 from user_role.models import UserRole
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from offer.models import Offer
+from django.http import HttpResponse
 
 
 def index(request):
@@ -66,6 +68,7 @@ def register(request):
                 user=new_user
             )
             user_role.save()
+
             return redirect('login')
         else:
             return render(request, 'user/register.html', {
@@ -78,6 +81,49 @@ def register(request):
         return render(request, 'user/register.html', {
             'form': RegistrationForm()
         })
+
+def view_agents(request):
+    context = {'agents': UserRole.objects.filter(role='admin')}
+    return render(request, 'agent/index.html', context)
+
+
+def register_agent(request):
+    if request.method == 'POST':
+        form = AgentRegistrationForm(request.POST)
+        if form.is_valid():
+            new_user_meta = request.POST
+            new_user = form.save()
+
+            new_profile = Profile(
+                user=new_user,
+                kennitala=new_user_meta['kennitala'],
+                phone_number=new_user_meta['phone_number'],
+                address=new_user_meta['address'],
+                postal_code_id=new_user_meta['postal_code'],
+                country_id=new_user_meta['country'],
+                profile_image=new_user_meta['profile_image']
+            )
+            new_profile.save()
+
+            user_role = UserRole(
+                role="user",
+                user=new_user
+            )
+            user_role.save()
+
+            agent_role = UserRole(
+                role="admin",
+                user=new_user
+                )
+            agent_role.save()
+
+        return HttpResponse('Fasteignasali skráður.')
+
+    else:
+        return render(request, 'user/register_admin.html', {
+            'form': AgentRegistrationForm()
+        })
+
 
 #þetta fall er ekki notað til þess að uppfæra profile upplýsingar, heldur má þetta vera fallið sem opnar "Mínar síður"
 
@@ -113,17 +159,24 @@ def my_offers(request):
 
 
 @login_required
-def profile(request, id):
+def profile(request):
     user_roles_set = UserRole.objects.filter(user_id=request.user.id)
     user_roles = list(user_roles_set.values_list('role', flat=True))
     is_admin = False
     number_of_columns = 6
-    try:
-        if user_roles.index('admin'):
-            is_admin = True
-            number_of_columns = 4
-    except:
-        pass
+
+    if 'admin' in user_roles:
+        is_admin = True
+        number_of_columns = 4
+        print('if')
+    # try:
+    #     if user_roles.index('admin'):
+    #         is_admin = True
+    #         number_of_columns = 4
+    # except:
+    #     pass
+
+    print(is_admin, request.user.id)
     return render(request,'user/profile.html', {
         'user': request.user,
         'is_admin': is_admin,
