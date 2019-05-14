@@ -1,33 +1,97 @@
-<tr>
-    <td>{{ offer.amount }}</td>
-    <td>{{ offer.estate.address }}</td>
-    <td>{{ offer.offer_made }}</td>
-    <td>{{ offer.expires }}</td>
-    <td>
-        {% if to_me %}
-            {% if offer.status == 'Approved' and todays_date > offer.expires|date:"Y-m-d-h" %}
-                Nýtt
-            {% endif %}
-        {% elif from_me %}
-            {% if offer.status == 'Incoming' and todays_date < offer.expires|date:"Y-m-d-h" %}
-                <p>Staða: Í vinnslu</p>
-                {% elif offer.status == 'Approved' and todays_date < offer.expires|date:"Y-m-d-h"%}
-                    <p>Staða: Sent</p>
-                {% elif todays_date > offer.expires|date:"Y-m-d-h" and offer.status != 'Accepted' %}
-                    <p>Staða: Útrunnið</p>
-                {% elif offer.status == 'Rejected' %}
-                    <p>Staða: Hafnað</p>
-                {% elif offer.status == 'Accepted' %}
-                    <p>Staða: Samþykkt</p>
-            {% endif %}
+<table class="table table-striped table-light">
+    <thead class="thead-dark">
+        <tr>
+            <th>Upphæð</th>
+            <th>Eign</th>
+            <th>Tilboð skráð</th>
+            <th>Rennur út</th>
+            <th>Staða tilboðs</th>
+            <th>Aðgerðir</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if no_received_offers and to_me or no_made_offers and from_me %}
+            <tr>
+                <td colspan="6">Engin tilboð fundust</td>
+            </tr>
+        {% else %}
+            {% for offer in offers %}
+                {% if offer.estate.estate_seller == request.user and to_me or offer.offer_maker == request.user and from_me or is_admin_page and all_offers and offer or is_admin_page and incoming_offers and offer.status == 'Incoming' and todays_date < offer.expires|date:"Y-m-d-h" %}
+                    <tr>
+                        <td>{{ offer.amount }}</td>
+                        <td>{{ offer.estate.address }}</td>
+                        <td>{{ offer.offer_made|date:"Y-m-d H:i:s" }}</td>
+                        <td>{{ offer.expires|date:"Y-m-d H:i:s" }}</td>
+                        <td>
+                            {% if to_me %}
+                                {% if offer.status == 'Approved' %}
+                                    {% if todays_date < offer.expires|date:"Y-m-d-h" %}
+                                        Nýtt
+                                    {% else %}
+                                        Útrunnið
+                                    {% endif %}
+                                {% elif offer.status == 'Rejected' %}
+                                    Hafnað
+                                {% elif offer.status == 'Accepted' %}
+                                    {% if offer.paid == False %}
+                                        Beðið eftir greiðslu
+                                    {% else %}
+                                        Greitt
+                                    {% endif %}
+                                {% elif offer.status == 'Incoming' %}
+                                    {% if todays_date < offer.expires|date:"Y-m-d-h" %}
+                                        Beðið yfirferðar
+                                    {% else %}
+                                        Útrunnið
+                                    {% endif %}
+                                {% endif %}
+                            {% elif from_me %}
+                                {% if offer.status == 'Incoming' and todays_date < offer.expires|date:"Y-m-d-h" %}
+                                    Í vinnslu
+                                {% elif offer.status == 'Approved' and todays_date < offer.expires|date:"Y-m-d-h" %}
+                                    Sent
+                                {% elif offer.status == 'Rejected' %}
+                                    Hafnað
+                                {% elif offer.status == 'Accepted' %}
+                                    Samþykkt
+                                {% elif todays_date > offer.expires|date:"Y-m-d-h" %}
+                                    Útrunnið
+                                {% endif %}
+                            {% elif is_admin_page and all_offers %}
+                                {% if offer.status == 'Accepted' %}
+                                    Samþykkt
+                                {% elif offer.status == 'Rejected' %}
+                                    Hafnað
+                                {% elif todays_date < offer.expires|date:"Y-m-d-h" %}
+                                    {% if offer.status == 'Incoming' %}
+                                        Nýtt
+                                    {% elif offer.status == 'Approved' %}
+                                        Sent
+                                    {% endif %}
+                                {% elif todays_date > offer.expires|date:"Y-m-d-h" %}
+                                    Útrunnið
+                            {% endif %}
+                            {% elif is_admin_page and incoming_offers and offer.status == 'Incoming' and todays_date < offer.expires|date:"Y-m-d-h" %}
+                                Nýtt
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if to_me and offer.status == 'Approved' and todays_date < offer.expires|date:"Y-m-d-h" %}
+                                <a href="{% url 'accept_offer' offer.id %}"><button value="Accept">Samþykkja</button></a>
+                                <a href="{% url 'reject_offer' offer.id %}"><button value="Reject">Hafna</button></a>
+                            {% elif from_me and offer.status == 'Accepted'%}
+                                <a href="{% url 'pay' offer.id %}"><button value="Pay">Greiða</button></a>
+                            {% elif is_admin_page and offer.status == 'Incoming' and todays_date < offer.expires|date:"Y-m-d-h" %}
+                                <a href="{% url 'approve_offer' offer.id %}"><button value="Approve">Staðfesta</button></a>
+                                <a href="{% url 'reject_offer' offer.id %}"><button value="Reject">Hafna</button></a>
+                            {% endif %}
+                        </td>
+                    </tr>
+
+                {% endif %}
+            {% endfor %}
         {% endif %}
-    </td>
-    <td>
-        {% if to_me %}
-            <button value="Hafna">Hafna</button>
-            <button value="Samþykkja">Samþykkja</button>
-        {% elif from_me and offer.status == 'Accepted'%}
-            <button value="payment-button">Greiða</button>
-        {% endif %}
-    </td>
-</tr>
+    </tbody>
+</table>
+
+{#{% if is_admin_page and offer.status == 'Incoming' %}#}
