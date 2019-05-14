@@ -1,0 +1,17 @@
+{%  extends "base.html" %}
+{% block content %}
+    <h1>Mínar siður</h1>
+    <div class="myPageField">
+        <a href="#">Mín tilboð</a>
+    </div>
+    <div class="myPageField">
+        <a href="#">Mínar eignir á sölu</a>
+    </div>
+    <div class="myPageField">
+        <a href="{% url 'vhistory' %}">Skoðaðar eignir</a> #Áður: Mín leitarsaga (í hönnunnarskýrslunni).
+    </div>
+    <div class="myPageField">
+        <a href="#">Stillingar</a>
+    </div>
+
+{% endblock %}

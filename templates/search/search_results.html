@@ -1,0 +1,31 @@
+{%  extends 'base.html' %}
+
+{% block content %}
+    <div class="content-container my-5 p-5 estates-container">
+        <h3 class="text-center">Leitarniðurstöður"</h3>
+        <form action="sort_estates" method="GET">
+            <button type="submit" name="orderbyaddress">Raða eftir heimilisfangi</button>
+        </form>
+
+        <form action="sort_estates" method="GET">
+            <button type="submit" name="orderbyprice">Raða eftir verði</button>
+        </form>
+
+        <form action="sort_estates" method="GET">
+            <button type="submit" name="orderbydate">Raða eftir skráningardagsetningu</button>
+        </form>
+        <div class="row">
+            {% for estate in estates %}
+                <div class="col-4">
+                    {% include 'estate/single_estate.html' with estate=estate %}
+                </div>
+            {% endfor %}
+        </div>
+
+    <div class="row">
+        <div class="col-8">
+            <button class="btn btn-danger float-left" onclick="window.location.href = '/';">Til baka</button>
+        </div>
+    </div>
+    </div>
+{% endblock %}

@@ -10,12 +10,19 @@
             <li class="nav-item"><a class="nav-link" href="{% url 'estate-index' %}">Allar fasteignir</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'register_estate' %}">Skrá fasteign á sölu</a></li>
           {% if user.is_authenticated %}
-              <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Mínar síður</a></li>
+              <li class="nav-item"><a class="nav-link" href="/users/{{ request.user.id }}/profile/">Mínar síður</a></li>
               <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Útskrá</a></li>
           {% else %}
               <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Innskráning</a></li>
               <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Nýskráning</a></li>
           {% endif %}
-      </ul>
+        </ul>
+        {% if user.is_authenticated %}
+            <div class="profile image-wrapper mx-2">
+                <img src="/media/{{ user.profile.profile_image }}" class ="profile-image"/>
+            </div>
+            <p>Velkomin/n {{ request.user.get_full_name }}</p>
+
+        {% endif %}
   </div>
 </nav>
