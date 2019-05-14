@@ -87,7 +87,7 @@ def my_offers(request):
         user_role = UserRole.objects.get(user_id = request.user.id)
     except:
         user_role = 'user'
-        
+
     no_received_offers = True
     no_made_offers = True
 
