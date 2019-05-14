@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     return render(request, 'user/index.html')
 
+
 @login_required
 def update_name(request, id):
     instance = get_object_or_404(User, pk=id)
@@ -39,9 +40,11 @@ def update_profile(request, id):
         'form': ProfileForm(instance=user_profile)
     })
 
+
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(data=request.POST)
+        print(form.is_valid())
         if form.is_valid():
             form.save()
             return redirect('login')

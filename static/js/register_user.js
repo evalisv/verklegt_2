@@ -7,7 +7,14 @@ $(document).ready(function(){
         if(pw1 !== pw2){
             e.preventDefault()
         }
+        else if(pw1.length < 8 && pw2.length < 8){
+            e.preventDefault()
+            console.log('password eru of stutt og event data er: ' + e.data)
+        }
 
+        else {
+            console.log('password stemma og eru í lagi')
+        }
 
 
     })
