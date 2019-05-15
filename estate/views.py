@@ -9,7 +9,7 @@ from vhistory.views import update_vhistory
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
 def index(request):
-    estate_list = Estate.objects.all().order_by("address")
+    estate_list = Estate.objects.all().order_by('address')
     paginator = Paginator(estate_list, 6)
 
     page = request.GET.get("page")
@@ -104,22 +104,22 @@ def update_estate(request, id):
 
 
 def sort_estates(request):
-    estates = Estate.objects.all()
+    order_by = request.GET.get('order_by', 'defaultOrderField')
+    estate_list = Estate.objects.all().order_by(order_by)
 
-    if request.GET.get('orderbyaddress'):
-        estates = Estate.objects.all().order_by('address')
-    if request.GET.get('orderbyprice'):
-        estates = Estate.objects.all().order_by('price')
-    if request.GET.get('orderbydate'):
-        estates = Estate.objects.all().order_by('date_listed')
+    # if 'orderbyaddress' in request.GET:
+    #     estate_list.order_by('address')
+    # elif 'orderbyprice' in request.GET:
+    #     estate_list.order_by('price')
+    # elif 'orderbydate' in request.GET:
+    #     estate_list.order_by('date_listed')
 
-    paginator = Paginator(estates, 6)
+    paginator = Paginator(estate_list, 6)
     page = request.GET.get("page")
     estates = paginator.get_page(page)
 
     context = {'estates': estates}
     return render(request, 'estate/index.html', context)
-
 
 #Fall til að kalla fram eignir notanda, fyrir 'Mínar eignir á sölu' - áfs:
 @login_required
