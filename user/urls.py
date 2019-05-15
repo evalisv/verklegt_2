@@ -16,7 +16,9 @@ urlpatterns = [
     path('profile/my_offers/approve<int:id>', views.approve_offer, name="approve_offer"),
     path('profile/my_offers/reject<int:id>', views.reject_offer, name="reject_offer"),
     path('profile/my_offers/accept<int:id>', views.accept_offer, name="accept_offer"),
-    path('profile/', views.profile, name='profile')
+    path('profile/', views.profile, name='profile'),
+    path('profile/agents/', views.view_agents, name='agent-index'),
+    path('profile/agents/register_agent/', views.register_agent, name='register_agent')
 ]
 
 # path('update_profile/<int:id>', views.update_profile, name="update_profile"),

@@ -13,7 +13,7 @@
                     <li class="nav-item">
                         <a class="nav-link" id="offers-from-me-tab" data-toggle="tab" href="#offers-from-me" role="tab" aria-controls="offers-from-me" aria-selected="false">Tilboð frá mér</a>
                     </li>
-                    {% if user_role.role == 'admin' %}
+                    {% if user_role == 'admin' %}
                         <li class="nav-item">
                             <a class="nav-link" id="all-offers-tab" data-toggle="tab" href="#all-offers" role="tab" aria-controls="all-offers" aria-selected="false">Öll tilboð</a>
                         </li>
@@ -29,7 +29,7 @@
                     <div class="tab-pane p-2 fade" id="offers-from-me" role="tabpanel" aria-labelledby="offers-from-me-tab">
                         {% include 'offer/offer_item.html' with offers=offers from_me=True to_me=False %}
                     </div>
-                    {% if user_role.role == 'admin' %}
+                    {% if user_role == 'admin' %}
                         <div class="tab-pane p-2 fade" id="all-offers" role="tabpanel" aria-labelledby="all-offers-tab">
                             {% include 'offer/offer_item.html' with offers=offers is_admin_page=True all_offers=True %}
                         </div>
