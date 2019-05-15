@@ -2,10 +2,18 @@
     <span class="step-links">
         {% if list.has_previous %}
             <span class="paging-cube">
+            {% if sorting == '' %}
                 <a href="?page=1">&laquo;</a>
+            {% else %}
+                <a href="sort?order_by={{ sorting }}&page=1">&laquo;</a>
+            {% endif %}
             </span>
             <span class="paging-cube">
+            {% if sorting == '' %}
                 <a href="?page={{ list.previous_page_number }}">&lsaquo;</a>
+            {% else %}
+                <a href="sort?order_by={{ sorting }}&page={{ list.previous_page_number }}">&lsaquo;</a>
+            {% endif %}
             </span>
         {% endif %}
         <span class="current">
@@ -16,10 +24,18 @@
         </span>
         {% if list.has_next %}
             <span class="paging-cube">
+            {% if sorting == '' %}
                 <a href="?page={{ list.next_page_number }}">&rsaquo;</a>
+            {% else %}
+                <a href="sort?order_by={{ sorting }}&page={{ list.next_page_number }}">&rsaquo;</a>
+            {% endif %}
             </span>
             <span class="paging-cube">
+            {% if sorting == '' %}
                 <a href="?page={{ list.paginator.num_pages }}">&raquo;</a>
+            {% else %}
+                <a href="sort?order_by={{ sorting }}&page={{ list.paginator.num_pages }}">&raquo;</a>
+            {% endif %}
             </span>
         {% endif %}
     </span>
