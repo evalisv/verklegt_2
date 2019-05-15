@@ -10,12 +10,11 @@
                 <div class="col-{{ number_of_cols }} card my-1 p-5 text-center">
                     <a href="/estates/my_estates/{{ user.id }}">Eignir</a>
                 </div>
+                {% if user_role == 'admin' %}
                      <div class="col-{{ number_of_cols }} card my-1 p-5 text-center">
                         <a href="agents/">Fasteignasalar</a>
                     </div>
-                <div class="col-{{ number_of_cols }} card my-1 p-5 text-center" onclick="window.location.href = '/users/index/';">
-                    <a href="users/">Notendur</a>
-                </div>
+                {% endif %}
             </div>
             <div class="row">
                 <div class="col-{{ number_of_cols }} card my-1 p-5 text-center">
@@ -24,6 +23,11 @@
                 <div class="col-{{ number_of_cols }} card my-1 p-5 text-center">
                     <a href="/users/{{ user.id }}/update">Stillingar</a>
                 </div>
+                {% if user_role == 'admin' %}
+                    <div class="col-{{ number_of_cols }} card my-1 p-5 text-center" onclick="window.location.href = '/users/index/';">
+                        Notendur
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -111,16 +111,10 @@ def register_agent(request):
             new_profile.save()
 
             user_role = UserRole(
-                role='user',
+                role='admin',
                 user=new_user
             )
             user_role.save()
-
-            agent_role = UserRole(
-                role='admin',
-                user=new_user
-                )
-            agent_role.save()
 
             return redirect('agent-index')
         else:
@@ -136,11 +130,7 @@ def register_agent(request):
 @login_required
 def my_offers(request):
     offer_list = Offer.objects.all().order_by("offer_made")
-
-    try:
-        user_role = UserRole.objects.get(user_id = request.user.id)
-    except:
-        user_role = 'user'
+    user_role = request.user.userrole.role
 
     no_received_offers = True
     no_made_offers = True
@@ -183,17 +173,13 @@ def accept_offer(request,id):
 
 @login_required
 def profile(request):
-    user_roles_set = UserRole.objects.filter(user_id=request.user.id)
-    user_roles = list(user_roles_set.values_list('role', flat=True))
-    is_admin = False
     number_of_columns = 6
 
-    if 'admin' in user_roles:
-        is_admin = True
+    if request.user.userrole.role == 'admin':
         number_of_columns = 4
 
     return render(request, 'user/profile.html', {
         'user': request.user,
-        'is_admin': is_admin,
+        'user_role': request.user.userrole.role,
         'number_of_cols': number_of_columns
     })
