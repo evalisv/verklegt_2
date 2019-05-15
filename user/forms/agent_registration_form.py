@@ -3,7 +3,7 @@ from django.forms import ModelForm, widgets
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
-from user_role.forms.extras import countries, postal_codes
+from user.forms.extras import countries, postal_codes
 from django.forms.widgets import ClearableFileInput
 
 class AgentRegistrationForm(UserCreationForm):
@@ -66,7 +66,7 @@ class AgentRegistrationForm(UserCreationForm):
     )
     profile_image = forms.FileField(
         label='Mynd',
-        widget=forms.ClearableFileInput(attrs={'class': 'form-control'})
+        widget=forms.ClearableFileInput()
     )
 
     class Meta:
@@ -82,7 +82,8 @@ class AgentRegistrationForm(UserCreationForm):
             'phone_number',
             'address',
             'postal_code',
-            'country')
+            'country',
+            'profile_image')
 
 
     def save(self, commit=True):

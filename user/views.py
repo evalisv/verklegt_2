@@ -48,7 +48,7 @@ def update_profile(request, id):
 
 def register(request):
     if request.method == 'POST':
-        form = RegistrationForm(request.POST)
+        form = RegistrationForm(request.POST, request.FILES)
         if form.is_valid():
             new_user_meta = request.POST
             new_user = form.save()
@@ -59,7 +59,8 @@ def register(request):
                 phone_number=new_user_meta['phone_number'],
                 address=new_user_meta['address'],
                 postal_code_id=new_user_meta['postal_code'],
-                country_id=new_user_meta['country']
+                country_id=new_user_meta['country'],
+                profile_image=request.FILES['profile_image']
             )
             new_profile.save()
 
@@ -86,13 +87,13 @@ def view_agents(request):
     context = {'agents': UserRole.objects.filter(role='admin')}
     return render(request, 'agent/index.html', context)
 
-
+@login_required
 def register_agent(request):
     if request.method == 'POST':
-        form = AgentRegistrationForm(request.POST)
-        if form.is_valid():
+        agent_form = AgentRegistrationForm(request.POST, request.FILES)
+        if agent_form.is_valid():
             new_user_meta = request.POST
-            new_user = form.save()
+            new_user = agent_form.save()
 
             new_profile = Profile(
                 user=new_user,
@@ -101,24 +102,27 @@ def register_agent(request):
                 address=new_user_meta['address'],
                 postal_code_id=new_user_meta['postal_code'],
                 country_id=new_user_meta['country'],
-                profile_image=new_user_meta['profile_image']
+                profile_image=request.FILES['profile_image']
             )
             new_profile.save()
 
             user_role = UserRole(
-                role="user",
+                role='user',
                 user=new_user
             )
             user_role.save()
 
             agent_role = UserRole(
-                role="admin",
+                role='admin',
                 user=new_user
                 )
             agent_role.save()
 
-        return HttpResponse('Fasteignasali skráður.')
-
+            return redirect('agent-index')
+        else:
+            return render(request, 'user/register_admin.html', {
+                'form': AgentRegistrationForm(request.POST)
+            })
     else:
         return render(request, 'user/register_admin.html', {
             'form': AgentRegistrationForm()

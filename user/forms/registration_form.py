@@ -63,6 +63,10 @@ class RegistrationForm(UserCreationForm):
         choices=countries,
         widget=forms.Select(attrs={'class': 'form-control col-sm-3 form-group-8'})
     )
+    profile_image = forms.FileField(
+        label='Mynd',
+        widget=forms.ClearableFileInput()
+    )
 
     class Meta:
         model = User
@@ -77,8 +81,8 @@ class RegistrationForm(UserCreationForm):
             'phone_number',
             'address',
             'postal_code',
-            'country'
-        )
+            'country',
+            'profile_image')
 
 
     def save(self, commit=True):

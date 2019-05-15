@@ -2,7 +2,7 @@
 {% block content %}
     <div class="content-container login register-user">
         <h1 class="text-center">Nýskráning</h1>
-        <form class="form" method="POST">
+        <form class="form" method="POST" enctype="multipart/form-data">
             {%  csrf_token %}
             {{ form }}
             <input type="submit" class="btn btn-primary float-right" value="Skrá mig" id="register" />
