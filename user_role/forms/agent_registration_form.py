@@ -65,7 +65,7 @@ class RegistrationForm(UserCreationForm):
     )
     profile_image = forms.FileField(
         label='Mynd',
-        widget=forms.ClearableFileInput()
+        widget=forms.ClearableFileInput(attrs={'class': 'form-control'})
     )
 
     class Meta:
@@ -81,8 +81,8 @@ class RegistrationForm(UserCreationForm):
             'phone_number',
             'address',
             'postal_code',
-            'country',
-            'profile_image')
+            'country'
+        )
 
 
     def save(self, commit=True):
