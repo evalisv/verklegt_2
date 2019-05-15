@@ -6,7 +6,6 @@ from offer import views as offerviews
 
 urlpatterns = [
     # url, fall sem á að keyrast þegar farið er á urlið, nafn á fallinu
-    path('', views.index, name="user-index"),
     path('update_name/<int:id>', views.update_name, name="update_name"),
     path('<int:id>/update', views.update_profile, name="update_profile"),
     path('register', views.register, name='register'),
@@ -16,7 +15,10 @@ urlpatterns = [
     path('profile/my_offers/approve<int:id>', views.approve_offer, name="approve_offer"),
     path('profile/my_offers/reject<int:id>', views.reject_offer, name="reject_offer"),
     path('profile/my_offers/accept<int:id>', views.accept_offer, name="accept_offer"),
-    path('profile/', views.profile, name='profile')
+    path('profile/', views.profile, name='profile'),
+    path('profile/users/', views.view_user, name="user-index"),
+    path('profile/agents/', views.view_agents, name='agent-index'),
+    path('profile/agents/register_agent/', views.register_agent, name='agent-registration')
 ]
 
 # path('update_profile/<int:id>', views.update_profile, name="update_profile"),
