@@ -16,9 +16,9 @@ def make_payment(request, id):
     if request.method == 'POST':
         form = PaymentForm(data=request.POST, instance=offer)
         if form.is_valid():
-            form = form.save(commit=False)
-            form.amount = offer.amount
-            form.save()
+            payment = form.save(commit=False)
+            payment.offer = offer.id
+            payment.save()
             return redirect('review_payment', offer.id)
     else:
         # form = PaymentForm()
@@ -27,12 +27,14 @@ def make_payment(request, id):
             'offer': offer
         })
 
+@login_required
 def get_review_info(request, id):
     offer = get_object_or_404(Offer, pk=id)
     return render(request, 'payment/review_step.html', {
         'offer': offer
     })
 
+@login_required
 def confirmation(request, id):
     offer = get_object_or_404(Offer, pk=id)
     offer.payed = True
