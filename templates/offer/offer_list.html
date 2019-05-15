@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
     {% now "Y-m-d-h" as todays_date %}
+{#    {% now "Y-m-d H:i:s" as todays_date %}#}
     <div class="content-container my-5 p-5 offers-container">
-        <h3 class="text-center">Tilboðin mín</h3>
+        <h3 class="text-center">Tilboð</h3>
         <div class="row">
             <div class="col-12">
-            {{ offers_received }}
-            {{ offers_made }}
                 <ul class="nav nav-tabs" id="offersTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="offers-to-me-tab" data-toggle="tab" href="#offers-to-me" role="tab" aria-controls="offers-to-me" aria-selected="true">Tilboð til mín</a>
@@ -14,79 +13,84 @@
                     <li class="nav-item">
                         <a class="nav-link" id="offers-from-me-tab" data-toggle="tab" href="#offers-from-me" role="tab" aria-controls="offers-from-me" aria-selected="false">Tilboð frá mér</a>
                     </li>
-                    {% if is_admin %}
+                    {% if user_role.role == 'admin' %}
                         <li class="nav-item">
-                            <a class="nav-link" id="incoming-offers-tab" data-toggle="tab" href="#incoming-offers" role="tab" aria-controls="incoming-offers" aria-selected="false">Ný tilboð</a>
+                            <a class="nav-link" id="all-offers-tab" data-toggle="tab" href="#all-offers" role="tab" aria-controls="all-offers" aria-selected="false">Öll tilboð</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="offers-in-progress-tab" data-toggle="tab" href="#offers-in-progress" role="tab" aria-controls="offers-in-progress" aria-selected="false">Ný tilboð</a>
+                            <a class="nav-link" id="offers-in-progress-tab" data-toggle="tab" href="#offers-in-progress" role="tab" aria-controls="offers-in-progress" aria-selected="false">Tilboð í vinnslu</a>
                         </li>
                     {% endif %}
                 </ul>
                 <div class="tab-content" id="offersTabContent">
                     <div class="tab-pane p-2 fade show active" id="offers-to-me" role="tabpanel" aria-labelledby="offers-to-me-tab">
-                        <table class="table table-striped table-light">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>Upphæð</th>
-                                    <th>Eign</th>
-                                    <th>Tilboð skráð</th>
-                                    <th>Rennur út</th>
-                                    <th>Staða tilboðs</th>
-                                    <th>Aðgerðir</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% if no_received_offers %}
-                                    <tr>
-                                        <td colspan="6">Engin tilboð fundust</td>
-                                    </tr>
-                                {% else %}
-                                    {% for offer in offers %}
-                                        {% if offer.estate.estate_seller == request.user %}
-                                            {% include 'offer/offer_item.html' with offer=offer from_me=False to_me=True %}
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endif %}
-                            </tbody>
-                        </table>
+                        {% include 'offer/offer_item.html' with offers=offers from_me=False to_me=True %}
                     </div>
                     <div class="tab-pane p-2 fade" id="offers-from-me" role="tabpanel" aria-labelledby="offers-from-me-tab">
-                        <table class="table table-striped table-light">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>Upphæð</th>
-                                    <th>Eign</th>
-                                    <th>Tilboð skráð</th>
-                                    <th>Rennur út</th>
-                                    <th>Staða tilboðs</th>
-                                    <th>Aðgerðir</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% if no_made_offers %}
-                                    <tr>
-                                        <td colspan="6">Engin tilboð fundust</td>
-                                    </tr>
-                                {% else %}
-                                    {% for offer in offers %}
-                                        {% if offer.offer_maker == request.user %}
-                                            {% include 'offer/offer_item.html' with offer=offer from_me=True to_me=False %}
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endif %}
-                            </tbody>
-                        </table>
+                        {% include 'offer/offer_item.html' with offers=offers from_me=True to_me=False %}
                     </div>
-                    <div class="tab-pane p-2 fade" id="incoming-offers" role="tabpanel" aria-labelledby="incoming-offers-tab">
-                        Ný tilboð
-                    </div>
-                    <div class="tab-pane p-2 fade" id="offers-in-progress" role="tabpanel" aria-labelledby="offers-in-progress-tab">
-                        Tilboð í vinnslu
-                    </div>
+                    {% if user_role.role == 'admin' %}
+                        <div class="tab-pane p-2 fade" id="all-offers" role="tabpanel" aria-labelledby="all-offers-tab">
+                            {% include 'offer/offer_item.html' with offers=offers is_admin_page=True all_offers=True %}
+                        </div>
+                        <div class="tab-pane p-2 fade" id="offers-in-progress" role="tabpanel" aria-labelledby="offers-in-progress-tab">
+                            {% include 'offer/offer_item.html' with offers=offers is_admin_page=True incoming_offers=True %}
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
 
     </div>
 {% endblock %}
+
+{#Upprunalega template-ið#}
+{#{% extends 'base.html' %}#}
+{##}
+{#{% block content %}#}
+{#    {% now "Y-m-d-h" as todays_date %}#}
+{#    <div class="content-container my-5 p-5 estates-container">#}
+{#        <h3 class="text-center">Öll mín tilboð</h3>#}
+{#        <div class="offer-to-user">#}
+{#            <h3>Tilboð til mín</h3>#}
+{#            {% for offer in offers %}#}
+{#                <div class="single-offer">#}
+{#                {% if offer.estate.estate_seller == reguest.user %}#}
+{#                    <h4>Upphæð: {{ offer.amount }} Eign: {{ offer.estate.address }} </h4>#}
+{#                    <h5>Tilboð skráð: {{ offer.offer_made }} Rennur út: {{ offer.expires }}</h5>#}
+{#                    {% if offer.status == 'Approved' and todays_date > offer.expires|date:"Y-m-d-h" %}#}
+{#                        <div><p>Staða: Nýtt</p></div>#}
+{#                    {% endif %}#}
+{#                    <button value="Hafna">Hafna</button>#}
+{#                    <button value="Samþykkja">Samþykkja</button>#}
+{#                {% endif %}#}
+{#                </div>#}
+{#            {% endfor %}#}
+{##}
+{#        </div>#}
+{#        <div class="offer-from-user">#}
+{#            <h3>Tilboð frá mér</h3>#}
+{#            {% for offer in offers %}#}
+{#                <div class="single-offer">#}
+{#                {% if offer.offer_maker == request.user %}#}
+{#                    <h4>Upphæð: {{ offer.amount }} Eign: {{ offer.estate.address }} </h4>#}
+{#                    <h5>Tilboð skráð: {{ offer.offer_made }} Rennur út: {{ offer.expires }}</h5>#}
+{#                    {% if offer.status == 'Incoming' and todays_date < offer.expires|date:"Y-m-d-h" %}#}
+{#                        <p>Staða: Í vinnslu</p>#}
+{#                        {% elif offer.status == 'Approved' and todays_date < offer.expires|date:"Y-m-d-h"%}#}
+{#                            <p>Staða: Sent</p>#}
+{#                        {% elif todays_date > offer.expires|date:"Y-m-d-h" and offer.status != 'Accepted' %}#}
+{#                            <p>Staða: Útrunnið</p>#}
+{#                        {% elif offer.status == 'Rejected' %}#}
+{#                            <p>Staða: Hafnað</p>#}
+{#                        {% elif offer.status == 'Accepted' %}#}
+{#                            <p>Staða: Samþykkt</p>#}
+{#                            <button value="payment-button">Greiða</button>#}
+{#                    {% endif %}#}
+{#                {% endif %}#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        </div>#}
+{##}
+{#        </div>#}
+{#{% endblock %}#}
