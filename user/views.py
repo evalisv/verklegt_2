@@ -109,12 +109,11 @@ def my_offers(request):
         'no_made_offers': no_made_offers,
         'no_received_offers': no_received_offers
     }
-    re_path(r'^sort$', views.sort_estates, name="sort_estates")
     return render(request, "offer/offer_list.html", context)
 
 
 @login_required
-def profile(request, id):
+def profile(request):
     user_roles_set = UserRole.objects.filter(user_id=request.user.id)
     user_roles = list(user_roles_set.values_list('role', flat=True))
     is_admin = False
