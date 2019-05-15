@@ -16,7 +16,8 @@ def search_view(request):
     pnrsouth = request.GET.getlist('postal-sudurland')
     type1 = request.GET.getlist('type1')
     lyfta = request.GET.get('lyfta')
-
+    if lyfta == 'on':
+        lyfta = True
     #Fylki fyrir array sem innihalda póstnúmer sem hakað er við og tegund húsnæðis
     pnr_arr = []
     type_arr = []
@@ -60,19 +61,28 @@ def search_view(request):
 
     if query is not None:
         SearchQuery.objects.create(user=user, query=query)
+
         lookup = (Q(address__icontains=query) |
                   Q(description__icontains=query) |
                   Q(postal_code__postal_code__icontains=query) |
                   Q(postal_code__municipality__icontains=query))
 
-        if len(type_arr) >= 0 and len(pnr_arr) == 0:
-            estates = Estate.objects.all().filter(type__in=type_arr).filter(lookup)
+        if len(type_arr) > 0 and len(pnr_arr) == 0:
+            estates = Estate.objects.filter(lookup).filter(type__in=type_arr)
+   #     if len(type_arr) > 0 and len(pnr_arr) == 0 and lyfta:
+    #        estates = Estate.objects.filter(lookup).filter(type__in=type_arr).filter(elevator=lyfta)
         elif len(type_arr) > 0 and len(pnr_arr) > 0:
-            estates = Estate.objects.all().filter(postal_code__postal_code__in=pnr_arr)\
-                .filter(type__in=type_arr).filter(lookup)
+            estates = Estate.objects.filter(lookup).filter(postal_code__postal_code__in=pnr_arr)\
+                .filter(type__in=type_arr)
+  #      elif len(type_arr) > 0 and len(pnr_arr) > 0 and lyfta:
+   #         estates = Estate.objects.filter(lookup).filter(postal_code__postal_code__in=pnr_arr)\
+    #            .filter(type__in=type_arr).filter(elevator=lyfta)
         elif len(type_arr) == 0 and len(pnr_arr) > 0:
-            estates = Estate.objects.all().filter(postal_code__postal_code__in=pnr_arr).filter(lookup)
-
+            estates = Estate.objects.filter(lookup).filter(postal_code__postal_code__in=pnr_arr)
+        else:
+            estates = Estate.objects.filter(lookup)
+      #  elif lyfta:
+       #     estates = Estate.objects.all().filter(elevator=lyfta).filter(lookup)
         context['estates'] = estates
     return render(request, 'search/search_results.html', context)
 
