@@ -40,6 +40,8 @@ def register_estate(request):
             for img in pics:
                 estate_picture = EstatePictures(url=img, estate=estate)
                 estate_picture.save()
+            # TODO: Búa til tengingu á user role ef notandi hefur ekki seller role
+            print("seller", estate.estate_seller)
 
             # TODO: færa þetta inn í for lykkuna fyrir myndir
             file_type = estate.images.url.split('.')[-1]

@@ -239,3 +239,7 @@ span.step-links {
 .nav-tabs {
     margin-left: 20px
 }
+
+#make-offer-form label[for="id_expires_month"] {
+    display: block;
+}
