@@ -4,26 +4,49 @@
         <div class="my-page-area">
         <h3 class="text-center">Mínar síður</h3>
             <div class="row">
-                <div class="col-{{ number_of_cols }} card my-1 p-5 text-center">
-                    <a href="my_offers">Tilboð</a>
-                </div>
-                <div class="col-{{ number_of_cols }} card my-1 p-5 text-center">
-                    <a href="/estates/my_estates/{{ user.id }}">Eignir</a>
-                </div>
-                     <div class="col-{{ number_of_cols }} card my-1 p-5 text-center">
-                        <a href="agents/">Fasteignasalar</a>
+                <a href="{% url 'my_offers' %}" class="col-{{ number_of_cols }} card">
+                    <div class="m-1 p-5 text-center">
+                        <i class="fa fa-file-text fa-3x"></i>
+                        Tilboð
                     </div>
-                <div class="col-{{ number_of_cols }} card my-1 p-5 text-center" onclick="window.location.href = '/users/index/';">
-                    Notendur
-                </div>
+                </a>
+                <a href="{% url 'seller_estates' %}" class="col-{{ number_of_cols }} card">
+                    <div class="m-1 p-5 text-center">
+                        <i class="fa fa-home fa-3x"></i>
+                        Eignir
+                    </div>
+                </a>
+                {% if user_role == 'admin' %}
+                    <a href="agents/" class="col-{{ number_of_cols }} card">
+                         <div class="m-1 p-5 text-center">
+                             <i class="fa fa-user-secret fa-3x"></i>
+                             Fasteignasalar
+                         </div>
+                    </a>
+                {% endif %}
             </div>
+
             <div class="row">
-                <div class="col-{{ number_of_cols }} card my-1 p-5 text-center">
-                    <a href="/searchlist/{{ user.id }}/search_history">Leitarsaga</a>
-                </div>
-                <div class="col-{{ number_of_cols }} card my-1 p-5 text-center">
-                    <a href="/users/{{ user.id }}/update">Stillingar</a>
-                </div>
+                <a href="{% url 'search_history' %}" class="col-{{ number_of_cols }} card">
+                    <div class="m-1 p-5 text-center">
+                        <i class="fa fa-history fa-3x"></i>
+                        Leitarsaga
+                    </div>
+                </a>
+                <a href="{% url 'settings' %}" class="col-{{ number_of_cols }} card">
+                    <div class="m-1 p-5 text-center">
+                        <i class="fa fa-cog fa-3x"></i>
+                        Stillingar
+                    </div>
+                </a>
+                {% if user_role == 'admin' %}
+                    <a href="/users/index" class="col-{{ number_of_cols }} card">
+                        <div class="m-1 p-5 text-center">
+                            <i class="fa fa-users fa-3x"></i>
+                            Notendur
+                        </div>
+                    </a>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -1,14 +1,15 @@
 <div class="well estate">
-    <a href = "/estates/{{ estate.id }}">
-        <div class="image-wrapper">
-            <img class="estate-img" src="/media/{{ estate.images }}" />
-        </div>
-        <div><h4>{{ estate.address }}</h4></div>
-        <div><h5>Verð: {{ estate.price }}</h5></div>
-        {% if vhistory %}
-            <div><h6>Stærð: {{ estate.size }} fm.</h6></div>
-            <div><h6>Tegund: {{ estate.type }}</h6></div>
-        {% endif %}
-        <div><p>{{ estate.description }}</p></div>
-    </a>
+    <div class="image-wrapper">
+        <img class="estate-img" src="/media/{{ estate.images }}" />
+    </div>
+    <div><h4>{{ estate.address }}</h4></div>
+    <div><h5>Verð: {{ estate.price }}</h5></div>
+    {% if vhistory %}
+        <div><h6>Stærð: {{ estate.size }} fm.</h6></div>
+        <div><h6>Tegund: {{ estate.type }}</h6></div>
+    {% endif %}
+    <div><p>{{ estate.description }}</p></div>
+    {% if not my_estates %}
+        <a href="/estates/{{ estate.id }}" class="btn btn-primary my-1">Nánar</a>
+    {% endif %}
 </div>

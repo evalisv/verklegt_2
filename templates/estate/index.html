@@ -3,21 +3,17 @@
 {% block content %}
     <div class="content-container my-5 p-5 estates-container">
         <h3 class="text-center">Allar fasteignir</h3>
-         <form action="sort" method="GET">
-                <button type="submit" name="orderbyaddress">Raða eftir heimilisfangi</button>
-            </form>
 
-        <form action="sort" method="GET">
-            <button type="submit" name="orderbyprice">Raða eftir verði</button>
-        </form>
+        <a href="sort?order_by=address"><button class="button">Raða eftir götuheiti</button></a>
 
-        <form action="sort" method="GET">
-            <button type="submit" name="orderbydate">Raða eftir skráningardagsetningu</button>
-        </form>
+        <a href="sort?order_by=price"><button class="button">Raða eftir verði</button></a>
+
+        <a href="sort?order_by=date_listed"><button class="button">Raða eftir skráningardagsetningu</button></a>
+
 
         <div class="row">
             {% for estate in estates %}
-                <div class="col-4">
+                <div class="col-4 card py-2">
                     {% include 'estate/single_estate.html' with estate=estate %}
                 </div>
             {% endfor %}
