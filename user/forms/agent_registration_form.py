@@ -1,11 +1,12 @@
 from django import forms
+from django.forms import ModelForm, widgets
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from user.forms.extras import countries, postal_codes
+from django.forms.widgets import ClearableFileInput
 
-
-class RegistrationForm(UserCreationForm):
+class AgentRegistrationForm(UserCreationForm):
     username = forms.CharField(
         label='Notendanafn',
         max_length=255,
@@ -86,7 +87,7 @@ class RegistrationForm(UserCreationForm):
 
 
     def save(self, commit=True):
-        user = super(RegistrationForm, self).save(commit=False)
+        user = super(AgentRegistrationForm, self).save(commit=False)
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.email = self.cleaned_data['email']

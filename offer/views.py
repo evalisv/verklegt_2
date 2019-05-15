@@ -13,7 +13,7 @@ def index(request):
 def make_offer(request, id):
     estate = get_object_or_404(Estate, pk=id)
     if request.method == 'POST':
-        form =  MakeOfferForm(data=request.POST)
+        form = MakeOfferForm(data=request.POST)
         if form.is_valid():
             offer = form.save(commit=False)
             offer.offer_maker = request.user
