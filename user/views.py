@@ -107,16 +107,16 @@ def register_agent(request):
             new_profile.save()
 
             user_role = UserRole(
-                role='user',
+                role='admin',
                 user=new_user
             )
             user_role.save()
 
-            agent_role = UserRole(
-                role='admin',
-                user=new_user
-                )
-            agent_role.save()
+            # agent_role = UserRole(
+            #     role='admin',
+            #     user=new_user
+            #     )
+            # agent_role.save()
 
             return redirect('agent-index')
         else:
