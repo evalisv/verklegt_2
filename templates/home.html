@@ -2,9 +2,9 @@
 
 {% block content %}
     <h1>Castle Apartments</h1>
-    <form class="form my-2 my-lg-0">
-      <input type="search" class="form-control mr-sm-2" id="search_box" placeholder="Götuheiti, póstnúmer, bær..."/>
-      <button type="button" id='search_button' class="btn btn-outline-success float-right my-sm-2" >Leita</button>
+    <form class="form my-2 my-lg-0" method="GET" action="/search/">
+      <input type="search" class="form-control mr-sm-2" id="search_box" placeholder="Sláðu inn leitarorð" name="q" value="{{ request.GET.q }}"/>
+      <button type="submit" id='search_button' class="btn btn-outline-success float-right my-sm-2" >Leita</button>
     </form>
     <span data-selector="filter" class="open-filter float-right btn btn-outline-secondary m-2">Ítarleg leit</span>
 
@@ -145,11 +145,14 @@
 
     </div>
 
-
-
-
-
-    <div class="container">
-        <h3>Vinsælar fasteignir</h3>
+    <div class="content-container my-5 p-5 estates-container">
+        <h3 class="text-center">Nýjustu fasteignir á skrá</h3>
+            <div class="row">
+            {% for estate in estates %}
+                <div class="col-4">
+                {% include 'estate/single_estate.html' with estate=estate %}
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

@@ -2,7 +2,7 @@ body {
     background-image: url('/static/images/castle-bg.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: contain;
+    /*background-size: contain;*/
     background-position-x: center;
 }
 
@@ -14,11 +14,32 @@ body {
 
 .login {
     width: 60%;
-    background: #f5f5f5;
+    /*background: #f5f5f5;*/
     margin: 70px auto 0 auto;
     padding: 25px;
     border-radius: 10px;
     overflow: hidden;
+}
+
+.register-user input#id_username, .register-user label[for="id_username"] {
+    pointer-events: none;
+    background: transparent;
+    color: transparent;
+    border: none;
+    height: 0;
+    width: 0;
+    font-size: 0;
+    padding: 0;
+    margin: -24px 0 0;
+}
+
+ul.errorlist li {
+    list-style: none;
+}
+
+.register-user .errorlist.username-error {
+    margin-top: -1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .container {
@@ -104,6 +125,12 @@ a {
     width: 100%;
 }
 
+.profile.image-wrapper {
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 100%;
+}
+
 .estate .image-wrapper {
     height: 212px;
 }
@@ -167,4 +194,52 @@ span.step-links {
 
 .paging-cube:hover a {
     color: white;
+}
+
+.my-page-area .card {
+    max-width: 48%;
+    margin-left: 1%;
+    margin-right: 1%;
+    border-radius: 10px;
+}
+/*.my-page-area {*/
+    /*margin-left:20px;*/
+    /*margin-right:20px;*/
+/*}*/
+
+/*.myPageSurroundings {*/
+/*    margin: 0 auto;*/
+/*}*/
+
+/*.myPageField {*/
+/*    margin-bottom: 10px;*/
+/*    margin-left: 10px;*/
+/*    margin-right: 10px;*/
+/*    width: 40%;*/
+/*    padding: 40px;*/
+/*    text-align: center;*/
+/*    display: inline-block;*/
+/*    border-radius: 10px;*/
+/*    border: 1px solid #000000;*/
+/*}*/
+
+.profile-image-display a {
+    pointer-events: none;
+}
+
+#for-changing {
+    display: block;
+    clear: right;
+}
+
+.tab-pane {
+    background: white;
+    border-radius: 5px;
+}
+.nav-tabs {
+    margin-left: 20px
+}
+
+#make-offer-form label[for="id_expires_month"] {
+    display: block;
 }

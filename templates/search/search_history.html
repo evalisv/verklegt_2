@@ -1,0 +1,16 @@
+{%  extends "base.html" %}
+{% block content %}
+    <div class="content-container my-5 p-5">
+        <div class="my-page-area">
+            <h3 class="text-center">Leitarsaga</h3>
+            <div class="row">
+                <div class="col-6 card my-1 p-5 text-center">
+                    <a href="/vhistory/{{ user.id }}">Skoðaðar eignir</a>
+                </div>
+                <div class="col-6 card my-1 p-5 text-center">
+                    <a href="/searchlist/{{ user.id }}">Leitarorðin mín</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

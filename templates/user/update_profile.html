@@ -1,9 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Uppfæra notandaupplýsingar</h1>
-    <form class="form form-horizontal" method="post">
-        {%  csrf_token %}
-        {{ form }}
-        <input type="submit" value="Uppfæra" class="btn btn-primary pull-right" style="clear:both; margin: 10px 0" />
-    </form>
+    <div class="content-container update-profile my-5 p-5">
+        <h3 class="text-center">Uppfæra notandaupplýsingar</h3>
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <label class="col-2">Notendanafn:</label>
+                    <div class="col-10">{{ readOnlyData.username }}</div>
+                </div>
+                <form class="form" method="post" enctype="multipart/form-data">
+                    {%  csrf_token %}
+                    {{ form }}
+                    <input id="submit-profile-changes" type="submit" value="Uppfæra" class="btn btn-primary float-right my-3 mx-2" />
+{#                    <input type="submit" value="Uppfæra" class="btn btn-primary pull-right" style="clear:both; margin: 10px 0" />#}
+                </form>
+            </div>
+        </div>
+
+    </div>
 {% endblock %}
