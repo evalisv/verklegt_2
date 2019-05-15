@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Response úr html file í user</h1>
+    <div class="content-container my-5 p-5 estates-container">
+        <h3 class="text-center">Allar fasteignir eftir póstnúmerum</h3>
+        <div class="row">
+            {% for estate in estates %}
+                <div class="col-4">
+                    {% include 'estate/single_estate.html' with estate=estate %}
+                </div>
+            {% endfor %}
+        </div>
+        {% include 'components/paging.html' with list=estates %}
+    </div>
 {% endblock %}

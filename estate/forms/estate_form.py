@@ -12,7 +12,7 @@ class UpdateEstateForm(ModelForm):
         model = Estate
         exclude = ["id", "estate_seller"]
         widgets = {
-            "address" : widgets.TextInput(attrs={"class": "form-control col-sm-6 address form-group-1"}),
+            "address": widgets.TextInput(attrs={"class": "form-control col-sm-6 address form-group-1"}),
             "postal_code": widgets.Select(attrs={"class": "form-control col-sm-2 postal-code form-group-1"}),
             "price": widgets.NumberInput(attrs={"class": "form-control col-sm-2 price form-group-3"}),
             "fasteignamat": widgets.NumberInput(attrs={"class": "form-control col-sm-2 fasteignamat form-group-3"}),
