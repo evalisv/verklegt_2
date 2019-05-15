@@ -1,7 +1,13 @@
 from django.db import models
-
+from django.contrib.auth.models import User
+from estate.models import Estate
+from offer.models import Offer
 
 class Payment(models.Model):
-    amount = models.IntegerField()
+    offer = models.OneToOneField(Offer, null=True, blank=True,on_delete=models.CASCADE)
     received = models.DateTimeField()
-    payment_method = models.CharField(max_length=999)
+
+
+
+
+

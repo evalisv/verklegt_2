@@ -23,14 +23,16 @@ from searches.views import search_view
 
 urlpatterns = [
     path('estates/', include('estate.urls')),
-    path('users/', include('user.urls')),
+    path('user/', include('user.urls')),
     path('', views.homepage, name="homepage"),
     path('admin/', admin.site.urls),
     path('offer/', include('offer.urls')),
-    path('vhistory/', include('vhistory.urls')),
+    # path('vhistory/', include('vhistory.urls')),
     path('search/', search_view),
-    path('searchlist/', include('searches.urls'))
+#   path('searchlist/', include('searches.urls'))
+    #path('payment/', include('payment.urls'))
 ]
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
