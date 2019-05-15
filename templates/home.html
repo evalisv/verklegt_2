@@ -3,13 +3,12 @@
 {% block content %}
     <h1>Castle Apartments</h1>
     <form class="form my-2 my-lg-0" method="GET" action="/search/">
-      <input type="search" class="form-control mr-sm-2" id="search_box" placeholder="Sláðu inn leitarorð" name="q" value="{{ request.GET.q }}"/>
+      <input type="search" class="form-control mr-sm-2" id="search_box" placeholder="Sláðu inn götuheiti" name="q" value="{{ request.GET.q }}"/>
       <button type="submit" id='search_button' class="btn btn-outline-success float-right my-sm-2" >Leita</button>
-    </form>
-    <span data-selector="filter" class="open-filter float-right btn btn-outline-secondary m-2">Ítarleg leit</span>
+        <span data-selector="filter" class="open-filter float-right btn btn-outline-secondary m-2">Ítarleg leit</span>
 
-    <div class="container filter-container">
-    <div class="filter hidden row">
+        <div class="container filter-container">
+        <div class="filter hidden row">
         <div class="postalcodes col">
             <ul class="level1">
                 <li data-selector="capital" class="level1">
@@ -19,7 +18,7 @@
                         {% for code in postal_codes %}
                             {% if code.postal_code < 230 and code.postal_code != 190 or code.postal_code > 269 and code.postal_code < 277 %}
                                 <li>
-                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal{{ code.postal_code }}" value="postal{{ code.postal_code }}" />
+                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal-hofudborgarsvaedid" value="postal{{ code.postal_code }}" />
                                     <label for="postal{{ code.postal_code }}">{{ code.postal_code }}, {{ code.municipality }}</label>
                                 </li>
                             {% endif %}
@@ -33,7 +32,7 @@
                         {% for code in postal_codes %}
                             {% if code.postal_code > 299 and code.postal_code < 381 %}
                                 <li>
-                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal{{ code.postal_code }}" value="postal{{ code.postal_code }}" />
+                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal-vesturland" value="postal{{ code.postal_code }}" />
                                     <label for="postal{{ code.postal_code }}">{{ code.postal_code }}, {{ code.municipality }}</label>
                                 </li>
                             {% endif %}
@@ -47,7 +46,7 @@
                         {% for code in postal_codes %}
                             {% if code.postal_code > 399 and code.postal_code < 525 %}
                                 <li>
-                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal{{ code.postal_code }}" value="postal{{ code.postal_code }}" />
+                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal-nordvesturland" value="postal{{ code.postal_code }}" />
                                     <label for="postal{{ code.postal_code }}">{{ code.postal_code }}, {{ code.municipality }}</label>
                                 </li>
                             {% endif %}
@@ -61,7 +60,7 @@
                         {% for code in postal_codes %}
                             {% if code.postal_code > 499 and code.postal_code < 682 %}
                                 <li>
-                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal{{ code.postal_code }}" value="postal{{ code.postal_code }}" />
+                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal-nordurland" value="postal{{ code.postal_code }}" />
                                     <label for="postal{{ code.postal_code }}">{{ code.postal_code }}, {{ code.municipality }}</label>
                                 </li>
                             {% endif %}
@@ -75,7 +74,7 @@
                         {% for code in postal_codes %}
                             {% if code.postal_code > 684 and code.postal_code < 786 %}
                                 <li>
-                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal{{ code.postal_code }}" value="postal{{ code.postal_code }}" />
+                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal-austurland" value="postal{{ code.postal_code }}" />
                                     <label for="postal{{ code.postal_code }}">{{ code.postal_code }}, {{ code.municipality }}</label>
                                 </li>
                             {% endif %}
@@ -89,7 +88,7 @@
                         {% for code in postal_codes %}
                             {% if code.postal_code > 799 %}
                                 <li>
-                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal{{ code.postal_code }}" value="postal{{ code.postal_code }}" />
+                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal-sudurland" value="postal{{ code.postal_code }}" />
                                     <label for="postal{{ code.postal_code }}">{{ code.postal_code }}, {{ code.municipality }}</label>
                                 </li>
                             {% endif %}
@@ -103,7 +102,7 @@
                         {% for code in postal_codes %}
                             {% if code.postal_code == 799 or code.postal_code > 229 and code.postal_code < 263 %}
                                 <li>
-                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal{{ code.postal_code }}" value="postal{{ code.postal_code }}" />
+                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal-sudvesturland" value="postal{{ code.postal_code }}" />
                                     <label for="postal{{ code.postal_code }}">{{ code.postal_code }}, {{ code.municipality }}</label>
                                 </li>
                             {% endif %}
@@ -116,43 +115,40 @@
         <div class="col extras">
             <ul>
                 <li>
-                    <input type="checkbox" name="type1" value="einbyli" id="einbyli">
+                    <input type="checkbox" name="type1" value="Einbýlishús" id="einbyli">
                     <label for="">Einbýli</label>
                 </li>
                 <li>
-                    <input type="checkbox" name="type1" value="parhus" id="parhus">
+                    <input type="checkbox" name="type1" value="Parhús" id="parhus">
                     <label for="">Parhús</label>
                 </li>
                 <li>
-                    <input type="checkbox" name="type1" value="radhus" id="radhus">
+                    <input type="checkbox" name="type1" value="Raðhús" id="radhus">
                     <label for="">Raðhús</label>
                 </li>
                 <li>
-                    <input type="checkbox" name="type1" value="fjolbyli" id="fjolbyli">
+                    <input type="checkbox" name="type1" value="Fjölbýlishús" id="Fjölbýlishús">
                     <label for="">Fjölbýli</label>
                 </li>
                 <li>
-                    <input type="checkbox" name="lyfta" value="lyfta" id="lyfta">
+                    <input type="checkbox" name="lyfta" value="Lyfta" id="lyfta">
                     <label for="">Lyfta</label>
                 </li>
                 <li>
-                    <input type="checkbox" name="serinngangur" value="serinngangur" id="serinngangur">
+                    <input type="checkbox" name="serinngangur" value="Sérinngangur" id="serinngangur">
                     <label for="">Sérinngangur</label>
+                </li>
+                <li>
+                    <input type="checkbox" name="bilskur" value="Bílskúr" id="bilskur">
+                    <label for="">Bílskúr</label>
                 </li>
             </ul>
         </div>
     </div>
 
     </div>
-
-    <div class="content-container my-5 p-5 estates-container">
-        <h3 class="text-center">Nýjustu fasteignir á skrá</h3>
-            <div class="row">
-            {% for estate in estates %}
-                <div class="col-4">
-                {% include 'estate/single_estate.html' with estate=estate %}
-                </div>
-            {% endfor %}
-        </div>
+    </form>
+    <div class="container">
+        <h3>Vinsælar fasteignir</h3>
     </div>
 {% endblock %}
