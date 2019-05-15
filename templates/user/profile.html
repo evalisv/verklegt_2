@@ -4,28 +4,47 @@
         <div class="my-page-area">
         <h3 class="text-center">Mínar síður</h3>
             <div class="row">
-                <div class="col-{{ number_of_cols }} card my-1 p-5 text-center">
-                    <a href="my_offers">Tilboð</a>
+                <div class="col-{{ number_of_cols }} card m-1 p-5 text-center">
+                    <a href="my_offers">
+                        <i class="fa fa-file-text fa-3x"></i>
+                        Tilboð
+                    </a>
+
                 </div>
-                <div class="col-{{ number_of_cols }} card my-1 p-5 text-center">
-                    <a href="/estates/my_estates/{{ user.id }}">Eignir</a>
+                <div class="col-{{ number_of_cols }} card m-1 p-5 text-center">
+                    <a href="/estates/my_estates/{{ user.id }}">
+                        <i class="fa fa-home fa-3x"></i>
+                        Eignir
+                    </a>
                 </div>
                 {% if user_role == 'admin' %}
-                     <div class="col-{{ number_of_cols }} card my-1 p-5 text-center">
-                        <a href="agents/">Fasteignasalar</a>
+                     <div class="col-{{ number_of_cols }} card m-1 p-5 text-center">
+                        <a href="agents/">
+                            <i class="fa fa-user-secret fa-3x"></i>
+                            Fasteignasalar
+                        </a>
                     </div>
                 {% endif %}
             </div>
             <div class="row">
-                <div class="col-{{ number_of_cols }} card my-1 p-5 text-center">
-                    <a href="/searchlist/{{ user.id }}/search_history">Leitarsaga</a>
+                <div class="col-{{ number_of_cols }} card m-1 p-5 text-center">
+                    <a href="/searchlist/{{ user.id }}/search_history">
+                        <i class="fa fa-history fa-3x"></i>
+                        Leitarsaga
+                    </a>
                 </div>
-                <div class="col-{{ number_of_cols }} card my-1 p-5 text-center">
-                    <a href="/users/{{ user.id }}/update">Stillingar</a>
+                <div class="col-{{ number_of_cols }} card m-1 p-5 text-center">
+                    <a href="/users/{{ user.id }}/update">
+                        <i class="fa fa-cog fa-3x"></i>
+                        Stillingar
+                    </a>
                 </div>
                 {% if user_role == 'admin' %}
-                    <div class="col-{{ number_of_cols }} card my-1 p-5 text-center" onclick="window.location.href = '/users/index/';">
-                        Notendur
+                    <div class="col-{{ number_of_cols }} card m-1 p-5 text-center">
+                        <a href="/users/index">
+                            <i class="fa fa-users fa-3x"></i>
+                            Notendur
+                        </a>
                     </div>
                 {% endif %}
             </div>

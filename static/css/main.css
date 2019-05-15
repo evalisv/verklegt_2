@@ -197,10 +197,13 @@ span.step-links {
 }
 
 .my-page-area .card {
-    max-width: 48%;
-    margin-left: 1%;
-    margin-right: 1%;
+    max-width: 32%;
+    /*margin-left: 1%;*/
+    /*margin-right: 1%;*/
     border-radius: 10px;
+}
+.my-page-area .card:hover {
+    background: aliceblue;
 }
 /*.my-page-area {*/
     /*margin-left:20px;*/
