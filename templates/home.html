@@ -60,7 +60,7 @@
                         {% for code in postal_codes %}
                             {% if code.postal_code > 499 and code.postal_code < 682 %}
                                 <li>
-                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal{{ code.postal_code }}" value="postal{{ code.postal_code }}" />
+                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal-nordurland" value="postal{{ code.postal_code }}" />
                                     <label for="postal{{ code.postal_code }}">{{ code.postal_code }}, {{ code.municipality }}</label>
                                 </li>
                             {% endif %}
@@ -74,7 +74,7 @@
                         {% for code in postal_codes %}
                             {% if code.postal_code > 684 and code.postal_code < 786 %}
                                 <li>
-                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal{{ code.postal_code }}" value="postal{{ code.postal_code }}" />
+                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal-austurland" value="postal{{ code.postal_code }}" />
                                     <label for="postal{{ code.postal_code }}">{{ code.postal_code }}, {{ code.municipality }}</label>
                                 </li>
                             {% endif %}
@@ -88,7 +88,7 @@
                         {% for code in postal_codes %}
                             {% if code.postal_code > 799 %}
                                 <li>
-                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal{{ code.postal_code }}" value="postal{{ code.postal_code }}" />
+                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal-sudurland" value="postal{{ code.postal_code }}" />
                                     <label for="postal{{ code.postal_code }}">{{ code.postal_code }}, {{ code.municipality }}</label>
                                 </li>
                             {% endif %}
@@ -102,7 +102,7 @@
                         {% for code in postal_codes %}
                             {% if code.postal_code == 799 or code.postal_code > 229 and code.postal_code < 263 %}
                                 <li>
-                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal{{ code.postal_code }}" value="postal{{ code.postal_code }}" />
+                                    <input type="checkbox" id="postal{{ code.postal_code }}" name="postal-sudvesturland" value="postal{{ code.postal_code }}" />
                                     <label for="postal{{ code.postal_code }}">{{ code.postal_code }}, {{ code.municipality }}</label>
                                 </li>
                             {% endif %}
