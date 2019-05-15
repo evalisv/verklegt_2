@@ -9,20 +9,21 @@ def search_view(request):
     query = request.GET.get('q', None)
     pnrhofud = request.GET.getlist('postal-hofudborgarsvaedid')
     pnrvestur = request.GET.getlist('postal-vesturland')
-    pnrnordvesturland = request.GET.getlist('postal - nordvesturland')
-    typel = request.GET.getlist('type1')
-    fjolbyli = request.GET.getlist('Fjölbýlishús')
+    pnrnordvesturland = request.GET.getlist('postal-nordvesturland')
+    pnrnorth = request.GET.getlist('postal-nordurland')
+    pnreast = request.GET.getlist('postal-austurland')
+    pnrsouthwest = request.GET.getlist('postal-sudvesturland')
+    pnrsouth = request.GET.getlist('postal-sudurland')
+    type1 = request.GET.getlist('type1')
+    lyfta = request.GET.get('lyfta')
 
-
+    #Fylki fyrir array sem innihalda póstnúmer sem hakað er við og tegund húsnæðis
     pnr_arr = []
     type_arr = []
-    einbyli = ''
-    for i in typel:
+
+    #Náum í öll gildi sem hakað var við, sem birtast sem listar
+    for i in type1:
         type_arr.append(i)
-
-    for i in type_arr:
-        print(i)
-
 
     for i in pnrhofud:
         ii = int(i.split('postal')[1])
@@ -32,7 +33,23 @@ def search_view(request):
         ii = int(i.split('postal')[1])
         pnr_arr.append(ii)
 
-    for i in pnrvestur:
+    for i in pnrnordvesturland:
+        ii = int(i.split('postal')[1])
+        pnr_arr.append(ii)
+
+    for i in pnrnorth:
+        ii = int(i.split('postal')[1])
+        pnr_arr.append(ii)
+
+    for i in pnreast:
+        ii = int(i.split('postal')[1])
+        pnr_arr.append(ii)
+
+    for i in pnrsouthwest:
+        ii = int(i.split('postal')[1])
+        pnr_arr.append(ii)
+
+    for i in pnrsouth:
         ii = int(i.split('postal')[1])
         pnr_arr.append(ii)
 
@@ -48,15 +65,15 @@ def search_view(request):
                   Q(postal_code__postal_code__icontains=query) |
                   Q(postal_code__municipality__icontains=query))
 
-        estates = Estate.objects.all().filter(postal_code__postal_code__in=pnr_arr)\
-                                      .filter(estate__estatetype__type__in=type_arr).filter(lookup)
-
-        #paginator = Paginator(estates, 6)
-       # page = request.GET.get("page")
-       # estates = paginator.get_page(page)
+        if len(type_arr) >= 0 and len(pnr_arr) == 0:
+            estates = Estate.objects.all().filter(type__in=type_arr).filter(lookup)
+        elif len(type_arr) > 0 and len(pnr_arr) > 0:
+            estates = Estate.objects.all().filter(postal_code__postal_code__in=pnr_arr)\
+                .filter(type__in=type_arr).filter(lookup)
+        elif len(type_arr) == 0 and len(pnr_arr) > 0:
+            estates = Estate.objects.all().filter(postal_code__postal_code__in=pnr_arr).filter(lookup)
 
         context['estates'] = estates
-        print(context)
     return render(request, 'search/search_results.html', context)
 
 def view_search_words(request, id):
