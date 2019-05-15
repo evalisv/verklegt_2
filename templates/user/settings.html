@@ -2,14 +2,15 @@
 {% block content %}
     <div class="content-container my-5 p-5">
         <div class="my-page-area">
-            <h3 class="text-center">Leitarsaga</h3>
+            <h3 class="text-center">Stillingar</h3>
             <div class="row">
                 <div class="col-6 card my-1 p-5 text-center">
-                    <a href="{% url 'viewing_history' %}">Skoðaðar eignir</a>
+                    <a href="{% url 'update_name' %}">Uppfæra nafn</a>
                 </div>
                 <div class="col-6 card my-1 p-5 text-center">
-                    <a href="{% url 'search_word_history' %}">Leitarorðin mín</a>
+                    <a href="{% url 'update_profile' %}">Uppfæra persónuupplýsingar</a>
                 </div>
+{#                If user is admin, then some additional options#}
             </div>
         </div>
     </div>

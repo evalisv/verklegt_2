@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>Uppfæra nafn</h1>
-    <form class="form form-horizontal" action="{% url 'update_name' id %}" method="post">
+    <form class="form form-horizontal" action="{% url 'update_name'%}" method="post">
         {%  csrf_token %}
         {{ form }}
         <input type="submit" value="Uppfæra" class="btn btn-primary pull-right" style="clear:both; margin: 10px 0" />
