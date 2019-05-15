@@ -21,7 +21,7 @@ def update_name(request):
         form = UpdateNameForm(data=request.POST, instance=instance)
         if form.is_valid():
             form.save()
-            return redirect('user_profile')
+            return redirect('profile')
     else:
         form = UpdateNameForm(instance=instance)
         return render(request, 'user/update_name.html', {
@@ -38,7 +38,7 @@ def update_profile(request):
             user_profile.profile_image = request.FILES['profile_image']
             user_profile.user = request.user
             user_profile.save()
-            return redirect('user_profile')
+            return redirect('profile')
     return render(request, 'user/update_profile.html', {
         'form': ProfileForm(instance=user_profile),
         'readOnlyData': request.user,

@@ -29,7 +29,9 @@ urlpatterns = [
     path('profile/my_offers/approve<int:id>', views.approve_offer, name="approve_offer"),
     path('profile/my_offers/reject<int:id>', views.reject_offer, name="reject_offer"),
     path('profile/my_offers/accept<int:id>', views.accept_offer, name="accept_offer"),
-    path('profile/my_offers/pay<int:id>', paymentviews.make_payment, name="pay"),
+    path('profile/my_offers/pay<int:id>', paymentviews.make_payment, name="make_payment"),
+    path('profile/my_offers/pay<int:id>/review', paymentviews.get_review_info, name="review_payment"),
+    path('profile/my_offers/pay<int:id>/review/confirmation', paymentviews.confirmation, name="confirmation"),
     path('profile/agents/', views.view_agents, name='agent-index'),
     path('profile/agents/register_agent/', views.register_agent, name='register_agent')
 ]

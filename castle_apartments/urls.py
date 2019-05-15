@@ -28,9 +28,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('offer/', include('offer.urls')),
     # path('vhistory/', include('vhistory.urls')),
-    path('search/', search_view)
+    path('search/', search_view),
 #   path('searchlist/', include('searches.urls'))
-    path('payment/', include('payment.urls'))
+    #path('payment/', include('payment.urls'))
 ]
 
 

@@ -33,7 +33,7 @@
                                 {% elif offer.status == 'Rejected' %}
                                     Hafnað
                                 {% elif offer.status == 'Accepted' %}
-                                    {% if offer.paid == False %}
+                                    {% if offer.payed == False %}
                                         Beðið eftir greiðslu
                                     {% else %}
                                         Greitt
@@ -52,8 +52,10 @@
                                     Sent
                                 {% elif offer.status == 'Rejected' %}
                                     Hafnað
-                                {% elif offer.status == 'Accepted' %}
+                                {% elif offer.status == 'Accepted' and offer.payed == False %}
                                     Samþykkt
+                                {% elif offer.payed == True %}
+                                    Greitt
                                 {% elif todays_date > offer.expires|date:"Y-m-d-h" %}
                                     Útrunnið
                                 {% endif %}
@@ -79,8 +81,8 @@
                             {% if to_me and offer.status == 'Approved' and todays_date < offer.expires|date:"Y-m-d-h" %}
                                 <a href="{% url 'accept_offer' offer.id %}"><button value="Accept">Samþykkja</button></a>
                                 <a href="{% url 'reject_offer' offer.id %}"><button value="Reject">Hafna</button></a>
-                            {% elif from_me and offer.status == 'Accepted'%}
-                                <a href="{% url 'pay' offer.id %}"><button value="Pay">Greiða</button></a>
+                            {% elif from_me and offer.status == 'Accepted' and offer.payed == False%}
+                                <a href="{% url 'make_payment' offer.id %}"><button value="Pay">Greiða</button></a>
                             {% elif is_admin_page and offer.status == 'Incoming' and todays_date < offer.expires|date:"Y-m-d-h" %}
                                 <a href="{% url 'approve_offer' offer.id %}"><button value="Approve">Staðfesta</button></a>
                                 <a href="{% url 'reject_offer' offer.id %}"><button value="Reject">Hafna</button></a>

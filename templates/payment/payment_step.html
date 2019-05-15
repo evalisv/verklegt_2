@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-12">
                 <p>Upphæð: {{ offer.amount }}</p>
-                <form class="form form-horizontal" action="{% url 'make_payment' %}" method="post">
+                <form class="form form-horizontal" action="{% url 'make_payment' offer.id %}" method="post">
                     {% csrf_token %}
                     {{ form }}
                     <input type="submit" value="Staðfesta" class="btn btn-primary float-right my-3"/>
