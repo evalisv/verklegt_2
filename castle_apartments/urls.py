@@ -29,8 +29,10 @@ urlpatterns = [
     path('offer/', include('offer.urls')),
     # path('vhistory/', include('vhistory.urls')),
     path('search/', search_view)
-#     path('searchlist/', include('searches.urls'))
-    ]
+#   path('searchlist/', include('searches.urls'))
+    path('payment/', include('payment.urls'))
+]
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

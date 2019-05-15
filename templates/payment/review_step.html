@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="content-container payment-step my-5 p-5">
+    <h3 class="text-center">Yfirlit upplýsinga</h3>
+        <div class="row">
+            <div class="col-12">
+                 <div>
+                    <h3>Upplýsingar um kaupanda</h3>
+                     <p>
+                         Nafn: {{ request.user.get_full_name }} <br>
+                         Kennitala: {{ request.user.profile.kennitala }} <br>
+                         Heimilisfang: {{ request.user.profile.address }} <br>
+                         Póstnúmer: {{ request.user.profile.municipality.postal_code }} <br>
+                         Staður: {{ request.user.profile.municipality.municipality }} <br>
+                         Land: {{ request.user.profile.country.country }} <br>
+                         Símanúmer: {{ request.user.profile.phone_number }} <br>
+                         Netfang: {{ request.user.email}}
+                     </p>
+                     #þarf að tengja þennan takka í rétt url
+                     <a href="{% url 'update_profile' %}"><button>Breyta persónuupplýsingum/button></a>
+                 </div>
+                <div>
+                    <h3>Upplýsingar um fasteign</h3>
+                     <p>
+                        Heimilisfang: {{ offer.estate.address }} <br>
+                        Póstnúmer: {{ offer.estate.postal_code.postal_code }} <br>
+                        Staður: {{ offer.estate.municipality.municipality }} <br>
+                         Fermetrafjöldi: {{ offer.estate.size }} <br>
+                         Fjöldi svefnherbergja: {{ offer.estate.bedrooms }} <br>
+                         Fjöldi baðherbergja: {{ offer.estate.bathrooms }} <br>
+                         Fasteignamat: {{ offer.estate.fasteignamat }} <br>
+                         Brunabótamat: {{ offer.estate.brunabotamat }} <br>
+                         Gerð húsnæðis: {{ offer.estate.type }} <br>
+                         Byggingarár: {{ offer.estate.year_built }} <br>
+                     </p>
+                        {% if estate.entry %}
+                            <p>Sérinngangur</p> <br>
+                        {% endif %}
+                        {% if estate.garage %}
+                            <p>Bílskúr</p> <br>
+                        {% endif %}
+                        {% if estate.elevator %}
+                            <p>Lyfta</p>
+                        {% endif %}
+                 </div>
+                    <a href="{% url 'confirmation' %}"><button>Staðfesta upplýsingar og greiða</button></a>
+                    <button class="btn btn-link float-right my-3 mx-2" onclick="window.history.go(-1); return false;">Til baka í greiðsluupplýsingar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

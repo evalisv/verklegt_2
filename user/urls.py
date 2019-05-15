@@ -4,6 +4,7 @@ from . import views
 from searches import views as searchviews
 from vhistory import views as vhistoryviews
 from estate import views as estateviews
+from payment import views as paymentviews
 
 
 
@@ -28,6 +29,7 @@ urlpatterns = [
     path('profile/my_offers/approve<int:id>', views.approve_offer, name="approve_offer"),
     path('profile/my_offers/reject<int:id>', views.reject_offer, name="reject_offer"),
     path('profile/my_offers/accept<int:id>', views.accept_offer, name="accept_offer"),
+    path('profile/my_offers/pay<int:id>', paymentviews.make_payment, name="pay"),
     path('profile/agents/', views.view_agents, name='agent-index'),
     path('profile/agents/register_agent/', views.register_agent, name='register_agent')
 ]

@@ -74,6 +74,7 @@ def search_view(request):
             estates = Estate.objects.all().filter(postal_code__postal_code__in=pnr_arr).filter(lookup)
 
         context['estates'] = estates
+        print(context)
     return render(request, 'search/search_results.html', context)
 
 def view_search_words(request):
