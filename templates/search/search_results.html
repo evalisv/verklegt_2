@@ -22,14 +22,6 @@
                 </div>
             {% endfor %}
         </div>
-
-            <div class="row">
-                {% for estate in estates %}
-                    <div class="col-4">
-                        {% include 'estate/single_estate.html' with estate=estate %}
-                    </div>
-                {% endfor %}
-            </div>
             {% include 'components/paging.html' with list=estates %}
     <div class="row">
         <div class="col-8">
