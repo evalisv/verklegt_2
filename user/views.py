@@ -84,7 +84,9 @@ def register(request):
         })
 
 def view_agents(request):
-    context = {'agents': UserRole.objects.filter(role='admin')}
+    context = {
+        'users': User.objects.filter(userrole__role='admin')
+    }
     return render(request, 'agent/index.html', context)
 
 @login_required

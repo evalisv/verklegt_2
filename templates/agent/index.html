@@ -1,10 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
-<button onclick="window.location.href = 'register_agent';">Skrá nýjan fasteignasala</button>
-    <h3>Fasteignasalar:</h3>
-{%  for  agent in agents %}
-    <div class="col-4">
-        {% include 'agent/single_agent.html' with agent=agent %}
+    <div class="content-container agents-list my-5 p-5">
+        <h3 class="text-center">Fasteignasalar</h3>
+        <div class="row">
+            <div class="col-12">
+                    <div class="row">
+                        {%  for user in users %}
+                            <div class="col-4 card py-2">
+                                {% include 'agent/single_agent.html' with user=user %}
+                                <a href="#" class="btn btn-primary float-right m-1">Uppfæra</a>
+                                <a href="#" class="btn btn-danger float-right m-1">Eyða</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <a class="btn btn-primary float-right my-2" href="register_agent">Skrá nýjan fasteignasala</a>
+                <button class="btn btn-link float-right my-2" onclick="window.history.go(-1); return false;">Til baka</button>
+            </div>
+        </div>
     </div>
-{% endfor %}
 {% endblock %}

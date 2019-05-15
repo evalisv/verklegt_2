@@ -6,13 +6,12 @@
             <div class="col-12">
                 {% if estates|length == 0 %}
                     <p>Þú ert ekki með neina eign á söluskrá.</p>
-                    <a class="btn btn-primary float-right" href="/estates/register_estate">Skrá fasteign á sölu</a>
                 {% else %}
                     <div class="row">
                     {%  for  estate in estates %}
                         {% if request.user == estate.estate_seller %}
                             <div class="col-4 card py-2">
-                                {% include 'estate/single_estate.html' with estate=estate %}
+                                {% include 'estate/single_estate.html' with estate=estate my_estates=True%}
                                 <a href="{% url 'update_estate' estate.id %}" class="btn btn-primary float-right m-1">Uppfæra</a>
                                 <a href="{% url 'delete_estate' estate.id %}" class="btn btn-danger float-right m-1">Eyða</a>
                             </div>
@@ -22,6 +21,11 @@
                 {% endif %}
             </div>
         </div>
-        <button class="btn btn-link float-right" onclick="window.history.go(-1); return false;">Til baka</button>
+        <div class="row">
+            <div class="col-12">
+                <a class="btn btn-primary float-right my-2" href="/estates/register_estate">Skrá fasteign á sölu</a>
+                <button class="btn btn-link float-right my-2" onclick="window.history.go(-1); return false;">Til baka</button>
+            </div>
+        </div>
     </div>
 {% endblock %}
