@@ -18,6 +18,27 @@ def search_view(request):
     lyfta = request.GET.get('lyfta')
     if lyfta == 'on':
         lyfta = True
+
+    serinngangur = request.GET.get('serinngangur')
+    if serinngangur == 'on':
+        serinngangur = True
+
+    bilskur = request.GET.get('bilskur')
+    if bilskur == 'on':
+        bilskur = True
+
+
+    staerdfra = request.GET.get('staerdfra')
+    if staerdfra == 'Frá':
+        staerdfra = 0
+    staerdfra = int(staerdfra.split('staerdfra')[0])
+
+    staerdtil = request.GET.get('staerdtil')
+    if staerdfra == 'Til':
+        staerdfra = 100000
+    staerdtil = int(staerdtil.split('staerdtil')[0])
+
+
     #Fylki fyrir array sem innihalda póstnúmer sem hakað er við og tegund húsnæðis
     pnr_arr = []
     type_arr = []
@@ -61,28 +82,56 @@ def search_view(request):
 
     if query is not None:
         SearchQuery.objects.create(user=user, query=query)
-
         lookup = (Q(address__icontains=query) |
                   Q(description__icontains=query) |
                   Q(postal_code__postal_code__icontains=query) |
                   Q(postal_code__municipality__icontains=query))
 
-        if len(type_arr) > 0 and len(pnr_arr) == 0:
-            estates = Estate.objects.filter(lookup).filter(type__in=type_arr)
-   #     if len(type_arr) > 0 and len(pnr_arr) == 0 and lyfta:
-    #        estates = Estate.objects.filter(lookup).filter(type__in=type_arr).filter(elevator=lyfta)
-        elif len(type_arr) > 0 and len(pnr_arr) > 0:
-            estates = Estate.objects.filter(lookup).filter(postal_code__postal_code__in=pnr_arr)\
-                .filter(type__in=type_arr)
-  #      elif len(type_arr) > 0 and len(pnr_arr) > 0 and lyfta:
-   #         estates = Estate.objects.filter(lookup).filter(postal_code__postal_code__in=pnr_arr)\
-    #            .filter(type__in=type_arr).filter(elevator=lyfta)
-        elif len(type_arr) == 0 and len(pnr_arr) > 0:
-            estates = Estate.objects.filter(lookup).filter(postal_code__postal_code__in=pnr_arr)
+        if lyfta:
+            lookup2 = (Q(elevator=lyfta))
         else:
-            estates = Estate.objects.filter(lookup)
-      #  elif lyfta:
-       #     estates = Estate.objects.all().filter(elevator=lyfta).filter(lookup)
+            lookup2 = (Q(elevator=True) | Q(elevator=False))
+
+        if serinngangur:
+            lookup3 = (Q(entry=serinngangur))
+        else:
+            lookup3 = (Q(entry=True) | Q(entry=False))
+
+        if bilskur:
+            lookup4 = (Q(garage=bilskur))
+        else:
+            lookup4 = (Q(garage=True) | Q(garage=False))
+
+        lookup5 = (Q(size__gte=staerdfra) & Q(size__lte=staerdtil))
+
+        if len(type_arr) > 0 and len(pnr_arr) == 0:
+            estates = Estate.objects.filter(lookup)\
+                .filter(type__in=type_arr)\
+                .filter(lookup2)\
+                .filter(lookup3)\
+                .filter(lookup4)\
+                .filter(lookup5)
+        elif len(type_arr) > 0 and len(pnr_arr) > 0:
+            estates = Estate.objects.filter(lookup)\
+                .filter(postal_code__postal_code__in=pnr_arr)\
+                .filter(type__in=type_arr)\
+                .filter(lookup2)\
+                .filter(lookup3)\
+                .filter(lookup4)\
+                .filter(lookup5)
+        elif len(type_arr) == 0 and len(pnr_arr) > 0:
+            estates = Estate.objects.filter(lookup)\
+                .filter(postal_code__postal_code__in=pnr_arr)\
+                .filter(lookup2)\
+                .filter(lookup3)\
+                .filter(lookup4)\
+                .filter(lookup5)
+        else:
+            estates = Estate.objects.filter(lookup)\
+                .filter(lookup2)\
+                .filter(lookup3)\
+                .filter(lookup4)\
+                .filter(lookup5)
         context['estates'] = estates
     return render(request, 'search/search_results.html', context)
 
