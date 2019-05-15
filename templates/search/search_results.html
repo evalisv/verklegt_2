@@ -2,8 +2,7 @@
 
 {% block content %}
     <div class="content-container my-5 p-5 estates-container">
-        {% if query %}
-            <h3 class="text-center">Leitarniðurstöður fyrir "{{ query }}"</h3>
+            <h3 class="text-center">Leitarniðurstöður</h3>
             <form action="sort_estates" method="GET">
                 <button type="submit" name="orderbyaddress">Raða eftir heimilisfangi</button>
             </form>
@@ -23,7 +22,7 @@
                     </div>
                 {% endfor %}
             </div>
-        {% endif %}
+            {% include 'components/paging.html' with list=estates %}
     <div class="row">
         <div class="col-8">
             <button class="btn btn-danger float-left" onclick="window.location.href = '/';">Til baka</button>

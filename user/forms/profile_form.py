@@ -1,7 +1,6 @@
 from django.forms import ModelForm, widgets
 from django.contrib.auth.models import User
 from user.models import Profile
-from django.core.exceptions import ValidationError
 from django.forms.widgets import ClearableFileInput
 from django.core.exceptions import ValidationError
 
@@ -33,6 +32,7 @@ class ProfileForm(ModelForm, ClearableFileUpload):
         }
         labels = {
             'profile_image': '',
+            'kennitala': 'Kennitala',
             'phone_number': 'Sími',
             'address': 'Heimilisfang',
             'postal_code': 'Póstnúmer',
@@ -53,16 +53,6 @@ class ProfileForm(ModelForm, ClearableFileUpload):
         return phone_number_passed
 
 
-
-
-
-
-
-        def clean_card_number(self):
-            card_number_passed = self.cleaned_data.get('card_number')
-            if len(str(card_number_passed)) != 16:
-                raise ValidationError('Kortanúmer er ógilt.')
-            return card_number_passed
 # initial_text = 'currently'
 #     input_text = 'change'
 #     clear_checkbox_label = 'clear'

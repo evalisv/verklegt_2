@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 class MakeOfferForm(ModelForm):
     class Meta:
         model = Offer
-        exclude = ['id', 'estate', 'offer_maker', 'payment', 'counter_offer_to',]
+        exclude = ['id', 'estate', 'offer_maker', 'payment', 'counter_offer_to']
         widgets = {
             "amount": widgets.NumberInput(attrs={"class": "form-control"}),
             "expires": widgets.SelectDateWidget(attrs={"class": "form-control"}),

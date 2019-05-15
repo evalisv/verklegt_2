@@ -19,7 +19,6 @@ class PaymentForm(ModelForm):
         }
 
         labels = {
-            'amount': 'Upphæð',
             'card_number': 'Kortanúmer',
             'expiration': 'Gildistími',
             'cvc': 'CVC Öryggisnúmer',
