@@ -22,7 +22,7 @@
                         </li>
                     {% endif %}
                 </ul>
-                <div class="tab-content" id="offersTabContent">{{ no_received_offers }} {{ no_made_offers }}
+                <div class="tab-content" id="offersTabContent">
                     <div class="tab-pane p-2 fade show active" id="offers-to-me" role="tabpanel" aria-labelledby="offers-to-me-tab">
                         {% include 'offer/offer_item.html' with offers=offers from_me=False to_me=True %}
                     </div>
