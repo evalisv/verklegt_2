@@ -59,10 +59,10 @@ def search_view(request):
         print(context)
     return render(request, 'search/search_results.html', context)
 
-def view_search_words(request, id):
+def view_search_words(request):
     filtered_search_query = SearchQuery.objects.filter(user_id=request.user).order_by('-timestamp')
     context = {'searches': filtered_search_query}
     return render(request, 'search/search_words.html', context)
 
-def search_history(request, id):
+def search_history(request):
     return render(request, 'search/search_history.html')

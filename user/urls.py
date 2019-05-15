@@ -1,6 +1,8 @@
 from django.contrib.auth.views import LoginView, LogoutView
-from django.urls import path
+from django.urls import path, include
 from . import views
+from searches import views as searchviews
+from vhistory import views as vhistoryviews
 from estate import views as estateviews
 
 
@@ -12,8 +14,11 @@ urlpatterns = [
     path('register', views.register, name='register'),
     path('register_estate', estateviews.register_estate, name="register_estate"),
     path('profile/', views.profile, name='profile'),
+    path('profile/history/', searchviews.search_history, name='search_history'),
+    path('profile/history/viewing_history', vhistoryviews.get_vhistory_by_user, name='viewing_history'),
+    #path('profile/history/', include('vhistory.urls')),
     path('profile/update', views.update_profile, name="update_profile"),
-    path('profile/my_estates/', estateviews.seller_index, name="seller_estate"),
+    path('profile/my_estates/', estateviews.seller_index, name="seller_estates"),
     path('profile/my_estates/delete_estate/<int:id>', estateviews.delete_estate, name="delete_estate"),
     path('profile/my_estates/update_estate/<int:id>', estateviews.update_estate, name="update_estate"),
     path('profile/my_offers', views.my_offers, name='my_offers'),
@@ -22,6 +27,9 @@ urlpatterns = [
     path('profile/my_offers/approve<int:id>', views.approve_offer, name="approve_offer"),
     path('profile/my_offers/reject<int:id>', views.reject_offer, name="reject_offer"),
     path('profile/my_offers/accept<int:id>', views.accept_offer, name="accept_offer"),
+
+
+
 ]
 
 # path('update_profile/<int:gid>', views.update_profile, name="update_profile"),

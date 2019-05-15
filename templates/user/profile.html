@@ -8,12 +8,12 @@
                     <a href="my_offers">Tilboð</a>
                 </div>
                 <div class="col-{{ number_of_cols }} card my-1 p-5 text-center">
-                    <a href="/estates/my_estates/{{ user.id }}">Eignir</a>
+                    <a href="{% url 'seller_estates' %}">Eignir</a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-{{ number_of_cols }} card my-1 p-5 text-center">
-                    <a href="/searchlist/{{ user.id }}/search_history">Leitarsaga</a>
+                    <a href="{% url 'search_history' %}">Leitarsaga</a>
                 </div>
                 <div class="col-{{ number_of_cols }} card my-1 p-5 text-center">
                     <a href="/users/update">Stillingar</a>

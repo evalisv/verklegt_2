@@ -27,10 +27,10 @@ urlpatterns = [
     path('', views.homepage, name="homepage"),
     path('admin/', admin.site.urls),
     path('offer/', include('offer.urls')),
-    path('vhistory/', include('vhistory.urls')),
-    path('search/', search_view),
-    path('searchlist/', include('searches.urls'))
-]
+    # path('vhistory/', include('vhistory.urls')),
+    path('search/', include('searches.urls'))
+#     path('searchlist/', include('searches.urls'))
+    ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
