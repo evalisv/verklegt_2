@@ -1,0 +1,30 @@
+{%  extends "base.html" %}
+{% block content %}
+    <div class="content-container login register-user">
+        <h1 class="text-center">Nýskráning fasteignasala</h1>
+        <form class="form" method="POST" enctype="multipart/form-data">
+            {%  csrf_token %}
+            {{ form }}
+            <input type="submit" class="btn btn-primary float-right" value="Skrá fasteignasala" id="register"/>
+            <button class="btn btn-link float-right" data-toggle="modal" data-target="#exampleModal">Hætta við</button>
+            <div class="modal" tabindex="-1" role="dialog" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Ertu viss um að þú viljir hætta við nýskráningu?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Nei, ég vil halda áfram!</button>
+                            <a href="/" class="btn btn-link">Já, alveg viss!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
