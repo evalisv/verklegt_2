@@ -27,6 +27,18 @@ def search_view(request):
     if bilskur == 'on':
         bilskur = True
 
+
+    staerdfra = request.GET.get('staerdfra')
+    if staerdfra == 'Frá':
+        staerdfra = 0
+    staerdfra = int(staerdfra.split('staerdfra')[0])
+
+    staerdtil = request.GET.get('staerdtil')
+    if staerdfra == 'Til':
+        staerdfra = 100000
+    staerdtil = int(staerdtil.split('staerdtil')[0])
+
+
     #Fylki fyrir array sem innihalda póstnúmer sem hakað er við og tegund húsnæðis
     pnr_arr = []
     type_arr = []
@@ -90,30 +102,36 @@ def search_view(request):
         else:
             lookup4 = (Q(garage=True) | Q(garage=False))
 
+        lookup5 = (Q(size__gte=staerdfra) & Q(size__lte=staerdtil))
+
         if len(type_arr) > 0 and len(pnr_arr) == 0:
             estates = Estate.objects.filter(lookup)\
                 .filter(type__in=type_arr)\
                 .filter(lookup2)\
                 .filter(lookup3)\
-                .filter(lookup4)
+                .filter(lookup4)\
+                .filter(lookup5)
         elif len(type_arr) > 0 and len(pnr_arr) > 0:
             estates = Estate.objects.filter(lookup)\
                 .filter(postal_code__postal_code__in=pnr_arr)\
                 .filter(type__in=type_arr)\
                 .filter(lookup2)\
                 .filter(lookup3)\
-                .filter(lookup4)
+                .filter(lookup4)\
+                .filter(lookup5)
         elif len(type_arr) == 0 and len(pnr_arr) > 0:
             estates = Estate.objects.filter(lookup)\
                 .filter(postal_code__postal_code__in=pnr_arr)\
                 .filter(lookup2)\
                 .filter(lookup3)\
-                .filter(lookup4)
+                .filter(lookup4)\
+                .filter(lookup5)
         else:
             estates = Estate.objects.filter(lookup)\
                 .filter(lookup2)\
                 .filter(lookup3)\
-                .filter(lookup4)
+                .filter(lookup4)\
+                .filter(lookup5)
         context['estates'] = estates
     return render(request, 'search/search_results.html', context)
 
