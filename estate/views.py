@@ -83,6 +83,7 @@ def delete_estate(request, id):
 @login_required
 def update_estate(request, id):
     instance = get_object_or_404(Estate, pk=id)
+    user_role = get_object_or_404(UserRole, user_id = request.user.id)
     if request.method == 'POST':
         form = UpdateEstateForm(request.POST, request.FILES, instance=instance)
         if form.is_valid():
@@ -99,7 +100,8 @@ def update_estate(request, id):
     return render(request, 'estate/update_estate.html', {
         'form': form,
         'id': id,
-        'estate': instance
+        'estate': instance,
+        'user_role': user_role
     })
 
 
@@ -123,7 +125,7 @@ def sort_estates(request):
 
 #Fall til að kalla fram eignir notanda, fyrir 'Mínar eignir á sölu' - áfs:
 @login_required
-def seller_index(request, id):
+def seller_index(request):
     list_of_estates = []
     for estate in Estate.objects.all():
         if estate.estate_seller == request.user:

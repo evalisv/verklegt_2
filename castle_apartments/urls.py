@@ -23,7 +23,7 @@ from searches.views import search_view
 
 urlpatterns = [
     path('estates/', include('estate.urls')),
-    path('users/', include('user.urls')),
+    path('user/', include('user.urls')),
     path('', views.homepage, name="homepage"),
     path('admin/', admin.site.urls),
     path('offer/', include('offer.urls')),
