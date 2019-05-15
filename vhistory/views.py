@@ -28,7 +28,7 @@ def update_vhistory(user, estate):
     #return Vhistory.objects.filter(user_id=user.id).order_by('-view_date')
 
 
-def get_vhistory_by_user(request, id):
+def get_vhistory_by_user(request):
     filtered_vhistory = Vhistory.objects.values('estate_id').filter(user_id=request.user.id).order_by('-view_date')
     list_of_viewed = []
     for item in filtered_vhistory:
