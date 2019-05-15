@@ -1,11 +1,11 @@
 <div>
     <a href = "#">
         <div class="image-wrapper mx-5">
-            <img src="/media/{{ agent.user.profile.profile_image }}" class ="profile-image"/>
-
-        <h5>{{ agent.user.get_full_name }}</h5>
-        <h5>{{ agent.user.email }}</h5>
-            <h5>{{ agent.user.phone_number }}</h5>
+            <img src="/media/{{ user.profile.profile_image }}" class ="profile-image"/>
+        </div>
+        <div>
+            <p>Nafn: {{ user.get_full_name }}</p>
+            <p>Sími: {{ user.profile.phone_number }}</p>
         </div>
     </a>
 </div>
