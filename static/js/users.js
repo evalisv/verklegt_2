@@ -83,11 +83,13 @@ function manipulateUpdateFormHtml() {
     $('#for-current').next('a').wrap('<div class="col-4 profile-image-display image-wrapper" />');
     let imgSource = profileImage.attr('href');
     $('.profile-image-display.image-wrapper').prepend('<img src="/' + imgSource + '"/>');
+
     $('#for-current, .profile-image-display, #for-changing, #id_profile_image')
         .wrapAll('<div class="row my-2" id="profile-image-container" />');
-    // $('#profile-image-container').wrap('<div class="row" />');
-    $('#profile-image-container').appendTo(updateProfileForm);
-    $('#submit-profile-changes').appendTo(updateProfileForm);
+
+    let profileImageContainer = $('#profile-image-container');
+    profileImageContainer.wrap('<div class="row" />');
+    profileImageContainer.appendTo(updateProfileForm);
     $('.update-profile label').addClass('col-2');
 
     $('label[for="id_address"]').addClass('form-group-2');
@@ -97,4 +99,6 @@ function manipulateUpdateFormHtml() {
     $('.form-group-2').wrapAll('<div class="group-2 row my-2" />');
     $('.form-group-3').wrapAll('<div class="group-3 row my-2" />');
     $('.update-profile .group-3').insertAfter('.group-2');
+
+    $('#submit-profile-changes-wrapper').appendTo(updateProfileForm);
 }
