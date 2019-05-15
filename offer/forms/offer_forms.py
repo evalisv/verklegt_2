@@ -25,15 +25,15 @@ class MakeOfferForm(ModelForm):
             raise ValidationError('Upphæð verður að vera hærri en 0.')
         return amount_passed
 
-    def clean_expires(self):
-        expires_passed = self.cleaned_data.get('expires')
-        todays_date = datetime.today()
-        if todays_date > expires_passed:
-            raise ValidationError('Dagsetning má ekki vera liðin.')
-        return expires_passed
-
-
-
+    # def clean_expires(self):
+    #     expires_passed = self.cleaned_data.get('expires')
+    #     todays_date = self.cleaned_data(datetime.datetime.now())
+    #     if todays_date > expires_passed:
+    #         raise ValidationError('Dagsetning má ekki vera liðin.')
+    #     return expires_passed
+    #
+    #
+    #
 
 
 

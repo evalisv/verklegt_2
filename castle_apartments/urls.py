@@ -27,18 +27,13 @@ urlpatterns = [
     path('', views.homepage, name="homepage"),
     path('admin/', admin.site.urls),
     path('offer/', include('offer.urls')),
-<<<<<<< HEAD
-    path('vhistory/', include('vhistory.urls')),
-    path('search/', search_view),
-    path('searchlist/', include('searches.urls')),
-    path('payment/', include('payment.urls'))
-]
-=======
     # path('vhistory/', include('vhistory.urls')),
-    path('search/', include('searches.urls'))
-#     path('searchlist/', include('searches.urls'))
-    ]
->>>>>>> dab55c969c9d301659bdce6609ad8a311cfd0992
+    path('search/', search_view),
+#   path('searchlist/', include('searches.urls'))
+    #path('payment/', include('payment.urls'))
+]
+
+    
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

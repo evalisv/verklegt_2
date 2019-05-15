@@ -1,17 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="content-container payment-step my-5 p-5">
-    <h3 class="text-center">Greiðsluupplýsingar</h3>
+    <h3 class="text-center">Staðfesting</h3>
         <div class="row">
             <div class="col-12">
                  <div>
-                    <h3>Staðfesting/h3>
                      <p>
                          Kaup á fasteign tókust!
                      </p>
                  </div>
 
-                    <button class="btn btn-link float-right my-3 mx-2" onclick="">Forsíða</button>
+                <a href="{% url 'homepage' %}"><button class="btn btn-link float-right my-3 mx-2">Forsíða</button></a>
                 </form>
             </div>
         </div>

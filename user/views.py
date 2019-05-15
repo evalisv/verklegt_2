@@ -15,22 +15,21 @@ def index(request):
     return render(request, 'user/index.html')
 
 @login_required
-def update_name(request, id):
-    instance = get_object_or_404(User, pk=id)
+def update_name(request):
+    instance = get_object_or_404(User, pk=request.user.id)
     if request.method == 'POST':
         form = UpdateNameForm(data=request.POST, instance=instance)
         if form.is_valid():
             form.save()
-            return redirect('user-index')
+            return redirect('profile')
     else:
         form = UpdateNameForm(instance=instance)
         return render(request, 'user/update_name.html', {
-            'form': form,
-            'id': id
+            'form': form
         })
 
 @login_required
-def update_profile(request, id):
+def update_profile(request):
     user_profile = Profile.objects.filter(user=request.user).first()
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=user_profile)
@@ -39,7 +38,7 @@ def update_profile(request, id):
             user_profile.profile_image = request.FILES['profile_image']
             user_profile.user = request.user
             user_profile.save()
-            return redirect('user-index')
+            return redirect('profile')
     return render(request, 'user/update_profile.html', {
         'form': ProfileForm(instance=user_profile),
         'readOnlyData': request.user,
@@ -84,7 +83,9 @@ def register(request):
         })
 
 def view_agents(request):
-    context = {'agents': UserRole.objects.filter(role='admin')}
+    context = {
+        'users': User.objects.filter(userrole__role='admin')
+    }
     return render(request, 'agent/index.html', context)
 
 @login_required
@@ -179,3 +180,7 @@ def profile(request):
         'user_role': request.user.userrole.role,
         'number_of_cols': number_of_columns
     })
+
+
+def user_settings(request):
+    return render(request, 'user/settings.html')

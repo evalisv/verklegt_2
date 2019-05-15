@@ -1,15 +1,21 @@
 {%  extends "base.html" %}
 {% block content %}
-    <div class="content-container my-5 p-5">
+    <div class="content-container search-history my-5 p-5">
         <div class="my-page-area">
             <h3 class="text-center">Leitarsaga</h3>
             <div class="row">
-                <div class="col-6 card my-1 p-5 text-center">
-                    <a href="{% url 'viewing_history' %}">Skoðaðar eignir</a>
-                </div>
-                <div class="col-6 card my-1 p-5 text-center">
-                    <a href="/searchlist/}}">Leitarorðin mín</a>
-                </div>
+                <a class="col-6 card" href="{% url 'viewing_history' %}">
+                    <div class="my-1 p-5 text-center">
+                        <i class="fa fa-eye fa-3x"></i>
+                        Skoðaðar eignir
+                    </div>
+                </a>
+                <a class="col-6 card" href="{% url 'search_word_history' %}">
+                    <div class="my-1 p-5 text-center">
+                        <i class="fa fa-search fa-3x"></i>
+                        Leitarorðin mín
+                    </div>
+                </a>
             </div>
         </div>
     </div>

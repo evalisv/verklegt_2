@@ -4,9 +4,9 @@ from estate.models import Estate
 from offer.models import Offer
 
 class Payment(models.Model):
-    offer = models.ForeignKey(Offer, on_delete=models.CASCADE)
+    offer = models.OneToOneField(Offer, null=True, blank=True,on_delete=models.CASCADE)
     received = models.DateTimeField()
-    estate_id = models.ForeignKey(Estate, on_delete=models.CASCADE)
+
 
 
 
