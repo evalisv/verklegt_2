@@ -6,6 +6,7 @@ from django.db.models import Q
 
 
 def search_view(request):
+    query_url = request.GET.urlencode()
     query = request.GET.get('q', None)
     pnrhofud = request.GET.getlist('postal-hofudborgarsvaedid')
     pnrvestur = request.GET.getlist('postal-vesturland')
@@ -102,6 +103,7 @@ def search_view(request):
         user = request.user
     context = {'query': query}
 
+    #query fyrir strengjaleit í glugga
     if query is not None:
         SearchQuery.objects.create(user=user, query=query)
         lookup = (Q(address__icontains=query) |
@@ -164,8 +166,15 @@ def search_view(request):
                 .filter(lookup5)\
                 .filter(lookup6)\
                 .filter(lookup7)
+
+        paginator = Paginator(estates, 6)
+        page = request.GET.get('page')
+
+        estates = paginator.get_page(page)
+
         context['estates'] = estates
-        print(context)
+        context['query'] = query_url
+
     return render(request, 'search/search_results.html', context)
 
 def view_search_words(request):
