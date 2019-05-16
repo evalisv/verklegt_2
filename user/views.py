@@ -33,11 +33,12 @@ def update_profile(request):
     next_page = request.GET['next']
     print(next_page)
     user_profile = Profile.objects.filter(user=request.user).first()
+    file = request.FILES.get('profile_image', '')
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=user_profile)
         if form.is_valid():
             user_profile = form.save(commit=False)
-            user_profile.profile_image = request.FILES['profile_image']
+            user_profile.profile_image = file
             user_profile.user = request.user
             user_profile.save()
             if next_page:
@@ -50,6 +51,7 @@ def update_profile(request):
     })
 
 def register(request):
+    file = request.FILES.get('profile_image', '')
     if request.method == 'POST':
         form = RegistrationForm(request.POST, request.FILES)
         if form.is_valid():
@@ -63,7 +65,7 @@ def register(request):
                 address=new_user_meta['address'],
                 postal_code_id=new_user_meta['postal_code'],
                 country_id=new_user_meta['country'],
-                profile_image=request.FILES['profile_image']
+                profile_image=file
             )
             new_profile.save()
 
