@@ -15,16 +15,24 @@ def index(request):
 def make_payment(request, id):
     offer = get_object_or_404(Offer, pk=id)
     if request.method == 'POST':
-        form = PaymentForm(data=request.POST)
+        form = PaymentForm(request.POST)
         if form.is_valid():
             payment = Payment(received= datetime.datetime.now(), offer=offer)
             payment.save()
             return redirect('review_payment', offer.id)
+        else:
+            return render(request, 'payment/payment_step.html', {
+                'form': PaymentForm(request.POST),
+                'error_messages': form.error_messages,
+                'error_class': form.error_class,
+                'errors': form.errors,
+            })
     else:
         return render(request, 'payment/payment_step.html', {
             'form': PaymentForm(),
             'offer': offer
-        })
+            })
+
 
 @login_required
 def get_review_info(request, id):
