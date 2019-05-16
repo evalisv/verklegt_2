@@ -37,6 +37,14 @@ ul.errorlist li {
     border-radius: 10px;
 }
 
+.navbar .nav-item.dropdown {
+    margin-left: 20%;
+}
+
+#navbarSupportedContent ul.navbar-nav {
+    width: 100%;
+}
+
 .filter-container, .estate-detail-container {
     margin-bottom: 0;
 }
@@ -116,6 +124,7 @@ a {
     max-width: 50px;
     max-height: 50px;
     border-radius: 100%;
+    float: left;
 }
 
 .estate .image-wrapper {
