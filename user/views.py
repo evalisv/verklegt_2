@@ -32,6 +32,8 @@ def update_name(request):
 
 @login_required
 def update_profile(request):
+    next_page = request.GET['next']
+    print(next_page)
     user_profile = Profile.objects.filter(user=request.user).first()
     file = request.FILES.get('profile_image', '')
     if request.method == 'POST':
@@ -41,6 +43,8 @@ def update_profile(request):
             user_profile.profile_image = file
             user_profile.user = request.user
             user_profile.save()
+            if next_page:
+                return redirect(next_page)
             return redirect('profile')
     return render(request, 'user/update_profile.html', {
         'form': ProfileForm(instance=user_profile),
