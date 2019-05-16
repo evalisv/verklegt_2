@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="breadcrumbs">Forsíða > Mínar síður > Fasteignasalar</div>
+    <div class="breadcrumbs"><a href="{% url 'homepage' %}">Forsíða</a> > <a href="{% url 'profile' %}">Mínar síður</a> > Fasteignasalar</div>
     {% if not is_admin %}
         {% include 'components/forbidden.html' %}
     {% else %}

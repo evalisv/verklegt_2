@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="breadcrumbs">Forsíða > Mínar síður > Stillingar > Uppfæra nafn</div>
+    <div class="breadcrumbs"><a href="{% url 'homepage' %}">Forsíða</a> > <a href="{% url 'profile' %}">Mínar síður</a> > <a href="{% url 'settings' %}">Stillingar</a> > Uppfæra nafn</div>
     <h1>Uppfæra nafn</h1>
     <form class="form form-horizontal" action="{% url 'update_name'%}" method="post">
         {%  csrf_token %}
