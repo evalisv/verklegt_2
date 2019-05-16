@@ -2,17 +2,18 @@ from django.shortcuts import render, redirect, get_object_or_404
 from user.forms.profile_form import ProfileForm
 from user.forms.registration_form import RegistrationForm
 from user.forms.agent_registration_form import AgentRegistrationForm
-from user.forms.profile_form import UpdateNameForm
+from user.forms.profile_form import UpdateNameForm, PasswordForm
 from user.models import Profile
 from user_role.models import UserRole
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from offer.models import Offer
-from django.http import HttpResponse
+from django.contrib.auth import update_session_auth_hash
 
 
 def index(request):
     return render(request, 'user/index.html')
+
 
 @login_required
 def update_name(request):
@@ -28,8 +29,11 @@ def update_name(request):
             'form': form
         })
 
+
 @login_required
 def update_profile(request):
+    next_page = request.GET['next']
+    print(next_page)
     user_profile = Profile.objects.filter(user=request.user).first()
     file = request.FILES.get('profile_image', '')
     if request.method == 'POST':
@@ -39,12 +43,15 @@ def update_profile(request):
             user_profile.profile_image = file
             user_profile.user = request.user
             user_profile.save()
+            if next_page:
+                return redirect(next_page)
             return redirect('profile')
     return render(request, 'user/update_profile.html', {
         'form': ProfileForm(instance=user_profile),
         'readOnlyData': request.user,
         'error_messages': ProfileForm(request.POST, request.FILES, instance=user_profile).errors
     })
+
 
 def register(request):
     file = request.FILES.get('profile_image', '')
@@ -84,15 +91,20 @@ def register(request):
             'form': RegistrationForm()
         })
 
+
+@login_required
 def view_agents(request):
     context = {
         'users': User.objects.filter(userrole__role='admin')
     }
     return render(request, 'agent/index.html', context)
 
+
+@login_required
 def view_user(request):
     context = {'users': UserRole.objects.all()}
     return render(request, 'agent/user_index.html', context)
+
 
 @login_required
 def register_agent(request):
@@ -132,7 +144,7 @@ def register_agent(request):
 
 @login_required
 def my_offers(request):
-    offer_list = Offer.objects.all().order_by("offer_made")
+    offer_list = Offer.objects.all().order_by('offer_made')
     user_role = request.user.userrole.role
 
     no_received_offers = True
@@ -156,23 +168,30 @@ def my_offers(request):
     }
     return render(request, "offer/offer_list.html", context)
 
+
+@login_required
 def approve_offer(request, id):
     offer = get_object_or_404(Offer, pk=id)
     offer.status = 'Approved'
     offer.save()
     return redirect('my_offers')
 
+
+@login_required
 def reject_offer(request, id):
     offer = get_object_or_404(Offer, pk=id)
     offer.status = 'Rejected'
     offer.save()
     return redirect('my_offers')
 
+
+@login_required
 def accept_offer(request,id):
     offer = get_object_or_404(Offer, pk=id)
     offer.status = 'Accepted'
     offer.save()
     return redirect('my_offers')
+
 
 @login_required
 def profile(request):
@@ -188,5 +207,37 @@ def profile(request):
     })
 
 
+@login_required
 def user_settings(request):
     return render(request, 'user/settings.html')
+
+
+@login_required
+def update_password(request):
+    if request.method == 'POST':
+        form = PasswordForm(data=request.POST, user=request.user)
+
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('profile')
+    else:
+        form = PasswordForm(user=request.user)
+        return render(request, 'user/update_password.html', {
+            'form': form,
+            'readOnlyData': request.user,
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
