@@ -88,6 +88,10 @@ def view_agents(request):
     }
     return render(request, 'agent/index.html', context)
 
+def view_user(request):
+    context = {'users': UserRole.objects.all()}
+    return render(request, 'agent/user_index.html', context)
+
 @login_required
 def register_agent(request):
     if request.method == 'POST':
