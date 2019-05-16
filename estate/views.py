@@ -12,7 +12,6 @@ def index(request):
     paginator = Paginator(estate_list, 6)
 
     page = request.GET.get("page")
-    print('index', page)
     estates = paginator.get_page(page)
 
     context = {"estates": estates}
