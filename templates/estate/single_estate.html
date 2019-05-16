@@ -11,6 +11,6 @@
     {% endif %}
     <div><p>{{ estate.description }}</p></div>
     {% if not my_estates %}
-        <a href="/estates/{{ estate.id }}" class="btn btn-primary my-1">Nánar</a>
+        <a href="{% url 'estate_details' estate.id %}" class="btn btn-primary my-1">Nánar</a>
     {% endif %}
 </div>

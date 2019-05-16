@@ -17,7 +17,7 @@
                     </div>
                 </a>
                 {% if user_role == 'admin' %}
-                    <a href="agents/" class="col-{{ number_of_cols }} card">
+                    <a href="{% url 'agent-index' %}" class="col-{{ number_of_cols }} card">
                          <div class="m-1 p-5 text-center">
                              <i class="fa fa-user-secret fa-3x"></i>
                              Fasteignasalar
