@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from offer.models import Offer
 from django.contrib.auth import update_session_auth_hash
+from django.core.paginator import Paginator
 
 
 def index(request):
@@ -94,16 +95,36 @@ def register(request):
 
 @login_required
 def view_agents(request):
-    context = {
-        'users': User.objects.filter(userrole__role='admin')
-    }
-    return render(request, 'agent/index.html', context)
+    context = {}
+    if request.user.userrole.role == 'admin':
+        user_list = User.objects.filter(userrole__role='admin').order_by('first_name')
+        paginator = Paginator(user_list, 20)
+
+        page = request.GET.get("page")
+        users = paginator.get_page(page)
+
+        context['users'] = users
+        context['is_admin'] = True
+    else:
+        context['is_admin'] = False
+    return render(request, 'user/admin_index.html', context)
 
 
 @login_required
 def view_user(request):
-    context = {'users': UserRole.objects.all()}
-    return render(request, 'agent/user_index.html', context)
+    context = {}
+    if request.user.userrole.role == 'admin':
+        user_list = User.objects.filter(userrole__role='user').order_by('first_name')
+        paginator = Paginator(user_list, 20)
+
+        page = request.GET.get("page")
+        users = paginator.get_page(page)
+
+        context['users'] = users
+        context['is_admin'] = True
+    else:
+        context['is_admin'] = False
+    return render(request, 'user/user_index.html', context)
 
 
 @login_required
