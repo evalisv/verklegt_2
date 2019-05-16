@@ -2,7 +2,6 @@ body {
     background-image: url('/static/images/castle-bg.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
-    /*background-size: contain;*/
     background-position-x: center;
 }
 
@@ -14,23 +13,10 @@ body {
 
 .login {
     width: 60%;
-    /*background: #f5f5f5;*/
     margin: 70px auto 0 auto;
     padding: 25px;
     border-radius: 10px;
     overflow: hidden;
-}
-
-.register-user input#id_username, .register-user label[for="id_username"] {
-    pointer-events: none;
-    background: transparent;
-    color: transparent;
-    border: none;
-    height: 0;
-    width: 0;
-    font-size: 0;
-    padding: 0;
-    margin: -24px 0 0;
 }
 
 ul.errorlist li {
@@ -40,10 +26,6 @@ ul.errorlist li {
 .register-user .errorlist.username-error {
     margin-top: -1.5rem;
     margin-bottom: 1.5rem;
-}
-
-.container {
-    /*overflow: hidden;*/
 }
 
 .base-container {
@@ -60,14 +42,20 @@ ul.errorlist li {
 }
 
 .filter-container .row, .estate-detail-container {
-    background: #f5f5f5;
+    background: white;
     padding: 20px;
     border-radius: 10px;
 }
 
 .filter-container .row {
-    max-height: 400px;
+    max-height: 500px;
     overflow-y: scroll;
+}
+.filter.fa-search {
+    position: absolute;
+    right: 45px;
+    top: 10px;
+    cursor: pointer;
 }
 
 input[type="text"], input[type="password"], input[type="search"] {
@@ -109,7 +97,6 @@ a {
 
 .filter {
     position: relative;
-    /*margin-top: 45px;*/
 }
 
 .filter li {
@@ -197,7 +184,6 @@ span.step-links {
 }
 
 .my-page-area .card {
-    /*max-width: 32%;*/
     border-radius: 10px;
 }
 
@@ -212,26 +198,6 @@ span.step-links {
 .my-page-area .card:hover {
     background: aliceblue;
 }
-/*.my-page-area {*/
-    /*margin-left:20px;*/
-    /*margin-right:20px;*/
-/*}*/
-
-/*.myPageSurroundings {*/
-/*    margin: 0 auto;*/
-/*}*/
-
-/*.myPageField {*/
-/*    margin-bottom: 10px;*/
-/*    margin-left: 10px;*/
-/*    margin-right: 10px;*/
-/*    width: 40%;*/
-/*    padding: 40px;*/
-/*    text-align: center;*/
-/*    display: inline-block;*/
-/*    border-radius: 10px;*/
-/*    border: 1px solid #000000;*/
-/*}*/
 
 .profile-image-display a {
     pointer-events: none;

@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
-from estate.models import Estate, EstatePictures
+from estate.models import Estate, EstatePictures, Municipality
 from estate.forms.estate_form import RegisterEstateForm, UpdateEstateForm
 from django.contrib.auth.decorators import login_required
 from vhistory.views import update_vhistory
@@ -12,10 +12,12 @@ def index(request):
     paginator = Paginator(estate_list, 6)
 
     page = request.GET.get("page")
-    print('index', page)
     estates = paginator.get_page(page)
 
-    context = {"estates": estates}
+    context = {
+        'estates': estates,
+        'postal_codes': Municipality.objects.all()
+    }
     return render(request, "estate/index.html", context)
 
 

@@ -10,8 +10,12 @@
                 <div class="col-6 card my-1 p-5 text-center">
                     <a href="{% url 'update_profile' %}">Uppfæra persónuupplýsingar</a>
                 </div>
+                <div class="col-6 card my-1 p-5 text-center">
+                    <a href="{% url 'update_password' %}">Uppfæra lykilorð</a>
+                </div>
 {#                If user is admin, then some additional options#}
             </div>
+            <button class="btn btn-link float-right my-2" onclick="window.history.go(-1); return false;">Til baka</button>
         </div>
     </div>
 {% endblock %}

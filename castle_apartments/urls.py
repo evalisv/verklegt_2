@@ -22,16 +22,14 @@ from castle_apartments import views
 from searches.views import search_view
 
 urlpatterns = [
+    path('', views.homepage, name='homepage'),
     path('estates/', include('estate.urls')),
-    path('user/', include('user.urls')),
-    path('', views.homepage, name="homepage"),
+    path('users/', include('user.urls')),
     path('admin/', admin.site.urls),
     path('offer/', include('offer.urls')),
-    # path('vhistory/', include('vhistory.urls')),
     path('search/', search_view),
-#   path('searchlist/', include('searches.urls'))
-    #path('payment/', include('payment.urls'))
 ]
+
 
 
 if settings.DEBUG:

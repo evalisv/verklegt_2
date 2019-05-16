@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    {% include 'components/filter.html' %}
     <div class="content-container my-5 p-5 estates-container">
         <h3 class="text-center">Allar fasteignir</h3>
 
-        <a href="sort?order_by=address"><button class="button">Raða eftir götuheiti</button></a>
-
-        <a href="sort?order_by=price"><button class="button">Raða eftir verði</button></a>
-
-        <a href="sort?order_by=date_listed"><button class="button">Raða eftir skráningardagsetningu</button></a>
-
+        <div class="row my-1">
+            <a class="btn btn-outline-secondary col-4" href="sort?order_by=address">Raða eftir götuheiti</a>
+            <a class="btn btn-outline-secondary col-4" href="sort?order_by=price">Raða eftir verði</a>
+            <a class="btn btn-outline-secondary col-4" href="sort?order_by=date_listed">Raða eftir skráningardagsetningu</a>
+        </div>
 
         <div class="row">
             {% for estate in estates %}

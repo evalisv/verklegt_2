@@ -6,6 +6,7 @@ from payment.models import Payment
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from offer.models import Offer
+import datetime
 
 def index(request):
     return HttpResponse('<h1>payment</h1>')
@@ -14,24 +15,28 @@ def index(request):
 def make_payment(request, id):
     offer = get_object_or_404(Offer, pk=id)
     if request.method == 'POST':
-        form = PaymentForm(data=request.POST, instance=offer)
+        form = PaymentForm(request.POST)
         if form.is_valid():
-            payment = form.save(commit=False)
-            payment.offer = offer.id
-            payment.save()
             return redirect('review_payment', offer.id)
+        # else:
+        #     return render(request, 'payment/payment_step.html', {
+        #         'form': PaymentForm(request.POST),
+        #         'error_messages': form.error_messages,
+        #         'error_class': form.error_class,
+        #         'errors': form.errors,
+        #     })
     else:
-        # form = PaymentForm()
         return render(request, 'payment/payment_step.html', {
             'form': PaymentForm(),
             'offer': offer
-        })
+            })
+
 
 @login_required
 def get_review_info(request, id):
     offer = get_object_or_404(Offer, pk=id)
     return render(request, 'payment/review_step.html', {
-        'offer': offer
+        'offer': offer,
     })
 
 @login_required
@@ -39,4 +44,8 @@ def confirmation(request, id):
     offer = get_object_or_404(Offer, pk=id)
     offer.payed = True
     offer.save()
+    payment = Payment(received=datetime.datetime.now(), offer=offer)
+    payment.save()
+    # estate = get_object_or_404(Estate, pk=offer.estate)
+    # estate.delete()
     return render(request, 'payment/confirmation_step.html')
