@@ -18,9 +18,14 @@
           {% endif %}
         </ul>
         {% if user.is_authenticated %}
-            <div class="profile image-wrapper mx-2">
-                <img src="/media/{{ user.profile.profile_image }}" class ="profile-image"/>
-            </div>
+            {% if user.profile.profile_image == '' %}
+                <i class="fa fa-user fa-2x"></i>
+            {% else %}
+                <div class="profile image-wrapper mx-2">
+                    <img src="/media/{{ user.profile.profile_image }}" class ="profile-image"/>
+                </div>
+            {% endif %}
+
             <p>Velkomin/n {{ request.user.get_full_name }}</p>
 
         {% endif %}
