@@ -1,4 +1,10 @@
 $(document).ready(function() {
+    $('[data-search="search-icon"]').on('click', function() {
+        if ($('#search_box').val() != '') {
+            $('#search_button').trigger('click');
+        }
+    });
+
     $('[data-selector="filter"]').click(function() {
         $('.filter').toggleClass('hidden');
         $(this).toggleClass('active');

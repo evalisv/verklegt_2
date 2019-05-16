@@ -8,7 +8,7 @@ from django.forms.widgets import ClearableFileInput
 
 class AgentRegistrationForm(UserCreationForm):
     username = forms.CharField(
-        label='Notendanafn',
+        label='Notandanafn',
         max_length=255,
         required=True
     )
@@ -30,39 +30,45 @@ class AgentRegistrationForm(UserCreationForm):
         required=True,
         widget=forms.EmailInput(attrs={'class': 'form-control col-sm-8 form-group-3'})
     )
+    username = forms.CharField(
+        label='Notandanafn',
+        max_length=255,
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control col-sm-8 form-group-4'})
+    )
     password1 = forms.CharField(
         label='Lykilorð',
         max_length=100,
         min_length=8,
-        widget=forms.PasswordInput(attrs={'class': 'form-control col-sm-8 form-group-4'})
+        widget=forms.PasswordInput(attrs={'class': 'form-control col-sm-8 form-group-5'})
     )
     password2 = forms.CharField(
         label='Lykilorð endurtekið',
         max_length=100,
         min_length=8,
-        widget=forms.PasswordInput(attrs={'class': 'form-control col-sm-8 form-group-5'})
+        widget=forms.PasswordInput(attrs={'class': 'form-control col-sm-8 form-group-6'})
     )
     kennitala = forms.CharField(
         label='Kennitala',
-        widget=forms.NumberInput(attrs={'class': 'form-control col-sm-3 form-group-6'})
+        widget=forms.NumberInput(attrs={'class': 'form-control col-sm-3 form-group-7'})
     )
     phone_number = forms.CharField(
         label='Sími',
-        widget=forms.NumberInput(attrs={'class': 'form-control col-sm-3 form-group-6'})
+        widget=forms.NumberInput(attrs={'class': 'form-control col-sm-3 form-group-7'})
     )
     address = forms.CharField(
         label='Heimilisfang',
-        widget=forms.TextInput(attrs={'class': 'form-control col-sm-8 form-group-7'})
+        widget=forms.TextInput(attrs={'class': 'form-control col-sm-8 form-group-8'})
     )
     postal_code = forms.ChoiceField(
         label='Póstnúmer',
         choices=postal_codes,
-        widget=forms.Select(attrs={'class': 'form-control col-sm-3 form-group-8'})
+        widget=forms.Select(attrs={'class': 'form-control col-sm-3 form-group-9'})
     )
     country = forms.ChoiceField(
         label='Land',
         choices=countries,
-        widget=forms.Select(attrs={'class': 'form-control col-sm-3 form-group-8'})
+        widget=forms.Select(attrs={'class': 'form-control col-sm-3 form-group-9'})
     )
     profile_image = forms.FileField(
         label='Mynd',

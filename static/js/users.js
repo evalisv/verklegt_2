@@ -2,11 +2,12 @@ $(document).ready(function(){
     // Selectors
     let registerUserContainer = $('.content-container.register-user');
     let registerUserErrors = $('.register-user ul.errorlist');
-    let registerUserErrorsItem = $('.register-user ul.errorlist li');
+    // let registerUserErrorsItem = $('.register-user ul.errorlist li');
     let loginUserContainer = $('.content-container.login-user');
     let updateProfileContainer = $('.content-container.update-profile');
 
     if (registerUserContainer.length > 0) {
+        console.log('register');
         addClassNamesToLabels();
         manipulateHtml();
     }

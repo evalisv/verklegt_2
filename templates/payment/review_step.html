@@ -17,7 +17,7 @@
                          Netfang: {{ request.user.email}}
                      </p>
 {#                     TODO: next = sami stadur#}
-                     <a href="{% url 'update_profile' %}"><button>Breyta persónuupplýsingum</button></a>
+                     <a href="{% url 'update_profile' %}?next={% url 'review_payment' offer.id%}"><button>Breyta persónuupplýsingum</button></a>
                  </div>
                 <div>
                     <h3>Upplýsingar um fasteign</h3>
