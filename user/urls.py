@@ -23,6 +23,7 @@ urlpatterns = [
     path('profile/settings', views.user_settings, name='settings'), #TODO: búa til settings sídu
     path('profile/settings/update_profile', views.update_profile, name='update_profile'),
     path('profile/settings/update_name', views.update_name, name='update_name'),
+    path('profile/settings/update_password', views.update_password, name='update_password'),
     path('profile/my_estates/', estateviews.seller_index, name='seller_estates'),
     path('profile/my_estates/delete_estate/<int:id>', estateviews.delete_estate, name='delete_estate'),
     path('profile/my_estates/update_estate/<int:id>', estateviews.update_estate, name='update_estate'),
