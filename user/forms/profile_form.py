@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from user.models import Profile
 from django.forms.widgets import ClearableFileInput
 from django.core.exceptions import ValidationError
+from django.contrib.auth.forms import PasswordChangeForm
 
 class ClearableFileUpload(ClearableFileInput):
     initial_text = 'Núverandi mynd'
@@ -53,9 +54,22 @@ class ProfileForm(ModelForm, ClearableFileUpload):
     #     return phone_number_passed
     #
 
+class PasswordForm(PasswordChangeForm):
+    class Meta:
+        model = User
+        fields = (
+        'old_password'
+        'password1',
+        'password2'
+        )
+
+
+
+
 # initial_text = 'currently'
 #     input_text = 'change'
 #     clear_checkbox_label = 'clear'
 
 # 'kennitala': widgets.NumberInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
+
 
