@@ -6,7 +6,6 @@ from django.db.models import Q
 
 
 def search_view(request):
-    query_url = request.GET.urlencode()
     query = request.GET.get('q', None)
     pnrhofud = request.GET.getlist('postal-hofudborgarsvaedid')
     pnrvestur = request.GET.getlist('postal-vesturland')
@@ -53,13 +52,13 @@ def search_view(request):
         herbergitil = 10
 
     #tékk fyrir því að til stærðin sé ekki minni en frá
-    if herbergitil < herbergifra:
+    if int(herbergitil) < int(herbergifra):
         herbergitil = herbergifra
 
-    if verdtil < verdfra:
+    if int(verdtil) < int(verdfra):
         verdtil = verdfra
 
-    if staerdtil < staerdfra:
+    if int(staerdtil) < int(staerdfra):
         staerdtil = staerdfra
 
     #Fylki fyrir array sem innihalda póstnúmer sem hakað er við og tegund húsnæðis
@@ -166,15 +165,8 @@ def search_view(request):
                 .filter(lookup5)\
                 .filter(lookup6)\
                 .filter(lookup7)
-
-        paginator = Paginator(estates, 6)
-        page = request.GET.get('page')
-
-        estates = paginator.get_page(page)
-
         context['estates'] = estates
-        context['query'] = query_url
-
+        print(context)
     return render(request, 'search/search_results.html', context)
 
 def view_search_words(request):
