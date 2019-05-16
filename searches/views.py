@@ -169,7 +169,7 @@ def search_view(request):
     return render(request, 'search/search_results.html', context)
 
 def view_search_words(request):
-    filtered_search_query = SearchQuery.objects.filter(user_id=request.user).order_by('-timestamp')
+    filtered_search_query = SearchQuery.objects.filter(user_id=request.user).exclude(query='').order_by('-timestamp')
     context = {'searches': filtered_search_query}
     return render(request, 'search/search_words.html', context)
 
