@@ -2,7 +2,7 @@
 {% block content %}
     {% now "Y-m-d-h" as todays_date %}
 {#    {% now "Y-m-d H:i:s" as todays_date %}#}
-    <div class="breadcrumbs">Forsíða > Mínar síður > Tilboð</div>
+    <div class="breadcrumbs"><a href="{% url 'homepage' %}">Forsíða</a> > <a href="{% url 'profile' %}">Mínar síður</a> > Tilboð</div>
     <div class="content-container my-5 p-5 offers-container">
         <h3 class="text-center">Tilboð</h3>
         <div class="row">
