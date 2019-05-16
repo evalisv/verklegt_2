@@ -8,13 +8,13 @@ from django import forms
 
 class PaymentForm(ModelForm):
     # image = forms.CharField(required=False, widget=forms.TextInput(attrs={"class": "form-control"}))
-    card_number = forms.IntegerField(widget=forms.NumberInput(attrs={"class": "form-control col-sm-2 price form-group-3", 'label': 'Kortanúmer'}))
-    expiration = forms.IntegerField( widget=forms.NumberInput(attrs={"class": "form-control col-sm-2 price form-group-3", 'label': 'Gildistími'}))
-    cvc = forms.IntegerField(widget=forms.NumberInput(attrs={"class": "form-control col-sm-2 price form-group-3", 'label': 'CVC öryggisnúmer'}))
+    card_number = forms.IntegerField(widget=forms.NumberInput(attrs={"class": "form-control col-sm-2 price form-group-3", "lable": "Kortanúmer"}))
+    expiration = forms.IntegerField( widget=forms.NumberInput(attrs={"class": "form-control col-sm-2 price form-group-3", "lable": "Gildistími"}))
+    cvc = forms.IntegerField(widget=forms.NumberInput(attrs={"class": "form-control col-sm-2 price form-group-3", "lable": "CVC öryggisnúmer"}))
 
     class Meta:
         model = Payment
-        exclude = ['id', 'estate_id', 'buyer_id', 'seller_id', 'offer']
+        exclude = ['id', 'offer']
         widgets = {
             'received': widgets.HiddenInput(attrs={"value": datetime.datetime.now(), "required": False}),
         }

@@ -38,12 +38,6 @@
                                     {% else %}
                                         Greitt
                                     {% endif %}
-                                {% elif offer.status == 'Incoming' %}
-                                    {% if todays_date < offer.expires|date:"Y-m-d-h" %}
-                                        Beðið yfirferðar
-                                    {% else %}
-                                        Útrunnið
-                                    {% endif %}
                                 {% endif %}
                             {% elif from_me %}
                                 {% if offer.status == 'Incoming' and todays_date < offer.expires|date:"Y-m-d-h" %}
