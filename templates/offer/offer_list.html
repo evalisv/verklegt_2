@@ -2,6 +2,7 @@
 {% block content %}
     {% now "Y-m-d-h" as todays_date %}
 {#    {% now "Y-m-d H:i:s" as todays_date %}#}
+    <div class="breadcrumbs">Forsíða > Mínar síður > Tilboð</div>
     <div class="content-container my-5 p-5 offers-container">
         <h3 class="text-center">Tilboð</h3>
         <div class="row">
@@ -37,6 +38,7 @@
                             {% include 'offer/offer_item.html' with offers=offers is_admin_page=True incoming_offers=True %}
                         </div>
                     {% endif %}
+                <button class="btn btn-link float-right my-2" onclick="window.history.go(-1); return false;">Til baka</button>
                 </div>
             </div>
         </div>

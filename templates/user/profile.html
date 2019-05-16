@@ -1,5 +1,6 @@
 {%  extends "base.html" %}
 {% block content %}
+    <div class="breadcrumbs">Forsíða > Mínar síður</div>
     <div class="content-container my-5 p-5 dashboard-container">
         <div class="my-page-area">
         <h3 class="text-center">Mínar síður</h3>
@@ -40,7 +41,7 @@
                     </div>
                 </a>
                 {% if user_role == 'admin' %}
-                    <a href="/users/index" class="col-{{ number_of_cols }} card">
+                    <a href="{% url 'user-index' %}" class="col-{{ number_of_cols }} card">
                         <div class="m-1 p-5 text-center">
                             <i class="fa fa-users fa-3x"></i>
                             Notendur

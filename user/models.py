@@ -9,7 +9,7 @@ class Country(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_image = models.FileField(upload_to="media/users", max_length=9999)
+    profile_image = models.FileField(upload_to='media/users', max_length=9999, blank=True, null=True)
     kennitala = models.BigIntegerField()
     phone_number = models.IntegerField()
     address = models.CharField(max_length=255)

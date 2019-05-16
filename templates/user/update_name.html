@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
+    <div class="breadcrumbs">Forsíða > Mínar síður > Stillingar > Uppfæra nafn</div>
     <h1>Uppfæra nafn</h1>
     <form class="form form-horizontal" action="{% url 'update_name'%}" method="post">
         {%  csrf_token %}
         {{ form }}
         <input type="submit" value="Uppfæra" class="btn btn-primary pull-right" style="clear:both; margin: 10px 0" />
+        <button class="btn btn-link float-right my-3" onclick="window.history.go(-1); return false;">Til baka</button>
     </form>
 {% endblock %}

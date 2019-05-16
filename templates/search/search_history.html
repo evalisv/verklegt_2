@@ -1,5 +1,6 @@
 {%  extends "base.html" %}
 {% block content %}
+    <div class="breadcrumbs">Forsíða > Mínar síður > Leitarsaga</div>
     <div class="content-container search-history my-5 p-5">
         <div class="my-page-area">
             <h3 class="text-center">Leitarsaga</h3>
@@ -17,6 +18,7 @@
                     </div>
                 </a>
             </div>
+            <button class="btn btn-link float-right my-2" onclick="window.history.go(-1); return false;">Til baka</button>
         </div>
     </div>
 {% endblock %}

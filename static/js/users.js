@@ -2,22 +2,18 @@ $(document).ready(function(){
     // Selectors
     let registerUserContainer = $('.content-container.register-user');
     let registerUserErrors = $('.register-user ul.errorlist');
-    let registerUserErrorsItem = $('.register-user ul.errorlist li');
+    // let registerUserErrorsItem = $('.register-user ul.errorlist li');
     let loginUserContainer = $('.content-container.login-user');
     let updateProfileContainer = $('.content-container.update-profile');
 
     if (registerUserContainer.length > 0) {
-        fillOutUserName();
+        console.log('register');
         addClassNamesToLabels();
         manipulateHtml();
     }
 
     if (registerUserErrors.length > 0) {
         registerUserErrors.addClass('alert alert-danger py-1');
-        if (registerUserErrorsItem.text() === 'A user with that username already exists.') {
-            $('label[for="id_username"] + ul.errorlist').addClass('username-error');
-            $(registerUserErrorsItem).text('Notandi með þetta netfang er þegar skráður.');
-        }
     }
 
     if (loginUserContainer.length > 0) {
@@ -37,20 +33,24 @@ function addClassNamesToLabels() {
         .addClass('form-group-2 col-sm-4');
     $('.register-user label[for="id_email"]')
         .addClass('form-group-3 col-sm-4');
-    $('.register-user label[for="id_password1"]')
+    $('.register-user label[for="id_username"]')
         .addClass('form-group-4 col-sm-4');
-    $('.register-user label[for="id_password2"]')
+    $('.register-user label[for="id_password1"]')
         .addClass('form-group-5 col-sm-4');
-    $('.register-user label[for="id_kennitala"]')
+    $('.register-user label[for="id_password2"]')
         .addClass('form-group-6 col-sm-4');
-    $('.register-user label[for="id_phone_number"]')
-        .addClass('form-group-6 col-sm-2');
-    $('.register-user label[for="id_address"]')
+    $('.register-user label[for="id_kennitala"]')
         .addClass('form-group-7 col-sm-4');
-    $('.register-user label[for="id_postal_code"]')
+    $('.register-user label[for="id_phone_number"]')
+        .addClass('form-group-7 col-sm-2');
+    $('.register-user label[for="id_address"]')
         .addClass('form-group-8 col-sm-4');
+    $('.register-user label[for="id_postal_code"]')
+        .addClass('form-group-9 col-sm-4');
     $('.register-user label[for="id_country"]')
-        .addClass('form-group-8 col-sm-2');
+        .addClass('form-group-9 col-sm-2');
+    $('.register-user label[for="id_profile_image"]')
+        .addClass('form-group-9 col-sm-4 my-2')
 }
 
 function manipulateHtml() {
@@ -62,14 +62,7 @@ function manipulateHtml() {
     $('.register-user .form-group-6').wrapAll('<div class="row p-2" />');
     $('.register-user .form-group-7').wrapAll('<div class="row p-2" />');
     $('.register-user .form-group-8').wrapAll('<div class="row p-2" />');
-}
-
-function fillOutUserName() {
-    $('#id_username').removeAttr('autofocus').addClass('disabled');
-    $('#id_email').on('keyup', function() {
-        let email = $('#id_email').val();
-        $('#id_username').val(email);
-    });
+    $('.register-user .form-group-9').wrapAll('<div class="row p-2" />');
 }
 
 function manipulateUpdateFormHtml() {
