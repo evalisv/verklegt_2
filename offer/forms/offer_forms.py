@@ -8,15 +8,15 @@ class MakeOfferForm(ModelForm):
         model = Offer
         exclude = ['id', 'estate', 'offer_maker', 'payment', 'counter_offer_to']
         widgets = {
-            "amount": widgets.NumberInput(attrs={"class": "form-control"}),
-            "expires": widgets.SelectDateWidget(attrs={"class": "form-control col-4 float-left"}),
-            "offer_made": widgets.HiddenInput(attrs={"value": datetime.datetime.now()}),
-            "payed": widgets.HiddenInput(attrs={"value": False}),
-            "status": widgets.HiddenInput(attrs={"value": "Incoming"}),
+            'amount': widgets.NumberInput(attrs={'class': 'form-control'}),
+            'expires': widgets.SelectDateWidget(attrs={'class': 'form-control col-4 float-left'}),
+            'offer_made': widgets.HiddenInput(attrs={'value': datetime.datetime.now()}),
+            'payed': widgets.HiddenInput(attrs={'value': False}),
+            'status': widgets.HiddenInput(attrs={'value': 'Incoming'}),
         }
         labels = {
-            "amount": "Upphæð",
-            "expires": "Gildir til"
+            'amount': 'Upphæð',
+            'expires': 'Gildir til'
         }
 
     def clean_amount(self):
