@@ -16,9 +16,9 @@ def make_payment(request, id):
     if request.method == 'POST':
         form = PaymentForm(data=request.POST, instance=offer)
         if form.is_valid():
-            form = form.save(commit=False)
-            form.amount = offer.amount
-            form.save()
+            payment = form.save(commit=False)
+            payment.offer = offer
+            payment.save()
             return redirect('review_payment', offer.id)
     else:
         # form = PaymentForm()
