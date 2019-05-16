@@ -27,17 +27,39 @@ def search_view(request):
     if bilskur == 'on':
         bilskur = True
 
-
     staerdfra = request.GET.get('staerdfra')
-    if staerdfra == 'Frá':
+    if staerdfra == '':
         staerdfra = 0
-    staerdfra = int(staerdfra.split('staerdfra')[0])
 
     staerdtil = request.GET.get('staerdtil')
-    if staerdfra == 'Til':
-        staerdfra = 100000
-    staerdtil = int(staerdtil.split('staerdtil')[0])
+    if staerdtil == '':
+        staerdtil = 100000
 
+    verdfra = request.GET.get('verdfra')
+    if verdfra == '':
+        verdfra = 0
+
+    verdtil = request.GET.get('verdtil')
+    if verdtil == '':
+        verdtil = 300000000
+
+    herbergifra = request.GET.get('herbergifra')
+    if herbergifra == '':
+        herbergifra = 0
+
+    herbergitil = request.GET.get('herbergitil')
+    if herbergitil == '':
+        herbergitil = 10
+
+    #tékk fyrir því að til stærðin sé ekki minni en frá
+    if herbergitil < herbergifra:
+        herbergitil = herbergifra
+
+    if verdtil < verdfra:
+        verdtil = verdfra
+
+    if staerdtil < staerdfra:
+        staerdtil = staerdfra
 
     #Fylki fyrir array sem innihalda póstnúmer sem hakað er við og tegund húsnæðis
     pnr_arr = []
@@ -103,6 +125,8 @@ def search_view(request):
             lookup4 = (Q(garage=True) | Q(garage=False))
 
         lookup5 = (Q(size__gte=staerdfra) & Q(size__lte=staerdtil))
+        lookup6 = (Q(price__gte=verdfra) & Q(price__lte=verdtil))
+        lookup7 = (Q(bedrooms__gte=herbergifra) & Q(bedrooms__lte=herbergitil))
 
         if len(type_arr) > 0 and len(pnr_arr) == 0:
             estates = Estate.objects.filter(lookup)\
@@ -110,7 +134,9 @@ def search_view(request):
                 .filter(lookup2)\
                 .filter(lookup3)\
                 .filter(lookup4)\
-                .filter(lookup5)
+                .filter(lookup5)\
+                .filter(lookup6)\
+                .filter(lookup7)
         elif len(type_arr) > 0 and len(pnr_arr) > 0:
             estates = Estate.objects.filter(lookup)\
                 .filter(postal_code__postal_code__in=pnr_arr)\
@@ -118,20 +144,26 @@ def search_view(request):
                 .filter(lookup2)\
                 .filter(lookup3)\
                 .filter(lookup4)\
-                .filter(lookup5)
+                .filter(lookup5)\
+                .filter(lookup6)\
+                .filter(lookup7)
         elif len(type_arr) == 0 and len(pnr_arr) > 0:
             estates = Estate.objects.filter(lookup)\
                 .filter(postal_code__postal_code__in=pnr_arr)\
                 .filter(lookup2)\
                 .filter(lookup3)\
                 .filter(lookup4)\
-                .filter(lookup5)
+                .filter(lookup5)\
+                .filter(lookup6)\
+                .filter(lookup7)
         else:
             estates = Estate.objects.filter(lookup)\
                 .filter(lookup2)\
                 .filter(lookup3)\
                 .filter(lookup4)\
-                .filter(lookup5)
+                .filter(lookup5)\
+                .filter(lookup6)\
+                .filter(lookup7)
         context['estates'] = estates
         print(context)
     return render(request, 'search/search_results.html', context)
