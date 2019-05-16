@@ -103,6 +103,7 @@ def search_view(request):
         user = request.user
     context = {'query': query}
 
+    #query fyrir strengjaleit í glugga
     if query is not None:
         SearchQuery.objects.create(user=user, query=query)
         lookup = (Q(address__icontains=query) |
