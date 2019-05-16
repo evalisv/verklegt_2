@@ -9,7 +9,6 @@ from payment import views as paymentviews
 
 
 urlpatterns = [
-    # url, fall sem á að keyrast þegar farið er á urlið, nafn á fallinu
     path('', views.index, name='user-index'),
     path('index', views.view_user, name='user-index'),
     path('login', LoginView.as_view(template_name='user/login.html'), name='login'),
@@ -20,7 +19,7 @@ urlpatterns = [
     path('profile/history/', searchviews.search_history, name='search_history'),
     path('profile/history/viewing_history', vhistoryviews.get_vhistory_by_user, name='viewing_history'),
     path('profile/history/search_history', searchviews.view_search_words, name='search_word_history'),
-    path('profile/settings', views.user_settings, name='settings'), #TODO: búa til settings sídu
+    path('profile/settings', views.user_settings, name='settings'),
     path('profile/settings/update_profile', views.update_profile, name='update_profile'),
     path('profile/settings/update_name', views.update_name, name='update_name'),
     path('profile/settings/update_password', views.update_password, name='update_password'),
@@ -40,6 +39,3 @@ urlpatterns = [
     path('profile/agents/update_agent/<int:id>', views.update_profile, name='update_agent')
 
 ]
-
-
-# path('update_profile/<int:gid>', views.update_profile, name='update_profile'),

@@ -6,7 +6,7 @@ class Municipality(models.Model):
     postal_code = models.IntegerField(primary_key=True)
     municipality = models.CharField(max_length=255)
     def __str__(self):
-        return str(self.postal_code) + " " + str(self.municipality)
+        return str(self.postal_code) + ' ' + str(self.municipality)
 
 
 class EstateType(models.Model):
@@ -34,7 +34,7 @@ class Estate(models.Model):
     views = models.IntegerField()
     elevator = models.BooleanField()
     date_listed = models.DateTimeField()
-    images = models.FileField(upload_to="media", max_length=9999)
+    images = models.FileField(upload_to='media', max_length=9999)
     def __str__(self):
         return self.address
 

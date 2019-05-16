@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="breadcrumbs">Forsíða > Mínar síður > Fasteignasalar</div>
+    {% if not is_admin %}
+        {% include 'components/forbidden.html' %}
+    {% else %}
+        <div class="content-container agents-list my-5 p-5">
+            <h3 class="text-center">Fasteignasalar</h3>
+            <div class="row">
+                <div class="col-12">
+                        <div class="row">
+                            {%  for user in users %}
+                                <div class="col-4 card py-2">
+                                    {% include 'user/single_admin.html' with user=user %}
+                                    <a href="#" class="btn btn-primary float-right m-1">Uppfæra</a>
+                                    <a href="#" class="btn btn-danger float-right m-1">Eyða</a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <a class="btn btn-primary float-right my-2" href="{% url 'register_agent' %}">Skrá nýjan fasteignasala</a>
+                    <button class="btn btn-link float-right my-2" onclick="window.history.go(-1); return false;">Til baka</button>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

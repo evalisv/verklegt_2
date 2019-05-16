@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+    <div class="breadcrumbs">Forsæiða > Mínar síður > Eignir > Uppfæra eign</div>
     <div class="content-container update-estate my-5 p-5">
     {% if request.user == estate.estate_seller or user_role == 'admin' %}
         <h3 class="text-center">Fasteignin mín: {{ estate }}</h3>
