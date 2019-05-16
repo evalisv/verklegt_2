@@ -162,7 +162,7 @@ def my_offers(request):
         'no_received_offers': no_received_offers,
         'user_role': user_role
     }
-    return render(request, "offer/offer_list.html", context)
+    return render(request, 'offer/offer_list.html', context)
 
 
 @login_required
