@@ -11,6 +11,7 @@ from payment import views as paymentviews
 urlpatterns = [
     # url, fall sem á að keyrast þegar farið er á urlið, nafn á fallinu
     path('', views.index, name="user-index"),
+    path('index', views.view_user, name="user-index"),
     path('login', LoginView.as_view(template_name='user/login.html'), name='login'),
     path('logout', LogoutView.as_view(next_page='login'), name='logout'),
     path('register', views.register, name='register'),
@@ -34,6 +35,7 @@ urlpatterns = [
     path('profile/my_offers/pay<int:id>/review/confirmation', paymentviews.confirmation, name="confirmation"),
     path('profile/agents/', views.view_agents, name='agent-index'),
     path('profile/agents/register_agent/', views.register_agent, name='register_agent')
+
 ]
 
 
