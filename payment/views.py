@@ -17,16 +17,14 @@ def make_payment(request, id):
     if request.method == 'POST':
         form = PaymentForm(request.POST)
         if form.is_valid():
-            payment = Payment(received= datetime.datetime.now(), offer=offer)
-            payment.save()
             return redirect('review_payment', offer.id)
-        else:
-            return render(request, 'payment/payment_step.html', {
-                'form': PaymentForm(request.POST),
-                'error_messages': form.error_messages,
-                'error_class': form.error_class,
-                'errors': form.errors,
-            })
+        # else:
+        #     return render(request, 'payment/payment_step.html', {
+        #         'form': PaymentForm(request.POST),
+        #         'error_messages': form.error_messages,
+        #         'error_class': form.error_class,
+        #         'errors': form.errors,
+        #     })
     else:
         return render(request, 'payment/payment_step.html', {
             'form': PaymentForm(),
@@ -38,7 +36,7 @@ def make_payment(request, id):
 def get_review_info(request, id):
     offer = get_object_or_404(Offer, pk=id)
     return render(request, 'payment/review_step.html', {
-        'offer': offer
+        'offer': offer,
     })
 
 @login_required
@@ -46,4 +44,8 @@ def confirmation(request, id):
     offer = get_object_or_404(Offer, pk=id)
     offer.payed = True
     offer.save()
+    payment = Payment(received=datetime.datetime.now(), offer=offer)
+    payment.save()
+    # estate = get_object_or_404(Estate, pk=offer.estate)
+    # estate.delete()
     return render(request, 'payment/confirmation_step.html')
