@@ -142,6 +142,11 @@ def register_agent(request):
         })
 
 
+def delete_agent(request, id):
+    exiting_agent = get_object_or_404(User, pk=id)
+    exiting_agent.delete()
+    return redirect('agent-index')
+
 @login_required
 def my_offers(request):
     offer_list = Offer.objects.all().order_by('offer_made')
