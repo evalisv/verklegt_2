@@ -6,18 +6,10 @@ from payment.models import Payment
 from django.core.exceptions import ValidationError
 from django import forms
 
-class PaymentForm(ModelForm):
-    # image = forms.CharField(required=False, widget=forms.TextInput(attrs={"class": "form-control"}))
+class PaymentForm(forms.Form):
     card_number = forms.IntegerField(widget=forms.NumberInput(attrs={"class": "form-control col-sm-2 price form-group-3", "lable": "Kortanúmer"}))
     expiration = forms.IntegerField( widget=forms.NumberInput(attrs={"class": "form-control col-sm-2 price form-group-3", "lable": "Gildistími"}))
     cvc = forms.IntegerField(widget=forms.NumberInput(attrs={"class": "form-control col-sm-2 price form-group-3", "lable": "CVC öryggisnúmer"}))
-
-    class Meta:
-        model = Payment
-        exclude = ['id', 'offer']
-        widgets = {
-            'received': widgets.HiddenInput(attrs={"value": datetime.datetime.now(), "required": False}),
-        }
 
     def clean_card_number(self):
         card_number_passed = self.cleaned_data.get('card_number')

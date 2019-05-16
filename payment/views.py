@@ -6,6 +6,7 @@ from payment.models import Payment
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from offer.models import Offer
+import datetime
 
 def index(request):
     return HttpResponse('<h1>payment</h1>')
@@ -14,14 +15,12 @@ def index(request):
 def make_payment(request, id):
     offer = get_object_or_404(Offer, pk=id)
     if request.method == 'POST':
-        form = PaymentForm(data=request.POST, instance=offer)
+        form = PaymentForm(data=request.POST)
         if form.is_valid():
-            payment = form.save(commit=False)
-            payment.offer = offer.id
+            payment = Payment(received= datetime.datetime.now(), offer=offer)
             payment.save()
             return redirect('review_payment', offer.id)
     else:
-        # form = PaymentForm()
         return render(request, 'payment/payment_step.html', {
             'form': PaymentForm(),
             'offer': offer
