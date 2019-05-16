@@ -8,7 +8,7 @@
                         {%  for user in users %}
                             <div class="col-4 card py-2">
                                 {% include 'agent/single_agent.html' with user=user %}
-                                <a href="#" class="btn btn-primary float-right m-1">Uppfæra</a>
+                                <a href="{% url 'update_agent' user.id %}" class="btn btn-primary float-right m-1">Uppfæra</a>
                                 <a href="{% url 'delete_agent' user.id %}" class="btn btn-danger float-right m-1">Eyða</a>
                             </div>
                         {% endfor %}
