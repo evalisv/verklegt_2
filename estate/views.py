@@ -12,6 +12,7 @@ def index(request):
     paginator = Paginator(estate_list, 6)
 
     page = request.GET.get("page")
+    print('index', page)
     estates = paginator.get_page(page)
 
     context = {"estates": estates}
@@ -71,7 +72,7 @@ def delete_estate(request, id):
 @login_required
 def update_estate(request, id):
     instance = get_object_or_404(Estate, pk=id)
-    user_role = get_object_or_404(UserRole, user_id = request.user.id)
+    # user_role = get_object_or_404(UserRole, user_id = request.user.id)
     if request.method == 'POST':
         form = UpdateEstateForm(request.POST, request.FILES, instance=instance)
         if form.is_valid():
@@ -88,8 +89,7 @@ def update_estate(request, id):
     return render(request, 'estate/update_estate.html', {
         'form': form,
         'id': id,
-        'estate': instance,
-        'user_role': user_role
+        'estate': instance
     })
 
 
@@ -97,18 +97,17 @@ def sort_estates(request):
     order_by = request.GET.get('order_by', 'defaultOrderField')
     estate_list = Estate.objects.all().order_by(order_by)
 
-    # if 'orderbyaddress' in request.GET:
-    #     estate_list.order_by('address')
-    # elif 'orderbyprice' in request.GET:
-    #     estate_list.order_by('price')
-    # elif 'orderbydate' in request.GET:
-    #     estate_list.order_by('date_listed')
-
     paginator = Paginator(estate_list, 6)
     page = request.GET.get("page")
+
+    sorting = request.GET.get('order_by')
+
     estates = paginator.get_page(page)
 
-    context = {'estates': estates}
+    context = {
+        'estates': estates,
+        'sorting': sorting
+    }
     return render(request, 'estate/index.html', context)
 
 #Fall til að kalla fram eignir notanda, fyrir 'Mínar eignir á sölu' - áfs:
