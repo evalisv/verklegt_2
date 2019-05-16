@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="breadcrumbs">Forsíða > Mínar síður > Eignir</div>
+    <div class="breadcrumbs"><a href="{% url 'homepage' %}">Forsíða</a> > <a href="{% url 'profile' %}">Mínar síður</a> > Eignir</div>
     <div class="content-container my-estates my-5 p-5">
         <h3 class="text-center">Mínar eignir</h3>
         <div class="row">
