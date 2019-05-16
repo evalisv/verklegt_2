@@ -139,7 +139,7 @@ def my_offers(request):
     no_made_offers = True
 
     for offer in offer_list:
-        if offer.estate.estate_seller == request.user and offer.status == 'Approved':
+        if offer.estate.estate_seller == request.user and offer.status != 'Incoming':
             no_received_offers = False
             break
 

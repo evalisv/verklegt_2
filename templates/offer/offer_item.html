@@ -16,7 +16,7 @@
             </tr>
         {% else %}
             {% for offer in offers %}
-                {% if offer.estate.estate_seller == request.user and to_me or offer.offer_maker == request.user and from_me or is_admin_page and all_offers and offer or is_admin_page and incoming_offers and offer.status == 'Incoming' and todays_date < offer.expires|date:"Y-m-d-h" %}
+                {% if offer.estate.estate_seller == request.user and to_me and offer.status != 'Incoming' or offer.offer_maker == request.user and from_me or is_admin_page and all_offers and offer or is_admin_page and incoming_offers and offer.status == 'Incoming' and todays_date < offer.expires|date:"Y-m-d-h" %}
                     <tr>
                         <td>{{ offer.amount }}</td>
                         <td>{{ offer.estate.address }}</td>
