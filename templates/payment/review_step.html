@@ -2,51 +2,55 @@
 {% block content %}
     <div class="breadcrumbs">Forsíða > Mínar síður > Tilboð > Greiðsluupplýsinar > Yfirlit upplýsinga</div>
     <div class="content-container payment-step my-5 p-5">
-    <h3 class="text-center">Yfirlit upplýsinga</h3>
+        <h1 class="text-center">Yfirlit upplýsinga</h1>
         <div class="row">
             <div class="col-12">
-                 <div>
-                    <h3>Upplýsingar um kaupanda</h3>
-                     <p>
-                         Nafn: {{ request.user.get_full_name }} <br>
-                         Kennitala: {{ request.user.profile.kennitala }} <br>
-                         Heimilisfang: {{ request.user.profile.address }} <br>
-                         Póstnúmer: {{ request.user.profile.postal_code.postal_code }} <br>
-                         Staður: {{ request.user.profile.postal_code.municipality }} <br>
-                         Land: {{ request.user.profile.country.country }} <br>
-                         Símanúmer: {{ request.user.profile.phone_number }} <br>
-                         Netfang: {{ request.user.email}}
-                     </p>
+                <div class="row">
+                    <div class="col-6">
+                         <h4>Upplýsingar um kaupanda</h4>
+                         <p>
+                             Nafn: {{ request.user.get_full_name }} <br>
+                             Kennitala: {{ request.user.profile.kennitala }} <br>
+                             Heimilisfang: {{ request.user.profile.address }} <br>
+                             Póstnúmer: {{ request.user.profile.postal_code.postal_code }} <br>
+                             Staður: {{ request.user.profile.postal_code.municipality }} <br>
+                             Land: {{ request.user.profile.country.country }} <br>
+                             Símanúmer: {{ request.user.profile.phone_number }} <br>
+                             Netfang: {{ request.user.email}}
+                         </p>
 {#                     TODO: next = sami stadur#}
-                     <a href="{% url 'update_profile' %}?next={% url 'review_payment' offer.id%}"><button>Breyta persónuupplýsingum</button></a>
-                 </div>
-                <div>
-                    <h3>Upplýsingar um fasteign</h3>
-                     <p>
-                        Heimilisfang: {{ offer.estate.address }} <br>
-                        Póstnúmer: {{ offer.estate.postal_code.postal_code }} <br>
-                        Staður: {{ offer.estate.postal_code.municipality }} <br>
-                         Fermetrafjöldi: {{ offer.estate.size }} <br>
-                         Fjöldi svefnherbergja: {{ offer.estate.bedrooms }} <br>
-                         Fjöldi baðherbergja: {{ offer.estate.bathrooms }} <br>
-                         Fasteignamat: {{ offer.estate.fasteignamat }} <br>
-                         Brunabótamat: {{ offer.estate.brunabotamat }} <br>
-                         Gerð húsnæðis: {{ offer.estate.type }} <br>
-                         Byggingarár: {{ offer.estate.year_built }} <br>
-                     </p>
-                        {% if estate.entry %}
-                            <p>Sérinngangur</p> <br>
-                        {% endif %}
-                        {% if estate.garage %}
-                            <p>Bílskúr</p> <br>
-                        {% endif %}
-                        {% if estate.elevator %}
-                            <p>Lyfta</p>
-                        {% endif %}
-                 </div>
-                    <a href="{% url 'confirmation' offer.id %}"><button>Staðfesta upplýsingar og greiða</button></a>
-                    <button class="btn btn-link float-right my-3 mx-2" onclick="window.history.go(-1); return false;">Til baka í greiðsluupplýsingar</button>
-                </form>
+{#                        <a href="{% url 'update_profile' %}?next={% url 'review_payment' offer.id%}"><button>Breyta persónuupplýsingum</button></a>#}
+                     </div>
+                    <div class="col-6">
+                         <h4>Upplýsingar um fasteign</h4>
+                         <p>
+                             Heimilisfang: {{ offer.estate.address }} <br>
+                             Póstnúmer: {{ offer.estate.postal_code.postal_code }} <br>
+                             Staður: {{ offer.estate.postal_code.municipality }} <br>
+                             Fermetrafjöldi: {{ offer.estate.size }} <br>
+                             Fjöldi svefnherbergja: {{ offer.estate.bedrooms }} <br>
+                             Fjöldi baðherbergja: {{ offer.estate.bathrooms }} <br>
+                             Fasteignamat: {{ offer.estate.fasteignamat }} <br>
+                             Brunabótamat: {{ offer.estate.brunabotamat }} <br>
+                             Gerð húsnæðis: {{ offer.estate.type }} <br>
+                             Byggingarár: {{ offer.estate.year_built }} <br>
+                             {% if not estate.entry %}
+                                 Sérinngangur<br>
+                             {% endif %}
+                             {% if not estate.garage %}
+                                 Bílskúr<br>
+                             {% endif %}
+                             {% if not estate.elevator %}
+                                 Lyfta
+                             {% endif %}
+                         </p>
+                     </div>
+                </div>
+                <div class="row">
+                     <div class="col-12">
+                         <a class="btn btn-success float-right my-2" href="{% url 'confirmation' offer.id %}">Staðfesta upplýsingar og greiða</a>
+                         <button class="btn btn-link float-right my-2 mx-2" onclick="window.history.go(-1); return false;">Til baka í greiðsluupplýsingar</button></div>
+                     </div>
             </div>
         </div>
     </div>
