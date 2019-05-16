@@ -7,9 +7,9 @@ from django.core.exceptions import ValidationError
 from django import forms
 
 class PaymentForm(forms.Form):
-    card_number = forms.IntegerField(widget=forms.NumberInput(attrs={"class": "form-control col-sm-2 price form-group-3", "label": "Kortanúmer"}))
-    expiration = forms.IntegerField( widget=forms.NumberInput(attrs={"class": "form-control col-sm-2 price form-group-3", "label": "Gildistími"}))
-    cvc = forms.IntegerField(widget=forms.NumberInput(attrs={"class": "form-control col-sm-2 price form-group-3", "label": "CVC öryggisnúmer"}))
+    card_number = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control col-sm-2 price form-group-3', 'label': 'Kortanúmer'}))
+    expiration = forms.IntegerField( widget=forms.NumberInput(attrs={'class': 'form-control col-sm-2 price form-group-3', 'label': 'Gildistími'}))
+    cvc = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control col-sm-2 price form-group-3', 'label': 'CVC öryggisnúmer'}))
 
     def clean_card_number(self):
         card_number_passed = self.cleaned_data['card_number']
