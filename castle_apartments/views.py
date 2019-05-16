@@ -11,3 +11,12 @@ def homepage(request):
     context = {'postal_codes': Municipality.objects.all(),
                'estates': Estate.objects.order_by('-date_listed')[:6]}
     return render(request, 'home.html', context)
+
+def about_us(request):
+    return render(request, 'footer/about.html')
+
+def contact(request):
+    return render(request, 'footer/contact.html')
+
+def terms(request):
+    return render(request, 'footer/terms.html')

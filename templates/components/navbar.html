@@ -29,7 +29,7 @@
                         Velkomin(n) {{ request.user.get_full_name }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/users/profile/settings">Uppfæra persónuupplýsingar</a>
+                        <a class="dropdown-item" href="{% url 'update_profile' %}">Uppfæra persónuupplýsingar</a>
                         <a class="dropdown-item" href="{% url 'profile' %}">Mínar síður</a>
                     </div>
                 </li>

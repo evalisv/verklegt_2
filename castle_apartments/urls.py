@@ -28,6 +28,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('offer/', include('offer.urls')),
     path('search/', search_view),
+    path('about', views.about_us, name='about_us'),
+    path('contact', views.contact, name='contact_us'),
+    path('terms', views.terms, name='terms')
 ]
 
 
