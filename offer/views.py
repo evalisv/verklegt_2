@@ -22,6 +22,7 @@ def make_offer(request, id):
             return redirect('my_offers')
     else:
         form = MakeOfferForm()
+
     return render(request, 'offer/make_offer.html',{
         'form': form,
         'id': id
