@@ -8,7 +8,7 @@ from vhistory.views import update_vhistory
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
 def index(request):
-    estate_list = Estate.objects.all().order_by('address')
+    estate_list = Estate.objects.filter(on_sale=True).order_by('address')
     paginator = Paginator(estate_list, 6)
 
     page = request.GET.get("page")
@@ -96,7 +96,7 @@ def update_estate(request, id):
 
 def sort_estates(request):
     order_by = request.GET.get('order_by', 'defaultOrderField')
-    estate_list = Estate.objects.all().order_by(order_by)
+    estate_list = Estate.objects.filter(on_sale=True).order_by(order_by)
 
     paginator = Paginator(estate_list, 6)
     page = request.GET.get("page")
@@ -115,7 +115,7 @@ def sort_estates(request):
 @login_required
 def seller_index(request):
     list_of_estates = []
-    for estate in Estate.objects.all():
+    for estate in Estate.objects.filter(on_sale=True):
         if estate.estate_seller == request.user:
             list_of_estates.append(estate)
     paginator = Paginator(list_of_estates, 6)
