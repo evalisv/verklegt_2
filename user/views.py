@@ -91,7 +91,6 @@ def register(request):
                 phone_number=new_user_meta['phone_number'],
                 address=new_user_meta['address'],
                 postal_code_id=new_user_meta['postal_code'],
-                country_id=new_user_meta['country'],
                 profile_image=file
             )
             new_profile.save()
@@ -164,7 +163,6 @@ def register_agent(request):
                 phone_number=new_user_meta['phone_number'],
                 address=new_user_meta['address'],
                 postal_code_id=new_user_meta['postal_code'],
-                country_id=new_user_meta['country'],
                 profile_image=request.FILES['profile_image']
             )
             new_profile.save()

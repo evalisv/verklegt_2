@@ -65,11 +65,6 @@ class AgentRegistrationForm(UserCreationForm):
         choices=postal_codes,
         widget=forms.Select(attrs={'class': 'form-control col-sm-3 form-group-9'})
     )
-    country = forms.ChoiceField(
-        label='Land',
-        choices=countries,
-        widget=forms.Select(attrs={'class': 'form-control col-sm-3 form-group-9'})
-    )
     profile_image = forms.FileField(
         label='Mynd',
         widget=forms.ClearableFileInput()
@@ -88,7 +83,6 @@ class AgentRegistrationForm(UserCreationForm):
             'phone_number',
             'address',
             'postal_code',
-            'country',
             'profile_image')
 
 
