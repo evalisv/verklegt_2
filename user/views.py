@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from offer.models import Offer
 from django.contrib.auth import update_session_auth_hash
 from django.core.paginator import Paginator
+from django.forms.utils import ErrorList
 
 
 def index(request):
@@ -27,7 +28,8 @@ def update_name(request):
     else:
         form = UpdateNameForm(instance=instance)
         return render(request, 'user/update_name.html', {
-            'form': form
+            'form': form,
+            'user': instance
         })
 
 
@@ -37,7 +39,7 @@ def update_profile(request):
     user_profile = Profile.objects.filter(user=request.user).first()
     file = request.FILES.get('profile_image', user_profile.profile_image)
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=user_profile)
+        form = ProfileForm(request.POST, request.FILES, user_profile)
         if form.is_valid():
             user_profile = form.save(commit=False)
             user_profile.profile_image = file
@@ -46,11 +48,16 @@ def update_profile(request):
             if next_page:
                 return redirect(next_page)
             return redirect('profile')
-    return render(request, 'user/update_profile.html', {
-        'form': ProfileForm(instance=user_profile),
-        'readOnlyData': request.user,
-        'error_messages': ProfileForm(request.POST, request.FILES, instance=user_profile).errors
-    })
+        else:
+            return render(request, 'user/update_profile.html', {
+                'form': ProfileForm(instance=user_profile),
+                'readOnlyData': request.user,
+                'errors': form.errors
+            })
+    else:
+        return render(request, 'user/update_profile.html', {
+            'form': ProfileForm(instance=user_profile)
+        })
 
 
 def register(request):
@@ -73,7 +80,7 @@ def register(request):
             new_profile.save()
 
             user_role = UserRole(
-                role="user",
+                role='user',
                 user=new_user
             )
             user_role.save()
@@ -241,12 +248,19 @@ def update_password(request):
             form.save()
             update_session_auth_hash(request, form.user)
             return redirect('profile')
+        else:
+            return render(request, 'user/update_password.html', {
+                'form': form,
+                'readOnlyData': request.user,
+                'errors': form.error_messages
+            })
     else:
         form = PasswordForm(user=request.user)
-        return render(request, 'user/update_password.html', {
-            'form': form,
-            'readOnlyData': request.user,
-        })
+    return render(request, 'user/update_password.html', {
+        'form': form,
+        'readOnlyData': request.user,
+        'errors': form.error_messages
+    })
 
 
 
