@@ -43,19 +43,18 @@ def register_estate(request):
             for img in pics:
                 estate_picture = EstatePictures(url=img, estate=estate)
                 estate_picture.save()
-            # TODO: Búa til tengingu á user role ef notandi hefur ekki seller role
             print("seller", estate.estate_seller)
 
             # TODO: færa þetta inn í for lykkuna fyrir myndir
-            file_type = estate.images.url.split('.')[-1]
-            file_type = file_type.lower()
-            if file_type not in IMAGE_FILE_TYPES:
-                context = {
-                    "estate": estate,
-                    "form": form,
-                    "error_message": "Mynd þarf að vera af gerðinni PNG, JPG, eða JPEG",
-                }
-                return render(request, 'estate/register_estate.html', context)
+            #file_type = estate.images.url.split('.')[-1]
+            #file_type = file_type.lower()
+            #if file_type not in IMAGE_FILE_TYPES:
+            #    context = {
+            #        "estate": estate,
+            #        "form": form,
+            #        "error_message": "Mynd þarf að vera af gerðinni PNG, JPG, eða JPEG",
+            #    }
+            #    return render(request, 'estate/register_estate.html', context)
             return redirect('estate-index')
     else:
         form = RegisterEstateForm()
