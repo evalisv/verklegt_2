@@ -54,7 +54,7 @@ function addClassNamesToLabels() {
     $('.register-user label[for="id_country"]')
         .addClass('form-group-9 col-sm-2');
     $('.register-user label[for="id_profile_image"]')
-        .addClass('form-group-9 col-sm-4 my-2')
+        .addClass('form-group-10 col-sm-4 my-2')
 }
 
 function manipulateHtml() {
@@ -67,6 +67,7 @@ function manipulateHtml() {
     $('.register-user .form-group-7').wrapAll('<div class="row p-2" />');
     $('.register-user .form-group-8').wrapAll('<div class="row p-2" />');
     $('.register-user .form-group-9').wrapAll('<div class="row p-2" />');
+    $('.register-user .form-group-10').wrapAll('<div class="row p-2" />');
 }
 
 function manipulateUpdateFormHtml() {

@@ -72,7 +72,7 @@ class RegistrationForm(UserCreationForm):
     profile_image = forms.FileField(
         label='Mynd',
         required=False,
-        widget=forms.ClearableFileInput(attrs={'class': 'form-group-9 col-sm-8 my-2'})
+        widget=forms.ClearableFileInput(attrs={'class': 'form-group-10 col-sm-8 my-2'})
     )
 
     class Meta:
