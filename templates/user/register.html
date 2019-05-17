@@ -6,7 +6,9 @@
         <form class="form" method="POST" enctype="multipart/form-data">
             {%  csrf_token %}
             {{ form }}
-            <input type="submit" class="btn btn-primary float-right" value="Skrá mig" id="register" />
+            <p>Ég staðfesti að ég hef lesið og samþykki <a href="{% url 'terms' %}">skilmála</a> Castle Apartments<p>
+            <input type="checkbox" id="register-estate-checked" />
+            <input type="submit" class="btn btn-primary float-right" disabled="true" value="Skrá mig" id="btn-register-user" />
             <button class="btn btn-link float-right" data-toggle="modal" data-target="#exampleModal">Hætta við</button>
             <div class="modal" tabindex="-1" role="dialog" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
