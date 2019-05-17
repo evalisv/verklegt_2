@@ -1,11 +1,9 @@
-from django import forms
 from django.forms import ModelForm, widgets
 from django.contrib.auth.models import User
 from user.models import Profile
 from django.forms.widgets import ClearableFileInput
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.forms import UserCreationForm
 import datetime
 
 

@@ -1,15 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from payment.forms.payment_form import PaymentForm
-from estate.models import Estate
 from payment.models import Payment
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from offer.models import Offer
 import datetime
 
-def index(request):
-    return HttpResponse('<h1>payment</h1>')
 
 @login_required
 def make_payment(request, id):
