@@ -214,6 +214,11 @@ def accept_offer(request,id):
     estate = get_object_or_404(Estate, pk=offer.estate.id)
     estate.on_sale = False
     estate.save()
+    other_offers = Offer.objects.filter(estate=estate)
+    for item in other_offers:
+        if item != offer:
+            item.status = 'Rejected'
+            item.save()
     return redirect('my_offers')
 
 
