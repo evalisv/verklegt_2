@@ -5,7 +5,7 @@ from estate.models import Municipality, Estate
 
 def homepage(request):
     context = {'postal_codes': Municipality.objects.all(),
-               'estates': Estate.objects.order_by('-date_listed')[:6]}
+               'estates': Estate.objects.filter(on_sale=True).order_by('-date_listed')[:6]}
     return render(request, 'home.html', context)
 
 def about_us(request):

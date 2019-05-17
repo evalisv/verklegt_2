@@ -115,7 +115,9 @@
         </div>
         <div class="row">
             <div class="col-12">
+                {% if estate.on_sale == True %}
                 <a href="{% url 'make_offer' estate.id %}" class="btn btn-success my-2 float-right">Gera tilboð</a>
+                {% endif %}
                 <button class="btn btn-link float-right my-2" onclick="window.history.go(-1); return false;">Til baka</button>
 
             </div>

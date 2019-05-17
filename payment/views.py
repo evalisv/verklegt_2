@@ -18,19 +18,12 @@ def make_payment(request, id):
         form = PaymentForm(request.POST)
         if form.is_valid():
             return redirect('review_payment', offer.id)
-        # else:
-        #     return render(request, 'payment/payment_step.html', {
-        #         'form': PaymentForm(request.POST),
-        #         'error_messages': form.error_messages,
-        #         'error_class': form.error_class,
-        #         'errors': form.errors,
-        #     })
     else:
-        return render(request, 'payment/payment_step.html', {
-            'form': PaymentForm(),
-            'offer': offer
-            })
-
+        form = PaymentForm()
+    return render(request, 'payment/payment_step.html', {
+        'form': form,
+        'offer': offer
+    })
 
 @login_required
 def get_review_info(request, id):
@@ -46,6 +39,7 @@ def confirmation(request, id):
     offer.save()
     payment = Payment(received=datetime.datetime.now(), offer=offer)
     payment.save()
-    # estate = get_object_or_404(Estate, pk=offer.estate)
-    # estate.delete()
-    return render(request, 'payment/confirmation_step.html')
+
+    return render(request, 'payment/confirmation_step.html', {
+        'offer': offer,
+    })
