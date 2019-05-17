@@ -4,6 +4,7 @@ from user.forms.registration_form import RegistrationForm
 from user.forms.agent_registration_form import AgentRegistrationForm
 from user.forms.profile_form import UpdateNameForm, PasswordForm
 from user.models import Profile
+from estate.models import Estate
 from user_role.models import UserRole
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -211,6 +212,9 @@ def accept_offer(request,id):
     offer = get_object_or_404(Offer, pk=id)
     offer.status = 'Accepted'
     offer.save()
+    estate = get_object_or_404(Estate, pk=offer.estate.id)
+    estate.on_sale = False
+    estate.save()
     return redirect('my_offers')
 
 

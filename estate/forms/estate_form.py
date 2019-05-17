@@ -10,7 +10,7 @@ class UpdateEstateForm(ModelForm):
 
     class Meta:
         model = Estate
-        exclude = ['id', 'estate_seller']
+        exclude = ['id', 'estate_seller', 'on_sale']
         widgets = {
             'address': widgets.TextInput(attrs={'class': 'form-control col-sm-6 address form-group-1'}),
             'postal_code': widgets.Select(attrs={'class': 'form-control col-sm-2 postal-code form-group-1'}),
@@ -54,7 +54,7 @@ class RegisterEstateForm(ModelForm):
 
     class Meta:
         model = Estate
-        exclude = ['id', 'open_house', 'estate_seller']
+        exclude = ['id', 'open_house', 'estate_seller', 'on_sale']
         widgets = {
             'address': widgets.TextInput(attrs={'class': 'form-control col-sm-6 address form-group-1'}),
             'postal_code': widgets.Select(attrs={'class': 'form-control col-sm-2 postal-code form-group-1'}),
