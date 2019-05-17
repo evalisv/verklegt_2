@@ -33,6 +33,8 @@ urlpatterns = [
     path('profile/my_offers/pay<int:id>/review/confirmation', paymentviews.confirmation, name='confirmation'),
     path('profile/user_list', views.view_user, name='user-index'),
     path('profile/agents/', views.view_agents, name='agent-index'),
-    path('profile/agents/register_agent/', views.register_agent, name='register_agent')
+    path('profile/agents/register_agent/', views.register_agent, name='register_agent'),
+    path('profile/agents/delete_agent/<int:id>', views.delete_agent, name='delete_agent'),
+    path('profile/agents/update_agent/<int:id>', views.update_profile, name='update_agent')
 
 ]
