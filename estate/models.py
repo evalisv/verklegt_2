@@ -34,6 +34,7 @@ class Estate(models.Model):
     views = models.IntegerField()
     elevator = models.BooleanField()
     date_listed = models.DateTimeField()
+    on_sale = models.BooleanField(default=True)
     images = models.FileField(upload_to='media', max_length=9999)
     def __str__(self):
         return self.address
