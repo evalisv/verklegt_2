@@ -181,7 +181,7 @@ def register_agent(request):
 
 @login_required
 def my_offers(request):
-    offer_list = Offer.objects.all().order_by('offer_made')
+    offer_list = Offer.objects.all().order_by('-offer_made')
     user_role = request.user.userrole.role
 
     no_received_offers = True
