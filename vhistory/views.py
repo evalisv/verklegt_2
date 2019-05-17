@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from estate.models import Estate
 from vhistory.models import Vhistory
 from django.utils import timezone
