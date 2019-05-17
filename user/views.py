@@ -28,30 +28,53 @@ def update_name(request):
     else:
         form = UpdateNameForm(instance=instance)
         return render(request, 'user/update_name.html', {
-            'form': form
+            'form': form,
+            'user': instance
         })
 
 
 @login_required
-def update_profile(request):
-    next_page = request.GET.get('next', False)
-    user_profile = Profile.objects.filter(user=request.user).first()
+def update_profile(request, id = -1):
+    if id == -1:
+        next_page = request.GET.get('next', False)
+        user_profile = Profile.objects.filter(user=request.user).first()
+    else:
+        agent = get_object_or_404(User, id=id)
+        user_profile = Profile.objects.filter(user=agent).first()
     file = request.FILES.get('profile_image', user_profile.profile_image)
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=user_profile)
         if form.is_valid():
             user_profile = form.save(commit=False)
             user_profile.profile_image = file
-            user_profile.user = request.user
+            if id == -1:
+                user_profile.user = request.user
+            else:
+                user_profile.user = get_object_or_404(User, id=id)
             user_profile.save()
-            if next_page:
-                return redirect(next_page)
-            return redirect('profile')
+            if id == -1:
+                if next_page:
+                    return redirect(next_page)
+                return redirect('profile')
+            else:
+                return redirect('agent-index')
+        else:
+            return render(request, 'user/update_profile.html', {
+                'form': ProfileForm(instance=user_profile),
+                'readOnlyData': request.user,
+                'errors': form.errors
+            })
     return render(request, 'user/update_profile.html', {
         'form': ProfileForm(instance=user_profile),
         'readOnlyData': request.user,
         'error_messages': ProfileForm(request.POST, request.FILES, instance=user_profile).errors
     })
+
+
+def delete_agent(request, id):
+    exiting_agent = get_object_or_404(User, pk=id)
+    exiting_agent.delete()
+    return redirect('agent-index')
 
 
 def register(request):
@@ -74,7 +97,7 @@ def register(request):
             new_profile.save()
 
             user_role = UserRole(
-                role="user",
+                role='user',
                 user=new_user
             )
             user_role.save()
@@ -165,7 +188,7 @@ def register_agent(request):
 
 @login_required
 def my_offers(request):
-    offer_list = Offer.objects.all().order_by('offer_made')
+    offer_list = Offer.objects.all().order_by('-offer_made')
     user_role = request.user.userrole.role
 
     no_received_offers = True
@@ -250,12 +273,19 @@ def update_password(request):
             form.save()
             update_session_auth_hash(request, form.user)
             return redirect('profile')
+        else:
+            return render(request, 'user/update_password.html', {
+                'form': form,
+                'readOnlyData': request.user,
+                'errors': form.error_messages
+            })
     else:
         form = PasswordForm(user=request.user)
-        return render(request, 'user/update_password.html', {
-            'form': form,
-            'readOnlyData': request.user,
-        })
+    return render(request, 'user/update_password.html', {
+        'form': form,
+        'readOnlyData': request.user,
+        'errors': form.error_messages
+    })
 
 
 

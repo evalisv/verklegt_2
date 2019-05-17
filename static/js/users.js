@@ -1,19 +1,22 @@
 $(document).ready(function(){
     // Selectors
     let registerUserContainer = $('.content-container.register-user');
-    let registerUserErrors = $('.register-user ul.errorlist');
-    // let registerUserErrorsItem = $('.register-user ul.errorlist li');
+    let userErrors = $('ul.errorlist');
     let loginUserContainer = $('.content-container.login-user');
     let updateProfileContainer = $('.content-container.update-profile');
 
     if (registerUserContainer.length > 0) {
-        console.log('register');
         addClassNamesToLabels();
         manipulateHtml();
     }
 
-    if (registerUserErrors.length > 0) {
-        registerUserErrors.addClass('alert alert-danger py-1');
+    if (userErrors.length > 0) {
+        if ($('ul.errorlist ul.errorlist').length > 0) {
+            $('div > ul.errorlist > li').css('color', 'rgba(230,230,230,0.9)');
+            $('ul.errorlist ul.errorlist').addClass('alert alert-danger py-1')
+        } else {
+            userErrors.addClass('alert alert-danger py-1');
+        }
     }
 
     if (loginUserContainer.length > 0) {
@@ -22,6 +25,7 @@ $(document).ready(function(){
     }
 
     if (updateProfileContainer.length > 0) {
+        $('#profile_image-clear_id, label[for="profile_image-clear_id"]').addClass('hidden');
         manipulateUpdateFormHtml();
     }
 });
@@ -86,9 +90,11 @@ function manipulateUpdateFormHtml() {
     $('.update-profile label').addClass('col-2');
 
     $('label[for="id_address"]').addClass('form-group-2');
+    $('label[for="id_kennitala"]').addClass('form-group-1');
     $('label[for="id_phone_number"], label[for="id_postal_code"], label[for="id_country"]')
         .addClass('form-group-3');
 
+    $('.form-group-1').wrapAll('<div class="group-1 row my-2" />');
     $('.form-group-2').wrapAll('<div class="group-2 row my-2" />');
     $('.form-group-3').wrapAll('<div class="group-3 row my-2" />');
     $('.update-profile .group-3').insertAfter('.group-2');

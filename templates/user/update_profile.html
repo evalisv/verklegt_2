@@ -12,6 +12,11 @@
                 <form class="form" method="post" enctype="multipart/form-data">
                     {%  csrf_token %}
                     {{ form }}
+                    <div class="row errors">
+                        <div class="col-12">
+                            {{ errors }}
+                        </div>
+                    </div>
                     <div id="submit-profile-changes-wrapper" class="row">
                         <div class="col-12">
                             <input id="submit-profile-changes" type="submit" value="Uppfæra" class="btn btn-primary float-right my-3 mx-2" />
