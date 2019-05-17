@@ -28,7 +28,8 @@ def update_name(request):
     else:
         form = UpdateNameForm(instance=instance)
         return render(request, 'user/update_name.html', {
-            'form': form
+            'form': form,
+            'user': instance
         })
 
 
@@ -36,12 +37,11 @@ def update_name(request):
 def update_profile(request, id = -1):
     if id == -1:
         next_page = request.GET.get('next', False)
-        print(next_page)
         user_profile = Profile.objects.filter(user=request.user).first()
     else:
         agent = get_object_or_404(User, id=id)
         user_profile = Profile.objects.filter(user=agent).first()
-    file = request.FILES.get('profile_image', '')
+    file = request.FILES.get('profile_image', user_profile.profile_image)
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=user_profile)
         if form.is_valid():
@@ -58,13 +58,20 @@ def update_profile(request, id = -1):
                 return redirect('profile')
             else:
                 return redirect('agent-index')
+        else:
+            return render(request, 'user/update_profile.html', {
+                'form': ProfileForm(instance=user_profile),
+                'readOnlyData': request.user,
+                'errors': form.errors
+            })
     return render(request, 'user/update_profile.html', {
         'form': ProfileForm(instance=user_profile),
         'readOnlyData': request.user,
         'error_messages': ProfileForm(request.POST, request.FILES, instance=user_profile).errors
     })
 
-def delete_agent(request,id):
+
+def delete_agent(request, id):
     exiting_agent = get_object_or_404(User, pk=id)
     exiting_agent.delete()
     return redirect('agent-index')
@@ -90,7 +97,7 @@ def register(request):
             new_profile.save()
 
             user_role = UserRole(
-                role="user",
+                role='user',
                 user=new_user
             )
             user_role.save()
@@ -266,12 +273,19 @@ def update_password(request):
             form.save()
             update_session_auth_hash(request, form.user)
             return redirect('profile')
+        else:
+            return render(request, 'user/update_password.html', {
+                'form': form,
+                'readOnlyData': request.user,
+                'errors': form.error_messages
+            })
     else:
         form = PasswordForm(user=request.user)
-        return render(request, 'user/update_password.html', {
-            'form': form,
-            'readOnlyData': request.user,
-        })
+    return render(request, 'user/update_password.html', {
+        'form': form,
+        'readOnlyData': request.user,
+        'errors': form.error_messages
+    })
 
 
 

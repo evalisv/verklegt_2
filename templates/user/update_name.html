@@ -1,11 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="breadcrumbs"><a href="{% url 'homepage' %}">Forsíða</a> > <a href="{% url 'profile' %}">Mínar síður</a> > <a href="{% url 'settings' %}">Stillingar</a> > Uppfæra nafn</div>
-    <h1>Uppfæra nafn</h1>
-    <form class="form form-horizontal" action="{% url 'update_name'%}" method="post">
-        {%  csrf_token %}
-        {{ form }}
-        <input type="submit" value="Uppfæra" class="btn btn-primary pull-right" style="clear:both; margin: 10px 0" />
-        <button class="btn btn-link float-right my-3" onclick="window.history.go(-1); return false;">Til baka</button>
-    </form>
+    <div class="content-container update-profile my-5 p-5">
+        <h3 class="text-center">Uppfæra nafn</h3>
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <label class="col-2">Notendanafn:</label>
+                    <div class="col-10">{{ user.username }}</div>
+                </div>
+                <form class="form form-horizontal" action="{% url 'update_name'%}" method="post">
+                    {%  csrf_token %}
+                    {{ form }}
+                    <div class="row">
+                        <div class="col-12">
+                            <input type="submit" value="Uppfæra" class="btn btn-primary my-3 float-right" />
+                            <button class="btn btn-link float-right my-3" onclick="window.history.go(-1); return false;">Til baka</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}
