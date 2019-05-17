@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="breadcrumbs">Forsíða > Mínar síður > Eignir > Skrá fasteign</div>
+    <div class="breadcrumbs"><a href="{% url 'homepage' %}">Forsíða</a> > <a href="{% url 'profile' %}">Mínar síður</a> > <a href="{% url 'seller_estates' %}">Eignir</a> > Skrá fasteign</div>
     <div class="content-container register-estate my-5 p-5">
     <h3 class="text-center">Skrá fasteign til sölu</h3>
         <div class="row">

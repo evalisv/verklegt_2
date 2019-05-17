@@ -1,6 +1,6 @@
 {%  extends "base.html" %}
 {% block content %}
-    <div class="breadcrumbs">Forsíða > Nýskráning</div>
+    <div class="breadcrumbs"><a href="{% url 'homepage' %}">Forsíða</a> > Nýskráning</div>
     <div class="content-container login register-user">
         <h1 class="text-center">Nýskráning</h1>
         <form class="form" method="POST" enctype="multipart/form-data">
