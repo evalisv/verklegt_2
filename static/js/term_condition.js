@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    let regChecked = document.getElementById("register-estate-checked");
+    let regChecked = document.getElementById("agree-to-terms");
     let btnRegUser = document.getElementById("btn-register-user");
 
     regChecked.onclick = function(){
