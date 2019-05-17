@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-       <div class="breadcrumbs">Forsíða > Mínar síður > Leitarsaga > Skoðaðar eignir</div>
+    <div class="breadcrumbs"><a href="{% url 'homepage' %}">Forsíða</a> > <a href="{% url 'profile' %}">Mínar síður</a> > <a href="{% url 'search_history' %}">Leitarsaga</a> > Skoðaðar eignir</div>
     <div class="content-container view-history my-5 p-5">
         <h3 class="text-center">Skoðaðar eignir</h3>
         <div class="row">

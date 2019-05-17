@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="breadcrumbs">Forsíða > Mínar síður > Fasteignasalar</div>
+    <div class="breadcrumbs"><a href="{% url 'homepage' %}">Forsíða</a> > <a href="{% url 'profile' %}">Mínar síður</a> > Fasteignasalar</div>
     {% if not is_admin %}
         {% include 'components/forbidden.html' %}
     {% else %}
@@ -12,8 +12,8 @@
                             {%  for user in users %}
                                 <div class="col-4 card py-2">
                                     {% include 'user/single_admin.html' with user=user %}
-                                    <a href="#" class="btn btn-primary float-right m-1">Uppfæra</a>
-                                    <a href="#" class="btn btn-danger float-right m-1">Eyða</a>
+                                    <a href="{% url 'update_agent' user.id %}" class="btn btn-primary float-right m-1">Uppfæra</a>
+                                    <a href="{% url 'delete_agent' user.id %}" class="btn btn-danger float-right m-1">Eyða</a>
                                 </div>
                             {% endfor %}
                         </div>

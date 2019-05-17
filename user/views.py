@@ -32,13 +32,13 @@ def update_name(request):
 
 
 @login_required
-def update_profile(request, id=-1):
+def update_profile(request, id = -1):
     if id == -1:
-        next_page = request.GET['next']
+        next_page = request.GET.get('next', False)
         print(next_page)
         user_profile = Profile.objects.filter(user=request.user).first()
     else:
-        agent = get_object_or_404(User,id=id)
+        agent = get_object_or_404(User, id=id)
         user_profile = Profile.objects.filter(user=agent).first()
     file = request.FILES.get('profile_image', '')
     if request.method == 'POST':
@@ -49,7 +49,7 @@ def update_profile(request, id=-1):
             if id == -1:
                 user_profile.user = request.user
             else:
-                user_profile.user = get_object_or_404(User,id=id)
+                user_profile.user = get_object_or_404(User, id=id)
             user_profile.save()
             if id == -1:
                 if next_page:
@@ -63,6 +63,10 @@ def update_profile(request, id=-1):
         'error_messages': ProfileForm(request.POST, request.FILES, instance=user_profile).errors
     })
 
+def delete_agent(request,id):
+    exiting_agent = get_object_or_404(User, pk=id)
+    exiting_agent.delete()
+    return redirect('agent-index')
 
 def register(request):
     file = request.FILES.get('profile_image', '')
@@ -172,10 +176,6 @@ def register_agent(request):
             'form': AgentRegistrationForm()
         })
 
-def delete_agent(request, id):
-    exiting_agent = get_object_or_404(User, pk=id)
-    exiting_agent.delete()
-    return redirect('agent-index')
 
 @login_required
 def my_offers(request):

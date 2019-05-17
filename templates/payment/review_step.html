@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="breadcrumbs">Forsíða > Mínar síður > Tilboð > Greiðsluupplýsinar > Yfirlit upplýsinga</div>
+    <div class="breadcrumbs"><a href="{% url 'homepage' %}">Forsíða</a> > <a href="{% url 'profile' %}">Mínar síður</a> > <a href="{% url 'my_offers' %}">Tilboð</a> > <a href="{% url 'make_payment' id %}">Greiðsluupplýsinar</a> > Yfirlit upplýsinga</div>
     <div class="content-container payment-step my-5 p-5">
     <h3 class="text-center">Yfirlit upplýsinga</h3>
         <div class="row">
