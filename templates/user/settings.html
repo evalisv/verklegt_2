@@ -1,22 +1,31 @@
 {%  extends "base.html" %}
 {% block content %}
     <div class="breadcrumbs"><a href="{% url 'homepage' %}">Forsíða</a> > <a href="{% url 'profile' %}">Mínar síður</a> > Stillingar</div>
-    <div class="content-container my-5 p-5">
+    <div class="content-container my-5 p-5 dashboard-container">
         <div class="my-page-area">
             <h3 class="text-center">Stillingar</h3>
             <div class="row">
-                <div class="col-6 card my-1 p-5 text-center">
-                    <a href="{% url 'update_name' %}">Uppfæra nafn</a>
-                </div>
-                <div class="col-6 card my-1 p-5 text-center">
-                    <a href="{% url 'update_profile' %}">Uppfæra persónuupplýsingar</a>
-                </div>
-                <div class="col-6 card my-1 p-5 text-center">
-                    <a href="{% url 'update_password' %}">Uppfæra lykilorð</a>
-                </div>
-{#                If user is admin, then some additional options#}
+                <a href="{% url 'update_name' %}" class="col-4 card">
+                    <div class="m-1 p-5 text-center">
+                        <i class="fa fa-users fa-3x"></i>
+                        Uppfæra nafn
+                    </div>
+                </a>
+                <a href="{% url 'update_profile' %}" class="col-4 card">
+                    <div class="m-1 p-5 text-center">
+                        <i class="fa fa-file-text fa-3x"></i>
+                        Uppfæra persónuupplýsingar
+                    </div>
+                </a>
+                <a href="{% url 'update_password' %}" class="col-4 card">
+                   <div class="m-1 p-5 text-center">
+                       <i class="fa fa-cog fa-3x"></i>
+                        Uppfæra lyilorð
+                    </div>
+                </a>
             </div>
             <button class="btn btn-link float-right my-2" onclick="window.history.go(-1); return false;">Til baka</button>
         </div>
     </div>
 {% endblock %}
+
