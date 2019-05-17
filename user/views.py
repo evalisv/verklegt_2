@@ -33,25 +33,41 @@ def update_name(request):
 
 
 @login_required
-def update_profile(request):
-    next_page = request.GET.get('next', False)
-    user_profile = Profile.objects.filter(user=request.user).first()
-    file = request.FILES.get('profile_image', user_profile.profile_image)
+def update_profile(request, id = -1):
+    if id == -1:
+        next_page = request.GET.get('next', False)
+        print(next_page)
+        user_profile = Profile.objects.filter(user=request.user).first()
+    else:
+        agent = get_object_or_404(User, id=id)
+        user_profile = Profile.objects.filter(user=agent).first()
+    file = request.FILES.get('profile_image', '')
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=user_profile)
         if form.is_valid():
             user_profile = form.save(commit=False)
             user_profile.profile_image = file
-            user_profile.user = request.user
+            if id == -1:
+                user_profile.user = request.user
+            else:
+                user_profile.user = get_object_or_404(User, id=id)
             user_profile.save()
-            if next_page:
-                return redirect(next_page)
-            return redirect('profile')
+            if id == -1:
+                if next_page:
+                    return redirect(next_page)
+                return redirect('profile')
+            else:
+                return redirect('agent-index')
     return render(request, 'user/update_profile.html', {
         'form': ProfileForm(instance=user_profile),
         'readOnlyData': request.user,
         'error_messages': ProfileForm(request.POST, request.FILES, instance=user_profile).errors
     })
+
+def delete_agent(request,id):
+    exiting_agent = get_object_or_404(User, pk=id)
+    exiting_agent.delete()
+    return redirect('agent-index')
 
 
 def register(request):
