@@ -1,5 +1,5 @@
 from django.contrib.auth.views import LoginView, LogoutView
-from django.urls import path, include
+from django.urls import path
 from . import views
 from searches import views as searchviews
 from vhistory import views as vhistoryviews
