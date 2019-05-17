@@ -35,8 +35,15 @@ def get_review_info(request, id):
 @login_required
 def confirmation(request, id):
     offer = get_object_or_404(Offer, pk=id)
-    offer.payed = True
-    offer.save()
-    payment = Payment(received=datetime.datetime.now(), offer=offer)
-    payment.save()
-    return render(request, 'payment/confirmation_step.html')
+    already_payed = False
+    if len(Payment.objects.filter(offer_id=id)) == 0:
+        offer.payed = True
+        offer.save()
+        payment = Payment(received=datetime.datetime.now(), offer=offer)
+        payment.save()
+    else:
+        already_payed = True
+    return render(request, 'payment/confirmation_step.html', {
+        'offer': offer,
+        'already_payed': already_payed
+    })

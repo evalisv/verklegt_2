@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="breadcrumbs"><a href="{% url 'homepage' %}">Forsíða</a> > <a href="{% url 'profile' %}">Mínar síður</a> > <a href="{% url 'my_offers' %}">Tilboð</a> > <a href="{% url 'make_payment' id %}">Greiðsluupplýsinar</a> > Yfirlit upplýsinga</div>
+    <div class="breadcrumbs">
+        <a href="{% url 'homepage' %}">Forsíða</a> >
+        <a href="{% url 'profile' %}">Mínar síður</a> >
+        <a href="{% url 'my_offers' %}">Tilboð</a> >
+        <a href="{% url 'make_payment' offer.id %}">Greiðsluupplýsinar</a> >
+        Yfirlit upplýsinga</div>
     <div class="content-container payment-step my-5 p-5">
         <h1 class="text-center">Yfirlit upplýsinga</h1>
         <div class="row">
@@ -18,8 +23,7 @@
                              Símanúmer: {{ request.user.profile.phone_number }} <br>
                              Netfang: {{ request.user.email}}
                          </p>
-{#                     TODO: next = sami stadur#}
-{#                        <a href="{% url 'update_profile' %}?next={% url 'review_payment' offer.id%}"><button>Breyta persónuupplýsingum</button></a>#}
+                        <a class="btn btn-link" href="{% url 'update_profile' %}?next={% url 'review_payment' offer.id%}">Breyta persónuupplýsingum</a>
                      </div>
                     <div class="col-6">
                          <h4>Upplýsingar um fasteign</h4>
