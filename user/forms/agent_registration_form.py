@@ -72,7 +72,7 @@ class AgentRegistrationForm(UserCreationForm):
     )
     profile_image = forms.FileField(
         label='Mynd',
-        widget=forms.ClearableFileInput()
+        widget=forms.ClearableFileInput(attrs={'class': 'form-group-10 col-sm-8 my-2'})
     )
 
     class Meta:
