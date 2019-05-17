@@ -43,7 +43,6 @@ def register_estate(request):
             for img in pics:
                 estate_picture = EstatePictures(url=img, estate=estate)
                 estate_picture.save()
-            print("seller", estate.estate_seller)
             return redirect('estate-index')
     else:
         form = RegisterEstateForm()
@@ -57,7 +56,7 @@ def delete_estate(request, id):
     estate = get_object_or_404(Estate, pk=id)
     if request.user == estate.estate_seller:
         estate.delete()
-    return redirect('my_estates')
+    return redirect('seller_estates')
 
 @login_required
 def update_estate(request, id):
@@ -89,7 +88,7 @@ def sort_estates(request):
     paginator = Paginator(estate_list, 6)
     page = request.GET.get("page")
 
-    sorting = request.GET.get('order_by')
+    sorting = request.GET.get('-order_by')
 
     estates = paginator.get_page(page)
 
