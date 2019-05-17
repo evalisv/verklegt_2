@@ -11,22 +11,18 @@
                 <table class="table table-striped table-light">
                     <thead class="thead-dark">
                         <tr>
-                            <th>Id</th>
                             <th>Nafn</th>
                             <th>Notandanafn</th>
                             <th>Netfang</th>
-                            <th>Nánar</th>
+                            <th>Skráður síðan</th>
                         </tr>
                     </thead>
                         {% for user in users %}
                             <tr>
-                                <td>{{ user.id }}</td>
                                 <td>{{ user.get_full_name }}</td>
                                 <td>{{ user.username }}</td>
                                 <td>{{ user.email }}</td>
-                                <td>
-                                    <a href="#" title="Skoða"><i class="fa fa-eye fa-2x"></i></a>
-                                </td>
+                                <td>{{ user.date_joined|date:"d-m-Y" }}</td>
                             </tr>
                         {% endfor %}
                     <tbody>
