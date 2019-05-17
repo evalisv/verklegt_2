@@ -3,10 +3,16 @@ from django.forms import ModelForm, widgets
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
-from user.forms.extras import countries, postal_codes
 from django.forms.widgets import ClearableFileInput
+from estate.models import Municipality
+
 
 class AgentRegistrationForm(UserCreationForm):
+    postal = Municipality.objects.all()
+    postal_codes = []
+    for code in postal:
+        postal_codes.append((code.postal_code, str(code.postal_code) + ' ' + code.municipality))
+
     username = forms.CharField(
         label='Notandanafn',
         max_length=255,
