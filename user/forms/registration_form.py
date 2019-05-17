@@ -2,10 +2,15 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
-from user.forms.extras import postal_codes
+from estate.models import Municipality
 
 
 class RegistrationForm(UserCreationForm):
+    postal = Municipality.objects.all()
+    postal_codes = []
+    for code in postal:
+        postal_codes.append((code.postal_code, str(code.postal_code) + ' ' + code.municipality))
+
     username = forms.CharField(
         label='Notendanafn',
         max_length=255,
