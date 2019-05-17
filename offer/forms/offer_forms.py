@@ -8,8 +8,8 @@ class MakeOfferForm(ModelForm):
         model = Offer
         exclude = ['id', 'estate', 'offer_maker', 'payment', 'counter_offer_to']
         widgets = {
-            'amount': widgets.NumberInput(attrs={'class': 'form-control'}),
-            'expires': widgets.SelectDateWidget(attrs={'class': 'form-control col-4 float-left'}),
+            'amount': widgets.NumberInput(attrs={'class': 'form-control col-9'}),
+            'expires': widgets.SelectDateWidget(attrs={'class': 'form-control col-3 float-left'}),
             'offer_made': widgets.HiddenInput(attrs={'value': datetime.datetime.now()}),
             'payed': widgets.HiddenInput(attrs={'value': False}),
             'status': widgets.HiddenInput(attrs={'value': 'Incoming'}),
@@ -25,16 +25,9 @@ class MakeOfferForm(ModelForm):
             raise ValidationError('Upphæð verður að vera hærri en 0.')
         return amount_passed
 
-    # def clean_expires(self):
-    #     expires_passed = self.cleaned_data.get('expires')
-    #     todays_date = self.cleaned_data(datetime.datetime.now())
-    #     if todays_date > expires_passed:
-    #         raise ValidationError('Dagsetning má ekki vera liðin.')
-    #     return expires_passed
-    #
-    #
-    #
-
-
-
-
+    def clean_expires(self):
+        expires_passed = self.cleaned_data.get('expires')
+        offer_made = self.cleaned_data.get('offer_made')
+        if offer_made > expires_passed:
+            raise ValidationError('Dagsetning má ekki vera liðin.')
+        return expires_passed
