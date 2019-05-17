@@ -34,9 +34,8 @@ def update_name(request):
 @login_required
 def update_profile(request):
     next_page = request.GET.get('next', False)
-    print(next_page)
     user_profile = Profile.objects.filter(user=request.user).first()
-    file = request.FILES.get('profile_image', '')
+    file = request.FILES.get('profile_image', user_profile.profile_image)
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=user_profile)
         if form.is_valid():
