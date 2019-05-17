@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
-from user.forms.extras import countries, postal_codes
+from user.forms.extras import postal_codes
 
 
 class RegistrationForm(UserCreationForm):
@@ -64,11 +64,6 @@ class RegistrationForm(UserCreationForm):
         choices=postal_codes,
         widget=forms.Select(attrs={'class': 'form-control col-sm-3 form-group-9'})
     )
-    country = forms.ChoiceField(
-        label='Land',
-        choices=countries,
-        widget=forms.Select(attrs={'class': 'form-control col-sm-3 form-group-9'})
-    )
     profile_image = forms.FileField(
         label='Mynd',
         required=False,
@@ -88,7 +83,6 @@ class RegistrationForm(UserCreationForm):
             'phone_number',
             'address',
             'postal_code',
-            'country',
             'profile_image')
 
 

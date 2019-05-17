@@ -17,7 +17,19 @@ class ClearableFileUpload(ClearableFileInput):
 class UpdateNameForm(ModelForm):
     class Meta:
         model = User
-        exclude = ['id', 'email', 'username', 'password', 'last_login', 'is_superuser', 'is_staff', 'is_active', 'date_joined', 'user_permissions', 'groups']
+        exclude = [
+            'id',
+            'email',
+            'username',
+            'password',
+            'last_login',
+            'is_superuser',
+            'is_staff',
+            'is_active',
+            'date_joined',
+            'user_permissions',
+            'groups'
+        ]
         widgets = {
             'first_name': widgets.TextInput(attrs={'class': 'form-control'}),
             'last_name': widgets.TextInput(attrs={'class': 'form-control'}),
@@ -37,15 +49,13 @@ class ProfileForm(ModelForm, ClearableFileUpload):
             'phone_number': widgets.NumberInput(attrs={'class': 'form-control col-2 form-group-3'}),
             'address': widgets.TextInput(attrs={'class': 'form-control col-10 form-group-2'}),
             'postal_code': widgets.Select(attrs={'class': 'form-control col-2 form-group-3'}),
-            'country': widgets.Select(attrs={'class': 'form-control col-2 form-group-3'}),
         }
         labels = {
             'profile_image': '',
             'kennitala': 'Kennitala',
             'phone_number': 'Sími',
             'address': 'Heimilisfang',
-            'postal_code': 'Póstnúmer',
-            'country': 'Land'
+            'postal_code': 'Póstnúmer'
         }
 
     def clean_kennitala(self):
